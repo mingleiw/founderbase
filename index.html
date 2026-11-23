@@ -162,27 +162,123 @@ header .wrap { display: flex; align-items: center; justify-content: space-betwee
   .formats li:nth-last-child(2) { border-bottom: 1px solid var(--border); }
 }
 
-/* services */
-.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: clamp(28px, 3vw, 40px); }
-.filter { font: 400 13px/1 var(--f-mono); color: var(--ink-2); background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; min-height: 40px; cursor: pointer;
-  transition: border-color 160ms var(--ease), color 160ms var(--ease), background-color 160ms var(--ease); }
-.filter:hover { border-color: var(--ink-3); color: var(--ink); }
-.filter[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
-.no-js .filters { display: none; }
-.services { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
-.service { padding: 22px 24px 24px; display: grid; gap: 8px; align-content: start; }
-.service .meta { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
-.service .meta .kind { display: inline-flex; align-items: center; gap: 6px; }
-.service .meta .kind::before { content: ""; width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid var(--ink-3); }
-.service[data-kind="events"] .meta .kind::before { border-color: var(--accent-dot); }
-.service[data-kind="space"] .meta .kind::before { background: var(--ink); border-color: var(--ink); }
-.service h3 { font-size: 20px; letter-spacing: -0.02em; line-height: 1.25; }
-.service p { color: var(--ink-2); font-size: 15px; }
-.service.hide { display: none; }
-.service.enter { animation: enter 420ms var(--ease) both; animation-delay: var(--d, 0ms); }
-@keyframes enter { from { opacity: 0; transform: translateY(10px); } }
-@media (max-width: 900px) { .services { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 600px) { .services { grid-template-columns: 1fr; } }
+/* what we provide: bento grid with small live drawings */
+.bento { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: minmax(220px, auto); grid-auto-flow: dense; gap: 16px; margin-top: clamp(36px, 4vw, 52px); }
+.tile { display: flex; flex-direction: column; padding: 18px; overflow: hidden; }
+.tile.w2 { grid-column: span 2; }
+.tile.h2 { grid-row: span 2; }
+.ill { position: relative; flex: 1; min-height: 110px; border-radius: 10px; background: var(--ground); display: grid; place-items: center; overflow: hidden; margin-bottom: 18px; }
+.ill svg { width: 100%; height: 100%; max-height: 260px; }
+.tile .kind { display: block; margin-bottom: 6px; color: var(--ink-3); font-size: 12px; }
+.tile h3 { font-size: 19px; letter-spacing: -0.02em; line-height: 1.25; }
+.tile.h2 h3 { font-size: 26px; }
+.tile p { color: var(--ink-2); font-size: 15px; margin-top: 6px; }
+@media (max-width: 900px) {
+  .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: auto; }
+  .tile.h2 { grid-row: auto; }
+  .tile.h2 .ill { min-height: 200px; }
+  .ill { min-height: 130px; }
+}
+@media (max-width: 600px) { .bento { grid-template-columns: 1fr; } .tile.w2 { grid-column: auto; } }
+
+/* default = finished picture; .motion .tile:not(.live) = the starting point */
+.seat { fill: var(--accent-dot); transition: fill 300ms var(--ease) calc(var(--i) * 160ms); }
+.seat.free { fill: #DADAD4; }
+.motion .tile:not(.live) .seat { fill: #DADAD4; }
+
+.clock { font: 500 clamp(40px, 4vw + 8px, 60px)/1 var(--f-mono); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.clock-sub { position: absolute; bottom: 14px; left: 0; right: 0; text-align: center; }
+.clock-bar { position: absolute; left: 16px; right: 16px; bottom: 40px; height: 2px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.clock-bar i { position: absolute; inset: 0; background: var(--accent-dot); transform-origin: left; transform: scaleX(var(--left, 1)); }
+
+.plate { transform-box: fill-box; transform-origin: center; transition: transform 380ms var(--ease) calc(var(--i) * 120ms), opacity 380ms var(--ease) calc(var(--i) * 120ms); }
+.motion .tile:not(.live) .plate { transform: scale(0); opacity: 0; }
+.flame { transform-box: fill-box; transform-origin: center bottom; }
+.motion .live .flame { animation: flicker 1.8s ease-in-out infinite; }
+.motion .live .flame + .flame { animation-delay: -0.9s; }
+@keyframes flicker { 50% { transform: scale(0.82, 1.12); opacity: 0.8; } }
+
+.wave { display: flex; align-items: center; gap: 4px; height: 70px; }
+.wave span { width: 4px; height: 100%; border-radius: 2px; background: var(--ink); transform: scaleY(var(--h)); }
+.wave span:nth-child(n+9):nth-child(-n+12) { background: var(--accent-dot); }
+.motion .live .wave span { animation: wave 1.2s ease-in-out infinite; animation-delay: calc(var(--i) * -90ms); }
+@keyframes wave { 0%, 100% { transform: scaleY(0.12); } 50% { transform: scaleY(var(--h)); } }
+
+.stack { position: relative; width: 120px; height: 88px; }
+.box { position: absolute; width: 38px; height: 28px; background: var(--card); border: 1.5px solid var(--ink); border-radius: 3px;
+  transition: transform 520ms var(--ease) calc(var(--i) * 140ms), opacity 300ms var(--ease) calc(var(--i) * 140ms); }
+.box::after { content: ""; position: absolute; left: 50%; top: 0; bottom: 55%; width: 6px; transform: translateX(-50%); background: #E9E2CF; }
+.box.g { border-color: var(--accent); }
+.motion .tile:not(.live) .box { transform: translateY(-90px); opacity: 0; }
+
+.count { font: 500 64px/1 var(--f-mono); font-variant-numeric: tabular-nums; display: inline-flex; align-items: center; gap: 10px; }
+.count.go { color: var(--accent); font-size: 40px; }
+.count.go::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--accent-dot); box-shadow: 0 0 0 5px rgba(50, 179, 111, 0.18); }
+.count.tick { animation: tick 360ms var(--ease); }
+@keyframes tick { from { transform: scale(1.35); opacity: 0; } }
+
+.edge { stroke: var(--ink-3); stroke-width: 1.2; stroke-dasharray: 1; stroke-dashoffset: 0; transition: stroke-dashoffset 600ms var(--ease) calc(var(--i) * 110ms); }
+.motion .tile:not(.live) .edge { stroke-dashoffset: 1; }
+.node { fill: var(--card); stroke: var(--ink); stroke-width: 1.5; }
+.node.hub { fill: var(--accent-dot); stroke: var(--accent-dot); }
+
+.steam { fill: none; stroke: var(--ink-3); stroke-width: 1.5; stroke-linecap: round; }
+.motion .live .steam { animation: steam 2.4s ease-in-out infinite; }
+.motion .live .steam:nth-child(2) { animation-delay: -0.8s; }
+.motion .live .steam:nth-child(3) { animation-delay: -1.6s; }
+@keyframes steam { 0% { transform: translateY(6px); opacity: 0; } 40% { opacity: 1; } 100% { transform: translateY(-8px); opacity: 0; } }
+
+.board { position: relative; width: 150px; height: 92px; border: 1.5px solid var(--ink); border-radius: 6px; background: var(--card); }
+.sticky { position: absolute; width: 30px; height: 26px; border-radius: 3px; background: #F1EBD8; border: 1px solid #E2D9BE; transform: rotate(var(--r));
+  transition: transform 360ms var(--ease) calc(var(--i) * 150ms), opacity 360ms var(--ease) calc(var(--i) * 150ms); }
+.sticky.g { background: #DCEFE3; border-color: #B9DDC7; }
+.motion .tile:not(.live) .sticky { transform: rotate(var(--r)) scale(0.4); opacity: 0; }
+
+.bulb { fill: #DADAD4; }
+.bulb.on { fill: var(--accent-dot); }
+.motion .live .bulb { animation: bulb 2.6s ease-in-out infinite; animation-delay: calc(var(--i) * 160ms); }
+@keyframes bulb { 0%, 100% { fill: #DADAD4; } 35%, 60% { fill: var(--accent-dot); } }
+
+.win { width: min(260px, 86%); border: 1.5px solid var(--ink); border-radius: 8px; background: var(--card); overflow: hidden; }
+.win-bar { display: flex; gap: 5px; padding: 7px 9px; border-bottom: 1px solid var(--border); }
+.win-bar i { width: 7px; height: 7px; border-radius: 50%; background: #DADAD4; }
+.win-body { padding: 10px 12px 12px; display: grid; gap: 7px; }
+.code { height: 6px; border-radius: 3px; background: #D9D9D3; width: var(--w); transform-origin: left; transition: transform 500ms var(--ease) calc(var(--i) * 220ms); }
+.code.g { background: var(--accent-dot); }
+.motion .tile:not(.live) .code { transform: scaleX(0); }
+
+/* a day at founder base */
+.day { border-top: 1px solid var(--border); }
+.day-inner { padding-block: clamp(80px, 10vw, 128px); }
+.day-track { position: relative; margin-top: clamp(40px, 5vw, 64px); }
+.day-stops { list-style: none; margin: 0; padding: 0; position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+.day-stops::before { content: ""; position: absolute; left: 7px; right: calc(20% - 7px); top: 7px; height: 1px; background: #CFCFC8; }
+.day-stop { display: grid; gap: 6px; align-content: start; padding-right: 8px; }
+.day-stop .dot { width: 15px; height: 15px; border-radius: 50%; background: var(--card); border: 1.5px solid var(--ink); position: relative; z-index: 2; margin-bottom: 18px; transition: border-color 240ms var(--ease); }
+.day-stop .time { font: 500 30px/1 var(--f-mono); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; transition: color 300ms var(--ease); }
+.day-stop strong { font-weight: 500; font-size: 18px; letter-spacing: -0.015em; }
+.day-stop p { color: var(--ink-2); font-size: 15px; }
+.day-stop strong, .day-stop p { transition: opacity 400ms var(--ease), transform 400ms var(--ease); }
+.motion .day-stop:not(.lit) .time { color: #C4C4BD; }
+.motion .day-stop:not(.lit) strong, .motion .day-stop:not(.lit) p { opacity: 0.35; }
+.motion .day-stop:not(.lit) .dot { border-color: #CFCFC8; }
+.motion .day-stop.lit .dot { border-color: var(--accent); }
+.day-fill { position: absolute; display: none; background: var(--accent-dot); z-index: 1; pointer-events: none; }
+.day-train { position: absolute; left: 0; top: 0; width: 15px; height: 15px; border-radius: 50%; background: var(--accent-dot); z-index: 3; pointer-events: none; display: none;
+  box-shadow: 0 0 0 5px rgba(50, 179, 111, 0.18), 0 2px 8px rgba(31, 138, 85, 0.35); }
+.motion .day-train { display: block; }
+@media (min-width: 901px) {
+  .motion .day { height: 230vh; }
+  .motion .day-sticky { position: sticky; top: 64px; min-height: calc(100vh - 64px); display: flex; align-items: center; }
+  .motion .day-inner { width: 100%; }
+}
+@media (max-width: 900px) {
+  .day-stops { grid-template-columns: 1fr; gap: 0; }
+  .day-stops::before { left: 7px; right: auto; top: 10px; bottom: 40px; width: 1px; height: auto; }
+  .day-stop { grid-template-columns: 15px 1fr; column-gap: 20px; padding: 0 0 28px; }
+  .day-stop .dot { grid-row: 1 / span 3; margin: 8px 0 0; }
+  .day-stop .time { font-size: 24px; }
+}
 
 /* contact */
 .cta { padding: clamp(32px, 5vw, 56px); text-align: center; }
@@ -224,10 +320,10 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 .btn-primary::after { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 40%; pointer-events: none;
   background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.22), transparent); transform: translateX(-160%) skewX(-12deg); }
 .btn-primary:hover::after { transform: translateX(320%) skewX(-12deg); transition: transform 800ms var(--ease); }
-.point, .service { transition: transform 260ms var(--ease), border-color 260ms var(--ease), box-shadow 260ms var(--ease), opacity 700ms var(--ease); }
+.point, .tile { transition: transform 260ms var(--ease), border-color 260ms var(--ease), box-shadow 260ms var(--ease), opacity 700ms var(--ease); }
 @media (hover: hover) {
-  .point:hover, .service:hover { transform: translateY(-2px); border-color: #D2D2CC; box-shadow: 0 8px 24px -16px rgba(20, 20, 20, 0.25); }
-  .motion .point.shown:hover, .motion .service.shown:hover { transform: translateY(-2px); }
+  .point:hover, .tile:hover { transform: translateY(-2px); border-color: #D2D2CC; box-shadow: 0 8px 24px -16px rgba(20, 20, 20, 0.25); }
+  .motion .point.shown:hover, .motion .tile.shown:hover { transform: translateY(-2px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -248,6 +344,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     </a>
     <nav class="nav" aria-label="Main">
       <a href="#services">Services</a>
+      <a href="#day">A day</a>
       <a href="#venue">Venue</a>
       <a class="nav-cta" href="#contact">Join</a>
     </nav>
@@ -292,26 +389,39 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   <section class="section" id="services" aria-labelledby="services-title">
     <div class="wrap">
       <h2 id="services-title">What we provide.</h2>
-      <p class="sub">Space to work, rooms to host in, and help around both. Pick what you need.</p>
-      <div class="filters" role="group" aria-label="Filter services">
-        <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
-        <button class="filter" type="button" data-filter="space" aria-pressed="false">Space</button>
-        <button class="filter" type="button" data-filter="events" aria-pressed="false">Events</button>
-        <button class="filter" type="button" data-filter="support" aria-pressed="false">Support</button>
+      <p class="sub">Space to work, rooms to host in, and help around both.</p>
+      <div class="bento">
+        <article class="card tile w2 h2"><div class="ill" aria-hidden="true"><svg viewBox="0 0 300 160" preserveAspectRatio="xMidYMid meet"><rect x="22" y="30" width="54" height="24" rx="4" fill="#fff" stroke="#141414" stroke-width="1.3"/><rect x="41" y="35" width="16" height="10" rx="2" fill="none" stroke="#8A8A84"/><circle class="seat" style="--i:0" cx="49" cy="68" r="7"/><rect x="90" y="30" width="54" height="24" rx="4" fill="#fff" stroke="#141414" stroke-width="1.3"/><rect x="109" y="35" width="16" height="10" rx="2" fill="none" stroke="#8A8A84"/><circle class="seat" style="--i:1" cx="117" cy="68" r="7"/><rect x="158" y="30" width="54" height="24" rx="4" fill="#fff" stroke="#141414" stroke-width="1.3"/><rect x="177" y="35" width="16" height="10" rx="2" fill="none" stroke="#8A8A84"/><circle class="seat" style="--i:2" cx="185" cy="68" r="7"/><rect x="226" y="30" width="54" height="24" rx="4" fill="#fff" stroke="#141414" stroke-width="1.3"/><rect x="245" y="35" width="16" height="10" rx="2" fill="none" stroke="#8A8A84"/><circle class="seat free" style="--i:3" cx="253" cy="68" r="7"/><rect x="22" y="96" width="54" height="24" rx="4" fill="#fff" stroke="#141414" stroke-width="1.3"/><rect x="41" y="101" width="16" height="10" rx="2" fill="none" stroke="#8A8A84"/><circle class="seat" style="--i:4" cx="49" cy="134" r="7"/><rect x="90" y="96" width="54" height="24" rx="4" fill="#fff" stroke="#141414" stroke-width="1.3"/><rect x="109" y="101" width="16" height="10" rx="2" fill="none" stroke="#8A8A84"/><circle class="seat" style="--i:5" cx="117" cy="134" r="7"/><rect x="158" y="96" width="54" height="24" rx="4" fill="#fff" stroke="#141414" stroke-width="1.3"/><rect x="177" y="101" width="16" height="10" rx="2" fill="none" stroke="#8A8A84"/><circle class="seat free" style="--i:6" cx="185" cy="134" r="7"/><rect x="226" y="96" width="54" height="24" rx="4" fill="#fff" stroke="#141414" stroke-width="1.3"/><rect x="245" y="101" width="16" height="10" rx="2" fill="none" stroke="#8A8A84"/><circle class="seat" style="--i:7" cx="253" cy="134" r="7"/></svg></div><span class="mono kind">space</span><h3>Space for your company</h3><p>Desks and private offices for your team, plus rooms for meetings, team days and offsites.</p></article>
+        <article class="card tile w2"><div class="ill" aria-hidden="true"><div class="clock" data-clock>48:00:00</div><div class="clock-bar"><i></i></div><span class="mono clock-sub">time left to build</span></div><span class="mono kind">events</span><h3>Hackathons</h3><p>Room for every team to build, and a community to fill it.</p></article>
+        <article class="card tile "><div class="ill" aria-hidden="true"><div class="wave"><span style="--i:0;--h:0.35"></span><span style="--i:1;--h:0.55"></span><span style="--i:2;--h:0.4"></span><span style="--i:3;--h:0.8"></span><span style="--i:4;--h:0.5"></span><span style="--i:5;--h:0.95"></span><span style="--i:6;--h:0.6"></span><span style="--i:7;--h:0.75"></span><span style="--i:8;--h:1"></span><span style="--i:9;--h:0.85"></span><span style="--i:10;--h:0.95"></span><span style="--i:11;--h:0.7"></span><span style="--i:12;--h:0.5"></span><span style="--i:13;--h:0.8"></span><span style="--i:14;--h:0.45"></span><span style="--i:15;--h:0.65"></span><span style="--i:16;--h:0.3"></span><span style="--i:17;--h:0.55"></span><span style="--i:18;--h:0.4"></span><span style="--i:19;--h:0.25"></span></div></div><span class="mono kind">events</span><h3>Tech talks</h3><p>Talks and panels for founders and engineers.</p></article>
+        <article class="card tile "><div class="ill" aria-hidden="true"><div class="stack"><span class="box " style="left:0px;top:60px;--i:0"></span><span class="box " style="left:41px;top:60px;--i:1"></span><span class="box g" style="left:82px;top:60px;--i:2"></span><span class="box " style="left:20px;top:31px;--i:3"></span><span class="box " style="left:61px;top:31px;--i:4"></span><span class="box " style="left:41px;top:2px;--i:5"></span></div></div><span class="mono kind">space</span><h3>Warehouse</h3><p>Storage space on site. You run your stock.</p></article>
+        <article class="card tile w2 h2"><div class="ill" aria-hidden="true"><svg viewBox="0 0 300 180" preserveAspectRatio="xMidYMid meet"><rect x="46" y="70" width="208" height="40" rx="20" fill="#fff" stroke="#141414" stroke-width="1.3"/><rect x="128" y="80" width="4" height="16" rx="1" fill="#141414"/><ellipse class="flame" cx="130" cy="76" rx="3" ry="5" fill="#32B36F"/><rect x="168" y="80" width="4" height="16" rx="1" fill="#141414"/><ellipse class="flame" cx="170" cy="76" rx="3" ry="5" fill="#32B36F"/><g class="plate" style="--i:0"><circle cx="78" cy="52" r="11" fill="#fff" stroke="#8A8A84" stroke-width="1.2"/><circle cx="78" cy="52" r="5" fill="none" stroke="#CFCFC8"/></g><g class="plate" style="--i:1"><circle cx="126" cy="52" r="11" fill="#fff" stroke="#8A8A84" stroke-width="1.2"/><circle cx="126" cy="52" r="5" fill="none" stroke="#CFCFC8"/></g><g class="plate" style="--i:2"><circle cx="174" cy="52" r="11" fill="#fff" stroke="#8A8A84" stroke-width="1.2"/><circle cx="174" cy="52" r="5" fill="none" stroke="#CFCFC8"/></g><g class="plate" style="--i:3"><circle cx="222" cy="52" r="11" fill="#fff" stroke="#8A8A84" stroke-width="1.2"/><circle cx="222" cy="52" r="5" fill="none" stroke="#CFCFC8"/></g><g class="plate" style="--i:4"><circle cx="78" cy="128" r="11" fill="#fff" stroke="#8A8A84" stroke-width="1.2"/><circle cx="78" cy="128" r="5" fill="none" stroke="#CFCFC8"/></g><g class="plate" style="--i:5"><circle cx="126" cy="128" r="11" fill="#fff" stroke="#8A8A84" stroke-width="1.2"/><circle cx="126" cy="128" r="5" fill="none" stroke="#CFCFC8"/></g><g class="plate" style="--i:6"><circle cx="174" cy="128" r="11" fill="#fff" stroke="#8A8A84" stroke-width="1.2"/><circle cx="174" cy="128" r="5" fill="none" stroke="#CFCFC8"/></g><g class="plate" style="--i:7"><circle cx="222" cy="128" r="11" fill="#fff" stroke="#8A8A84" stroke-width="1.2"/><circle cx="222" cy="128" r="5" fill="none" stroke="#CFCFC8"/></g></svg></div><span class="mono kind">events</span><h3>Private dinners</h3><p>Hosted dinners with food from our merchants, or bring your own.</p></article>
+        <article class="card tile "><div class="ill" aria-hidden="true"><div class="count" data-count>3</div></div><span class="mono kind">events</span><h3>Launch nights</h3><p>Show your product to a room that came to see it.</p></article>
+        <article class="card tile "><div class="ill" aria-hidden="true"><svg viewBox="0 0 300 150" preserveAspectRatio="xMidYMid meet"><line class="edge" pathLength="1" style="--i:0" x1="150" y1="60" x2="70" y2="30"/><line class="edge" pathLength="1" style="--i:1" x1="150" y1="60" x2="232" y2="28"/><line class="edge" pathLength="1" style="--i:2" x1="150" y1="60" x2="60" y2="98"/><line class="edge" pathLength="1" style="--i:3" x1="150" y1="60" x2="238" y2="100"/><line class="edge" pathLength="1" style="--i:4" x1="150" y1="60" x2="118" y2="118"/><line class="edge" pathLength="1" style="--i:5" x1="150" y1="60" x2="190" y2="122"/><line class="edge" pathLength="1" style="--i:6" x1="70" y1="30" x2="60" y2="98"/><line class="edge" pathLength="1" style="--i:7" x1="232" y1="28" x2="238" y2="100"/><line class="edge" pathLength="1" style="--i:8" x1="118" y1="118" x2="190" y2="122"/><line class="edge" pathLength="1" style="--i:9" x1="60" y1="98" x2="118" y2="118"/><circle class="node hub" cx="150" cy="60" r="9"/><circle class="node " cx="70" cy="30" r="6"/><circle class="node " cx="232" cy="28" r="6"/><circle class="node " cx="60" cy="98" r="6"/><circle class="node " cx="238" cy="100" r="6"/><circle class="node " cx="118" cy="118" r="6"/><circle class="node " cx="190" cy="122" r="6"/></svg></div><span class="mono kind">support</span><h3>Network</h3><p>The chamber of commerce and our founder community.</p></article>
+        <article class="card tile "><div class="ill" aria-hidden="true"><svg viewBox="0 0 300 150" preserveAspectRatio="xMidYMid meet"><g><path class="steam" d="M136 52c-6-8 6-12 0-22"/><path class="steam" d="M150 50c-6-8 6-12 0-22"/><path class="steam" d="M164 52c-6-8 6-12 0-22"/></g><path d="M118 62h64v26a24 24 0 0 1-24 24h-16a24 24 0 0 1-24-24z" fill="#fff" stroke="#141414" stroke-width="1.4"/><path d="M182 70h6a10 10 0 0 1 0 20h-7" fill="none" stroke="#141414" stroke-width="1.4"/><ellipse cx="150" cy="118" rx="52" ry="6" fill="none" stroke="#8A8A84" stroke-width="1.2"/><circle cx="138" cy="94" r="3" fill="#141414"/><circle cx="150" cy="98" r="3" fill="#141414"/><circle cx="161" cy="93" r="3" fill="#141414"/></svg></div><span class="mono kind">support</span><h3>Food on site</h3><p>Restaurants and milk tea, and catering as a package.</p></article>
+        <article class="card tile "><div class="ill" aria-hidden="true"><div class="board"><span class="sticky " style="left:12px;top:12px;--r:-6deg;--i:0"></span><span class="sticky g" style="left:52px;top:10px;--r:4deg;--i:1"></span><span class="sticky " style="left:94px;top:14px;--r:-3deg;--i:2"></span><span class="sticky " style="left:28px;top:52px;--r:5deg;--i:3"></span><span class="sticky " style="left:74px;top:50px;--r:-5deg;--i:4"></span><span class="sticky g" style="left:112px;top:54px;--r:3deg;--i:5"></span></div></div><span class="mono kind">events</span><h3>Workshops</h3><p>Hands-on sessions for founders and teams.</p></article>
+        <article class="card tile w2"><div class="ill" aria-hidden="true"><svg viewBox="0 0 300 130" preserveAspectRatio="xMidYMid meet"><path d="M30 50 Q150 120 270 50" fill="none" stroke="#141414" stroke-width="1.2"/><line x1="30" y1="50.0" x2="30" y2="58.0" stroke="#8A8A84"/><circle class="bulb" style="--i:0" cx="30" cy="62.0" r="5"/><line x1="50" y1="57.2" x2="50" y2="65.2" stroke="#8A8A84"/><circle class="bulb on" style="--i:1" cx="50" cy="69.2" r="5"/><line x1="70" y1="64.0" x2="70" y2="72.0" stroke="#8A8A84"/><circle class="bulb" style="--i:2" cx="70" cy="76.0" r="5"/><line x1="90" y1="69.8" x2="90" y2="77.8" stroke="#8A8A84"/><circle class="bulb" style="--i:3" cx="90" cy="81.8" r="5"/><line x1="110" y1="74.2" x2="110" y2="82.2" stroke="#8A8A84"/><circle class="bulb on" style="--i:4" cx="110" cy="86.2" r="5"/><line x1="130" y1="77.0" x2="130" y2="85.0" stroke="#8A8A84"/><circle class="bulb" style="--i:5" cx="130" cy="89.0" r="5"/><line x1="150" y1="78.0" x2="150" y2="86.0" stroke="#8A8A84"/><circle class="bulb" style="--i:6" cx="150" cy="90.0" r="5"/><line x1="170" y1="77.0" x2="170" y2="85.0" stroke="#8A8A84"/><circle class="bulb on" style="--i:7" cx="170" cy="89.0" r="5"/><line x1="190" y1="74.2" x2="190" y2="82.2" stroke="#8A8A84"/><circle class="bulb" style="--i:8" cx="190" cy="86.2" r="5"/><line x1="210" y1="69.8" x2="210" y2="77.8" stroke="#8A8A84"/><circle class="bulb" style="--i:9" cx="210" cy="81.8" r="5"/><line x1="230" y1="64.0" x2="230" y2="72.0" stroke="#8A8A84"/><circle class="bulb on" style="--i:10" cx="230" cy="76.0" r="5"/><line x1="250" y1="57.2" x2="250" y2="65.2" stroke="#8A8A84"/><circle class="bulb" style="--i:11" cx="250" cy="69.2" r="5"/><line x1="270" y1="50.0" x2="270" y2="58.0" stroke="#8A8A84"/><circle class="bulb" style="--i:12" cx="270" cy="62.0" r="5"/></svg></div><span class="mono kind">events</span><h3>Private events</h3><p>Book the venue for a private party or a company event.</p></article>
+        <article class="card tile w2"><div class="ill" aria-hidden="true"><div class="win"><div class="win-bar"><i></i><i></i><i></i></div><div class="win-body"><span class="code " style="--w:62%;--i:0"></span><span class="code " style="--w:84%;--i:1"></span><span class="code g" style="--w:46%;--i:2"></span><span class="code " style="--w:70%;--i:3"></span><span class="code " style="--w:38%;--i:4"></span></div></div></div><span class="mono kind">support</span><h3>Tech help</h3><p>Websites and product advice when you need them.</p></article>
       </div>
-      <div class="services">
-        <article class="card service" data-kind="space"><div class="meta"><span class="mono kind">space</span><span class="mono">01</span></div><h3>Office space</h3><p>Desks and private offices for your team.</p></article>
-        <article class="card service" data-kind="space"><div class="meta"><span class="mono kind">space</span><span class="mono">02</span></div><h3>Space for your company</h3><p>Rent rooms for your company’s meetings, team days and offsites.</p></article>
-        <article class="card service" data-kind="space"><div class="meta"><span class="mono kind">space</span><span class="mono">03</span></div><h3>Warehouse</h3><p>Storage space on site. You run your stock, we provide the room.</p></article>
-        <article class="card service" data-kind="events"><div class="meta"><span class="mono kind">events</span><span class="mono">04</span></div><h3>Private events</h3><p>Book the venue for a private party or a company event.</p></article>
-        <article class="card service" data-kind="events"><div class="meta"><span class="mono kind">events</span><span class="mono">05</span></div><h3>Private dinners</h3><p>Hosted dinners with food from our merchants, or bring your own.</p></article>
-        <article class="card service" data-kind="events"><div class="meta"><span class="mono kind">events</span><span class="mono">06</span></div><h3>Hackathons</h3><p>Room for every team to build, with the community to fill it.</p></article>
-        <article class="card service" data-kind="events"><div class="meta"><span class="mono kind">events</span><span class="mono">07</span></div><h3>Tech talks</h3><p>Host talks and panels for founders and engineers.</p></article>
-        <article class="card service" data-kind="events"><div class="meta"><span class="mono kind">events</span><span class="mono">08</span></div><h3>Workshops</h3><p>Hands-on sessions for founders and their teams.</p></article>
-        <article class="card service" data-kind="events"><div class="meta"><span class="mono kind">events</span><span class="mono">09</span></div><h3>Launch nights</h3><p>Show your product to a room that came to see it.</p></article>
-        <article class="card service" data-kind="support"><div class="meta"><span class="mono kind">support</span><span class="mono">10</span></div><h3>Food on site</h3><p>Restaurants and milk tea on site, and catering as a package.</p></article>
-        <article class="card service" data-kind="support"><div class="meta"><span class="mono kind">support</span><span class="mono">11</span></div><h3>Network</h3><p>The chamber of commerce and our founder community.</p></article>
-        <article class="card service" data-kind="support"><div class="meta"><span class="mono kind">support</span><span class="mono">12</span></div><h3>Tech help</h3><p>Websites and product advice when you need them.</p></article>
+    </div>
+  </section>
+
+  <section class="day" id="day" aria-labelledby="day-title">
+    <div class="day-sticky">
+      <div class="wrap day-inner">
+        <h2 id="day-title" style="font-size: clamp(36px, 2.8vw + 20px, 60px); line-height: 1.05;">A day at Founder Base.</h2>
+        <p class="sub" style="color: var(--ink-2); font-size: 19px; margin-top: 16px;">Work, eat, learn and host, without leaving.</p>
+        <div class="day-track">
+          <span class="day-fill" aria-hidden="true"></span>
+          <span class="day-train" aria-hidden="true"></span>
+          <ol class="day-stops">
+            <li class="day-stop"><span class="dot"></span><span class="time">9:00</span><strong>At your desk</strong><p>Heads down with your team.</p></li>
+            <li class="day-stop"><span class="dot"></span><span class="time">12:30</span><strong>Lunch on site</strong><p>Restaurants and milk tea a few steps away.</p></li>
+            <li class="day-stop"><span class="dot"></span><span class="time">15:00</span><strong>Workshop</strong><p>Learn something new with other founders.</p></li>
+            <li class="day-stop"><span class="dot"></span><span class="time">18:30</span><strong>Tech talk</strong><p>Hear what other builders are shipping.</p></li>
+            <li class="day-stop"><span class="dot"></span><span class="time">21:00</span><strong>Private dinner</strong><p>Close the day around one table.</p></li>
+          </ol>
+        </div>
       </div>
     </div>
   </section>
@@ -486,21 +596,83 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
     onScroll();
 
-    /* services filter */
-    var filters = Array.prototype.slice.call(document.querySelectorAll('.filter'));
-    var cards = Array.prototype.slice.call(document.querySelectorAll('.service'));
-    filters.forEach(function (f) {
-      f.addEventListener('click', function () {
-        var k = f.getAttribute('data-filter'), n = 0;
-        filters.forEach(function (o) { o.setAttribute('aria-pressed', o === f ? 'true' : 'false'); });
-        cards.forEach(function (c) {
-          var show = k === 'all' || c.getAttribute('data-kind') === k;
-          c.classList.toggle('hide', !show);
-          c.classList.remove('enter');
-          if (show && motion) { c.removeAttribute('data-reveal'); c.classList.remove('shown'); void c.offsetWidth; c.style.setProperty('--d', (n++ * 50) + 'ms'); c.classList.add('enter'); }
-        });
+    /* bento drawings: play when a tile comes into view */
+    var tiles = Array.prototype.slice.call(document.querySelectorAll('.tile'));
+    var clockEl = document.querySelector('[data-clock]'), countEl = document.querySelector('[data-count]');
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+    var clockLeft = 48 * 3600, clockTimer = 0;
+    function startClock() {
+      if (clockTimer) return;
+      clockTimer = setInterval(function () {
+        if (document.hidden) return;
+        clockLeft = clockLeft > 0 ? clockLeft - 1 : 48 * 3600;
+        var h = Math.floor(clockLeft / 3600), m = Math.floor(clockLeft % 3600 / 60), sec = clockLeft % 60;
+        clockEl.textContent = pad(h) + ':' + pad(m) + ':' + pad(sec);
+        clockEl.parentNode.style.setProperty('--left', (clockLeft / (48 * 3600)).toFixed(4));
+      }, 1000);
+    }
+    var counting = false;
+    function countdown() {
+      if (counting) return; counting = true;
+      var seq = ['3', '2', '1', 'Live'], n = 0;
+      (function next() {
+        countEl.textContent = seq[n];
+        countEl.classList.toggle('go', seq[n] === 'Live');
+        countEl.classList.remove('tick'); void countEl.offsetWidth; countEl.classList.add('tick');
+        n++;
+        if (n < seq.length) setTimeout(next, 800); else counting = false;
+      })();
+    }
+    if (!motion) {
+      tiles.forEach(function (t) { t.classList.add('live'); });
+      countEl.textContent = 'Live'; countEl.classList.add('go');
+    } else {
+      tiles.forEach(function (t) {
+        onView(t, function () {
+          t.classList.add('live');
+          if (t.contains(clockEl)) startClock();
+          if (t.contains(countEl)) countdown();
+        }, 0.35);
+        if (t.contains(countEl)) t.addEventListener('mouseenter', countdown);
       });
-    });
+    }
+
+    /* a day at founder base: the train follows the scroll */
+    var day = document.getElementById('day');
+    var dTrack = day.querySelector('.day-track'), dFill = day.querySelector('.day-fill'), dTrain = day.querySelector('.day-train');
+    var dStops = Array.prototype.slice.call(day.querySelectorAll('.day-stop'));
+    var dPts = [], dHor = true, dLen = 0;
+    function dMeasure() {
+      var tr = dTrack.getBoundingClientRect();
+      dPts = dStops.map(function (s) { var d = s.querySelector('.dot').getBoundingClientRect(); return { x: d.left - tr.left + d.width / 2, y: d.top - tr.top + d.height / 2 }; });
+      var a = dPts[0], b = dPts[dPts.length - 1];
+      dHor = Math.abs(b.x - a.x) > Math.abs(b.y - a.y);
+      dLen = dHor ? b.x - a.x : b.y - a.y;
+      dFill.style.cssText = dHor
+        ? 'display:block;left:' + a.x + 'px;top:' + (a.y - 1) + 'px;width:' + dLen + 'px;height:2px;transform-origin:left center'
+        : 'display:block;left:' + (a.x - 1) + 'px;top:' + a.y + 'px;width:2px;height:' + dLen + 'px;transform-origin:center top';
+      dUpdate();
+    }
+    function dUpdate() {
+      var p = 1;
+      if (motion) {
+        var r = day.getBoundingClientRect(), vh = window.innerHeight;
+        if (dHor) { var span = r.height - vh; p = span > 0 ? -r.top / span : 1; p = p * 1.15 - 0.05; }
+        else { p = (vh * 0.62 - dTrack.getBoundingClientRect().top) / Math.max(1, dLen); }
+        p = Math.min(1, Math.max(0, p));
+      }
+      dFill.style.transform = dHor ? 'scaleX(' + p + ')' : 'scaleY(' + p + ')';
+      var a = dPts[0], b = dPts[dPts.length - 1];
+      var x = a.x + (b.x - a.x) * p, y = a.y + (b.y - a.y) * p;
+      dTrain.style.transform = 'translate3d(' + (x - 7.5) + 'px,' + (y - 7.5) + 'px,0)';
+      var k = dHor ? 'x' : 'y';
+      dStops.forEach(function (s, i) { var sp = dLen ? (dPts[i][k] - a[k]) / dLen : 0; s.classList.toggle('lit', p >= sp - 0.001); });
+    }
+    dMeasure();
+    var dTick = false;
+    window.addEventListener('scroll', function () { if (!dTick) { dTick = true; requestAnimationFrame(function () { dTick = false; dUpdate(); }); } }, { passive: true });
+    window.addEventListener('resize', function () { setTimeout(dMeasure, 140); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(dMeasure);
 
     if (!motion) return;
 
@@ -556,7 +728,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 
     /* 5. sections fade and rise in */
     var groups = [
-      '.section h2', '.section .sub', '.filters', '.grid-3 .card', '.services .card', '.formats', '.venue-foot', '.cta form'
+      '.section h2', '.section .sub', '.grid-3 .card', '.formats', '.venue-foot', '.cta form'
     ];
     document.querySelectorAll(groups.join(',')).forEach(function (el) {
       var sib = el.parentNode.children, idx = Array.prototype.indexOf.call(sib, el);

@@ -4,7 +4,7 @@ Promotional landing page for **Founder Base 创业者基地**, a startup space i
 
 ## What's here
 
-- `index.html`: the whole site in one static file (HTML, CSS and a few lines of JS). English only; the page is drawn as one thin "one stop" line whose stops are the services.
+- `index.html`: the whole site in one static file (HTML, CSS and a few lines of JS). English only; a thin "one stop" line, a bento grid of what we provide with small live drawings, and a scroll-driven "day at Founder Base".
 
 No build step. Open `index.html` in a browser to preview it.
 
