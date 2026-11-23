@@ -360,6 +360,10 @@ legend .opt { font: 400 12px var(--f-mono); color: var(--ink-3); margin-left: 6p
 .c-sub { color: var(--ink-2); font-size: 13px; line-height: 1.4; }
 @media (max-width: 520px) { .row, .choice { grid-template-columns: 1fr; } }
 .form-note { text-align: center; }
+.form-note.ok { color: var(--accent); }
+.form-note.err { color: #B3261E; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+form .btn[disabled] { opacity: 0.6; cursor: default; }
 
 footer { border-top: 1px solid var(--border); padding-block: 24px 36px; font-size: 14px; color: var(--ink-2); }
 footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
@@ -525,8 +529,10 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       <div class="card cta">
         <h2 id="contact-title">Book a desk or a date.</h2>
         <p class="sub">We're opening to startups and event hosts. Tell us what you need.</p>
-        <!-- TODO: connect this form to a contact email or a form service; until then it sends nothing -->
+        <!-- Sends nothing until FORM_ENDPOINT in the script below is set to a form service address. -->
         <form id="interest-form" novalidate>
+          <input type="hidden" name="_subject" value="New Founder Base booking request">
+          <div class="hp" aria-hidden="true"><label for="f-hp">Leave this empty<input id="f-hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
           <fieldset>
             <legend>What are you booking?</legend>
             <div class="choice">
@@ -592,12 +598,44 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 </footer>
 
 <script>
-  // No backend yet: nothing is sent or stored.
+  // The booking form. Leave FORM_ENDPOINT empty and nothing is sent or stored.
+  // To go live, set it to a form service address that accepts a JSON POST, for example
+  //   Formspree:  'https://formspree.io/f/<form id>'
+  //   FormSubmit: 'https://formsubmit.co/ajax/<the alias it gives after the first confirmation>'
+  var FORM_ENDPOINT = '';
   (function () {
     var form = document.getElementById('interest-form');
-    form.addEventListener('submit', function (e) { e.preventDefault(); });
+    var note = form.querySelector('.form-note'), btn = form.querySelector('button[type="submit"]');
     var groups = Array.prototype.slice.call(form.querySelectorAll('.group'));
-    function show(kind) { groups.forEach(function (g) { g.hidden = g.getAttribute('data-for') !== kind; }); }
+    function say(text, cls) { note.textContent = text; note.className = 'mono form-note' + (cls ? ' ' + cls : ''); }
+    function show(kind) {
+      groups.forEach(function (g) {
+        var off = g.getAttribute('data-for') !== kind;
+        g.hidden = off;
+        g.querySelectorAll('input, select').forEach(function (f) { f.disabled = off; });
+      });
+    }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!FORM_ENDPOINT) { say("This form isn't connected yet, so nothing is sent."); return; }
+      var kind = form.querySelector('input[name="kind"]:checked');
+      var name = form.querySelector('#f-name'), email = form.querySelector('#f-email');
+      if (!kind) { say('Pick a desk or an event date first.', 'err'); return; }
+      if (!name.value.trim()) { say('Add your name.', 'err'); name.focus(); return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) { say('Add an email we can reply to.', 'err'); email.focus(); return; }
+      var data = {};
+      new FormData(form).forEach(function (v, k) {
+        if (k === 'extra') { data.extra = data.extra ? data.extra + ', ' + v : v; } else { data[k] = v; }
+      });
+      if (data._gotcha) return;
+      delete data._gotcha;
+      btn.disabled = true; say('Sending...');
+      fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data) })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); })
+        .then(function () { form.reset(); show(''); say("Thanks, we got your details.", 'ok'); })
+        .catch(function () { say('That didn\'t go through. Please try again in a moment.', 'err'); })
+        .then(function () { btn.disabled = false; });
+    });
     form.classList.add('js-ready');
     form.querySelectorAll('input[name="kind"]').forEach(function (r) { r.addEventListener('change', function () { show(r.value); }); });
     var checked = form.querySelector('input[name="kind"]:checked');
