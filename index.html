@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Founder Base</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Founder Base: one stop for founders in San Francisco. Desks, an event venue, warehouse space and food on site, below market rates.">
+<meta name="description" content="Founder Base: desks and an event venue for founders in San Francisco, below market rates, with food, storage and a network on site.">
 <meta property="og:title" content="Founder Base">
-<meta property="og:description" content="One stop for founders in San Francisco. Desks, an event venue, warehouse space and food on site, below market rates.">
+<meta property="og:description" content="Desks and an event venue for founders in San Francisco, below market rates.">
 <meta name="theme-color" content="#F6F6F3">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23141414'/%3E%3Cpath d='M7 16h18' stroke='%23F6F6F3' stroke-width='2'/%3E%3Ccircle cx='8' cy='16' r='3' fill='%23141414' stroke='%23F6F6F3' stroke-width='2'/%3E%3Ccircle cx='24' cy='16' r='3.5' fill='%2332B36F'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -80,13 +80,14 @@ header .wrap { display: flex; align-items: center; justify-content: space-betwee
 .hero { text-align: center; padding-block: clamp(72px, 10vw, 120px) clamp(64px, 8vw, 96px); }
 .eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--ink-2); font-size: 16px; margin-bottom: 20px; }
 .tag { font: 400 13px/1 var(--f-mono); color: var(--ink); background: #EEEEEA; border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px; }
-.hero h1 { font-size: clamp(40px, 5.6vw + 16px, 92px); line-height: 1.04; letter-spacing: -0.04em; }
+.hero h1 { font-size: clamp(38px, 4.6vw + 14px, 80px); line-height: 1.04; letter-spacing: -0.04em; }
 .hero h1 > span { display: block; }
-.cycle { height: 1.12em; overflow: hidden; color: var(--accent); }
+.cycle { display: inline-block; vertical-align: top; height: 1.12em; overflow: hidden; color: var(--accent); }
 .cycle-word { display: inline-block; transition: transform 520ms var(--ease), opacity 420ms var(--ease); }
 .cycle-word.out { transform: translateY(-60%); opacity: 0; }
 .cycle-word.in { transform: translateY(60%); opacity: 0; transition: none; }
-.hero .lede { font-size: clamp(20px, 0.6vw + 16px, 24px); line-height: 1.4; margin: 28px auto 0; max-width: 28ch; }
+.hero .lede { font-size: clamp(20px, 0.6vw + 16px, 24px); line-height: 1.4; margin: 28px auto 0; max-width: 30ch; }
+.hero .actions .btn { min-width: 168px; }
 .hero .body { color: var(--ink-2); margin: 20px auto 0; max-width: 38rem; }
 .hero .actions { margin-top: 36px; }
 .hero .fine { margin-top: 20px; }
@@ -134,14 +135,9 @@ header .wrap { display: flex; align-items: center; justify-content: space-betwee
 .section { padding-block: clamp(80px, 10vw, 128px); }
 .section h2 { font-size: clamp(36px, 2.8vw + 20px, 60px); line-height: 1.05; max-width: 17ch; }
 .section .sub { color: var(--ink-2); font-size: 19px; margin-top: 16px; max-width: 36rem; }
-.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: clamp(36px, 4vw, 48px); }
-.point { padding: 24px; display: grid; gap: 8px; align-content: start; }
-.point h3 { font-size: 18px; letter-spacing: -0.015em; line-height: 1.3; }
-.point p { color: var(--ink-2); font-size: 15px; }
-@media (max-width: 820px) { .grid-3 { grid-template-columns: 1fr; } }
 
 /* venue formats, as a quiet table card */
-.formats { margin-top: 16px; overflow: hidden; }
+.formats { overflow: hidden; }
 .formats-head { display: flex; justify-content: space-between; gap: 16px; padding: 14px 24px; border-bottom: 1px solid var(--border); background: #FAFAF8; }
 .formats ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .formats li { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 16px 24px; border-bottom: 1px solid var(--border); }
@@ -154,37 +150,77 @@ header .wrap { display: flex; align-items: center; justify-content: space-betwee
 .flap.set { animation: flip 260ms var(--ease); }
 @keyframes flip { from { transform: perspective(200px) rotateX(-80deg); opacity: 0.3; } to { transform: none; opacity: 1; } }
 .flap.spin { color: var(--ink-3); }
-.venue-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; margin-top: 24px; }
-.venue-foot .actions { justify-content: flex-start; }
 @media (max-width: 640px) {
   .formats ul { grid-template-columns: 1fr; }
   .formats li:nth-child(odd) { border-right: 0; }
   .formats li:nth-last-child(2) { border-bottom: 1px solid var(--border); }
 }
 
-/* what we provide: bento grid with small live drawings */
-.bento { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: minmax(220px, auto); grid-auto-flow: dense; gap: 16px; margin-top: clamp(36px, 4vw, 52px); }
+/* two pillars: desks and events */
+.pillars { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: clamp(36px, 4vw, 52px); }
+.pillar { display: flex; flex-direction: column; padding: clamp(20px, 2.4vw, 28px); scroll-margin-top: 84px; }
+.pillar-head { display: flex; justify-content: space-between; gap: 12px; }
+.pillar-head .mono { font-size: 12px; color: var(--ink-3); }
+.pillar-head .mono:first-child { color: var(--accent); }
+.pillar h3 { font-size: clamp(36px, 2.2vw + 18px, 54px); line-height: 1; letter-spacing: -0.045em; margin-top: 22px; }
+.pillar .lead { color: var(--ink-2); margin-top: 12px; max-width: 34ch; }
+.pillar .big, .pillar .formats { margin-top: 24px; height: 216px; border-radius: 12px; background: var(--ground); }
+.pillar .big { display: grid; place-items: center; overflow: hidden; }
+.pillar .big svg { width: 94%; height: 100%; }
+.pillar .formats { border: 0; display: flex; flex-direction: column; }
+.pillar .formats-head { background: transparent; padding: 12px 18px; }
+.pillar .formats-head .mono:last-child { display: inline-flex; align-items: center; gap: 7px; color: var(--ink-3); font-size: 12px; }
+.pillar .formats-head .mono:last-child::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent-dot); box-shadow: 0 0 0 4px rgba(50, 179, 111, 0.16); }
+.motion .pillar .formats-head .mono:last-child::before { animation: blink 2s ease-in-out infinite; }
+@keyframes blink { 50% { opacity: 0.35; } }
+.pillar .formats ul { flex: 1; grid-auto-rows: 1fr; }
+.pillar .formats li { padding: 0 18px; align-items: center; }
+.pillar .formats .ev { font-size: 14px; }
+.subs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 10px; }
+.sub-tile { border: 1px solid var(--border); border-radius: 12px; padding: 10px 10px 14px; display: grid; gap: 3px; align-content: start; }
+.mini { height: 76px; border-radius: 8px; background: var(--ground); display: grid; place-items: center; overflow: hidden; margin-bottom: 8px; }
+.mini svg { width: 100%; height: 100%; }
+.sub-tile strong { font-weight: 500; font-size: 15px; letter-spacing: -0.01em; line-height: 1.25; }
+.sub-tile .d { color: var(--ink-2); font-size: 13px; line-height: 1.4; }
+.mini .clock-wrap { width: 84%; gap: 7px; padding: 0; }
+.mini .clock { font-size: 19px; }
+.mini .wave { height: 44px; gap: 3px; }
+.mini .wave span { width: 3px; }
+.door { transform-box: fill-box; transform-origin: left bottom; transition: transform 500ms var(--ease) 300ms; }
+.motion .anim:not(.live) .door { transform: rotate(36deg); }
+.pillar-foot { margin-top: auto; padding-top: 24px; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 18px; }
+.pillar-notes { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.pillar-notes li { display: flex; align-items: center; gap: 9px; font-size: 12.5px; }
+.pillar-notes li::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--accent-dot); flex: none; }
+@media (max-width: 880px) { .pillars { grid-template-columns: 1fr; } }
+@media (max-width: 520px) {
+  .subs { grid-template-columns: 1fr; }
+  .sub-tile { grid-template-columns: 104px 1fr; column-gap: 14px; align-items: center; padding: 8px 12px 8px 8px; }
+  .mini { grid-row: span 2; margin: 0; height: 64px; }
+  .pillar .formats ul { grid-template-columns: 1fr; }
+  .pillar .formats { height: auto; }
+  .pillar .formats li { padding: 12px 18px; }
+  .pillar-foot .btn { width: 100%; }
+}
+
+/* extras: small cards with live drawings */
+.extras { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: clamp(36px, 4vw, 52px); }
+.extras .tile { min-height: 300px; }
+@media (max-width: 900px) { .extras { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .extras { grid-template-columns: 1fr; } .extras .tile { min-height: 0; } .extras .ill { min-height: 150px; } }
+
+/* shared tile and drawing styles */
 .tile { display: flex; flex-direction: column; padding: 18px; overflow: hidden; }
-.tile.w2 { grid-column: span 2; }
-.tile.h2 { grid-row: span 2; }
 .ill { position: relative; flex: 1; min-height: 110px; border-radius: 10px; background: var(--ground); display: grid; place-items: center; overflow: hidden; margin-bottom: 18px; }
 .ill svg { width: 100%; height: 100%; max-height: 260px; }
 .tile .kind { display: block; margin-bottom: 6px; color: var(--ink-3); font-size: 12px; }
 .tile h3 { font-size: 19px; letter-spacing: -0.02em; line-height: 1.25; }
-.tile.h2 h3 { font-size: 26px; }
 .tile p { color: var(--ink-2); font-size: 15px; margin-top: 6px; }
-@media (max-width: 900px) {
-  .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: auto; }
-  .tile.h2 { grid-row: auto; }
-  .tile.h2 .ill { min-height: 200px; }
-  .ill { min-height: 130px; }
-}
-@media (max-width: 600px) { .bento { grid-template-columns: 1fr; } .tile.w2 { grid-column: auto; } }
 
-/* default = finished picture; .motion .tile:not(.live) = the starting point */
+/* default = finished picture; .motion .anim:not(.live) = the starting point */
 .seat { fill: var(--accent-dot); transition: fill 300ms var(--ease) calc(var(--i) * 160ms); }
 .seat.free { fill: #DADAD4; }
-.motion .tile:not(.live) .seat { fill: #DADAD4; }
+.motion .anim:not(.live) .seat { fill: #DADAD4; }
 
 .clock { font: 500 clamp(40px, 4vw + 8px, 60px)/1 var(--f-mono); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
 .clock-wrap { display: grid; gap: 10px; justify-items: center; width: 82%; padding-block: 12px; }
@@ -192,7 +228,7 @@ header .wrap { display: flex; align-items: center; justify-content: space-betwee
 .clock-bar i { position: absolute; inset: 0; background: var(--accent-dot); transform-origin: left; transform: scaleX(var(--left, 1)); }
 
 .plate { transform-box: fill-box; transform-origin: center; transition: transform 380ms var(--ease) calc(var(--i) * 120ms), opacity 380ms var(--ease) calc(var(--i) * 120ms); }
-.motion .tile:not(.live) .plate { transform: scale(0); opacity: 0; }
+.motion .anim:not(.live) .plate { transform: scale(0); opacity: 0; }
 .flame { transform-box: fill-box; transform-origin: center bottom; }
 .motion .live .flame { animation: flicker 1.8s ease-in-out infinite; }
 .motion .live .flame + .flame { animation-delay: -0.9s; }
@@ -209,16 +245,11 @@ header .wrap { display: flex; align-items: center; justify-content: space-betwee
   transition: transform 520ms var(--ease) calc(var(--i) * 140ms), opacity 300ms var(--ease) calc(var(--i) * 140ms); }
 .box::after { content: ""; position: absolute; left: 50%; top: 0; bottom: 55%; width: 6px; transform: translateX(-50%); background: #E9E2CF; }
 .box.g { border-color: var(--accent); }
-.motion .tile:not(.live) .box { transform: translateY(-90px); opacity: 0; }
+.motion .anim:not(.live) .box { transform: translateY(-90px); opacity: 0; }
 
-.count { font: 500 64px/1 var(--f-mono); font-variant-numeric: tabular-nums; display: inline-flex; align-items: center; gap: 10px; }
-.count.go { color: var(--accent); font-size: 40px; }
-.count.go::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--accent-dot); box-shadow: 0 0 0 5px rgba(50, 179, 111, 0.18); }
-.count.tick { animation: tick 360ms var(--ease); }
-@keyframes tick { from { transform: scale(1.35); opacity: 0; } }
 
 .edge { stroke: var(--ink-3); stroke-width: 1.2; stroke-dasharray: 1; stroke-dashoffset: 0; transition: stroke-dashoffset 600ms var(--ease) calc(var(--i) * 110ms); }
-.motion .tile:not(.live) .edge { stroke-dashoffset: 1; }
+.motion .anim:not(.live) .edge { stroke-dashoffset: 1; }
 .node { fill: var(--card); stroke: var(--ink); stroke-width: 1.5; }
 .node.hub { fill: var(--accent-dot); stroke: var(--accent-dot); }
 
@@ -228,16 +259,7 @@ header .wrap { display: flex; align-items: center; justify-content: space-betwee
 .motion .live .steam:nth-child(3) { animation-delay: -1.6s; }
 @keyframes steam { 0% { transform: translateY(6px); opacity: 0; } 40% { opacity: 1; } 100% { transform: translateY(-8px); opacity: 0; } }
 
-.board { position: relative; width: 150px; height: 92px; border: 1.5px solid var(--ink); border-radius: 6px; background: var(--card); }
-.sticky { position: absolute; width: 30px; height: 26px; border-radius: 3px; background: #F1EBD8; border: 1px solid #E2D9BE; transform: rotate(var(--r));
-  transition: transform 360ms var(--ease) calc(var(--i) * 150ms), opacity 360ms var(--ease) calc(var(--i) * 150ms); }
-.sticky.g { background: #DCEFE3; border-color: #B9DDC7; }
-.motion .tile:not(.live) .sticky { transform: rotate(var(--r)) scale(0.4); opacity: 0; }
 
-.bulb { fill: #DADAD4; }
-.bulb.on { fill: var(--accent-dot); }
-.motion .live .bulb { animation: bulb 2.6s ease-in-out infinite; animation-delay: calc(var(--i) * 160ms); }
-@keyframes bulb { 0%, 100% { fill: #DADAD4; } 35%, 60% { fill: var(--accent-dot); } }
 
 .win { width: min(260px, 86%); border: 1.5px solid var(--ink); border-radius: 8px; background: var(--card); overflow: hidden; }
 .win-bar { display: flex; gap: 5px; padding: 7px 9px; border-bottom: 1px solid var(--border); }
@@ -245,7 +267,7 @@ header .wrap { display: flex; align-items: center; justify-content: space-betwee
 .win-body { padding: 10px 12px 12px; display: grid; gap: 7px; }
 .code { height: 6px; border-radius: 3px; background: #D9D9D3; width: var(--w); transform-origin: left; transition: transform 500ms var(--ease) calc(var(--i) * 220ms); }
 .code.g { background: var(--accent-dot); }
-.motion .tile:not(.live) .code { transform: scaleX(0); }
+.motion .anim:not(.live) .code { transform: scaleX(0); }
 
 /* a day at founder base */
 .day { border-top: 1px solid var(--border); }
@@ -284,11 +306,14 @@ header .wrap { display: flex; align-items: center; justify-content: space-betwee
 .cta { padding: clamp(32px, 5vw, 56px); text-align: center; }
 .cta h2 { margin-inline: auto; }
 .cta .sub { margin-inline: auto; }
-form { display: grid; gap: 20px; max-width: 480px; margin: 36px auto 0; text-align: left; }
+form { display: grid; gap: 20px; max-width: 560px; margin: 36px auto 0; text-align: left; }
 label.field { display: grid; gap: 6px; font-size: 14px; font-weight: 500; }
-input[type="text"], input[type="email"] { font: 400 16px/1.4 var(--f-sans); padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px;
+input[type="text"], input[type="email"], input[type="number"], input[type="date"], select { font: 400 16px/1.4 var(--f-sans); padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px;
   background: var(--ground); color: var(--ink); width: 100%; transition: border-color 160ms var(--ease), background-color 160ms var(--ease); }
-input:focus { outline: none; border-color: var(--ink); background: var(--card); }
+select { appearance: none; padding-right: 36px; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%2355554F' stroke-width='1.4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center; }
+input:focus, select:focus { outline: none; border-color: var(--ink); background-color: var(--card); }
 fieldset { border: 0; padding: 0; margin: 0; }
 legend { font-size: 14px; font-weight: 500; padding: 0; margin-bottom: 8px; }
 .checks { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -301,6 +326,24 @@ legend { font-size: 14px; font-weight: 500; padding: 0; margin-bottom: 8px; }
 .checks label:has(input:checked)::before { background: var(--accent-dot); border-color: var(--accent-dot); }
 .checks label:has(input:focus-visible) { outline: 2px solid var(--ink); outline-offset: 2px; }
 form .btn { width: 100%; }
+.row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.group { display: grid; gap: 20px; }
+.group[hidden] { display: none; }
+.js-ready .group:not([hidden]) { animation: rise 420ms var(--ease); }
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } }
+legend .opt { font: 400 12px var(--f-mono); color: var(--ink-3); margin-left: 6px; }
+.choice { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.choice label { position: relative; display: grid; gap: 4px; padding: 16px 16px 16px 44px; border: 1px solid var(--border); border-radius: 12px; background: var(--card); cursor: pointer;
+  transition: border-color 160ms var(--ease), box-shadow 160ms var(--ease); }
+.choice label::before { content: ""; position: absolute; left: 16px; top: 19px; width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--ink-3); box-sizing: border-box; transition: border 160ms var(--ease); }
+.choice label:hover { border-color: var(--ink-3); }
+.choice input { position: absolute; opacity: 0; pointer-events: none; }
+.choice label:has(input:checked) { border-color: var(--ink); box-shadow: 0 6px 18px -14px rgba(20, 20, 20, 0.4); }
+.choice label:has(input:checked)::before { border: 4.5px solid var(--accent-dot); }
+.choice label:has(input:focus-visible) { outline: 2px solid var(--ink); outline-offset: 2px; }
+.c-title { font-weight: 500; font-size: 16px; letter-spacing: -0.01em; }
+.c-sub { color: var(--ink-2); font-size: 13px; line-height: 1.4; }
+@media (max-width: 520px) { .row, .choice { grid-template-columns: 1fr; } }
 .form-note { text-align: center; }
 
 footer { border-top: 1px solid var(--border); padding-block: 24px 36px; font-size: 14px; color: var(--ink-2); }
@@ -320,10 +363,10 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 .btn-primary::after { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 40%; pointer-events: none;
   background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.22), transparent); transform: translateX(-160%) skewX(-12deg); }
 .btn-primary:hover::after { transform: translateX(320%) skewX(-12deg); transition: transform 800ms var(--ease); }
-.point, .tile { transition: transform 260ms var(--ease), border-color 260ms var(--ease), box-shadow 260ms var(--ease), opacity 700ms var(--ease); }
+.tile { transition: transform 260ms var(--ease), border-color 260ms var(--ease), box-shadow 260ms var(--ease), opacity 700ms var(--ease); }
 @media (hover: hover) {
-  .point:hover, .tile:hover { transform: translateY(-2px); border-color: #D2D2CC; box-shadow: 0 8px 24px -16px rgba(20, 20, 20, 0.25); }
-  .motion .point.shown:hover, .motion .tile.shown:hover { transform: translateY(-2px); }
+  .tile:hover { transform: translateY(-2px); border-color: #D2D2CC; box-shadow: 0 8px 24px -16px rgba(20, 20, 20, 0.25); }
+  .motion .tile.shown:hover { transform: translateY(-2px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -343,10 +386,10 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       Founder Base
     </a>
     <nav class="nav" aria-label="Main">
-      <a href="#services">Services</a>
+      <a href="#desks">Desks</a>
+      <a href="#events">Events</a>
       <a href="#day">A day</a>
-      <a href="#venue">Venue</a>
-      <a class="nav-cta" href="#contact">Join</a>
+      <a class="nav-cta" href="#contact">Book</a>
     </nav>
   </div>
   <div class="progress" aria-hidden="true"><span class="bar"></span><span class="knob"></span></div>
@@ -357,12 +400,12 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   <section class="hero" aria-labelledby="hero-title">
     <div class="wrap">
       <div class="eyebrow">San Francisco</div>
-      <h1 id="hero-title" aria-label="One stop for founders in San Francisco."><span aria-hidden="true">One stop for</span><span class="cycle" aria-hidden="true"><span class="cycle-word">founders</span></span><span aria-hidden="true">in San Francisco.</span></h1>
-      <p class="lede">Desks, an event venue, warehouse space and food, all on site.</p>
-      <p class="body">Below market rates, in one place. You build the company, and the space is ready when you need it.</p>
+      <h1 id="hero-title" aria-label="Desks and an event venue for founders in San Francisco."><span aria-hidden="true">Desks and an event venue</span><span aria-hidden="true">for <span class="cycle"><span class="cycle-word">founders</span></span></span><span aria-hidden="true">in San Francisco.</span></h1>
+      <p class="lede">Work here every day. Host your next event here too.</p>
+      <p class="body">Below market rates, with food, storage and a founder network on site. You build the company, and the space is ready when you need it.</p>
       <div class="actions">
-        <a class="btn btn-primary" href="#contact">Join the group</a>
-        <a class="btn btn-secondary" href="#venue">See the venue</a>
+        <a class="btn btn-primary" href="#contact" data-pick="desk">Book a desk</a>
+        <a class="btn btn-primary" href="#contact" data-pick="event">Book a date</a>
       </div>
       <p class="mono fine">We provide the places. Your company stays yours to run.</p>
 
@@ -373,9 +416,9 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
         <span class="train" aria-hidden="true"></span>
         <ol class="stops">
           <li class="stop start"><span class="dot"></span><span class="name">Your idea</span></li>
-          <li class="stop"><span class="dot"></span><span class="name">Office</span><span class="note">Desks and private offices</span></li>
+          <li class="stop"><span class="dot"></span><span class="name">Desk</span><span class="note">Desks and private offices</span></li>
+          <li class="stop"><span class="dot"></span><span class="name">Events</span><span class="note">Hackathons, tech talks, dinners</span></li>
           <li class="stop"><span class="dot"></span><span class="name">Food</span><span class="note">Restaurants and milk tea on site</span></li>
-          <li class="stop"><span class="dot"></span><span class="name">Events</span><span class="note">Private events, hackathons, tech talks</span></li>
           <li class="stop"><span class="dot"></span><span class="name">Network</span><span class="note">The chamber of commerce and our community</span></li>
           <li class="stop"><span class="dot"></span><span class="name">Warehouse</span><span class="note">Storage space on site</span></li>
           <li class="stop"><span class="dot"></span><span class="name">Tech help</span><span class="note">Websites and product advice</span></li>
@@ -386,22 +429,42 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     </div>
   </section>
 
-  <section class="section" id="services" aria-labelledby="services-title">
+  <section class="section" id="space" aria-labelledby="space-title">
     <div class="wrap">
-      <h2 id="services-title">What we provide.</h2>
-      <p class="sub">Space to work, rooms to host in, and help around both.</p>
-      <div class="bento">
-        <article class="card tile w2 h2"><div class="ill" aria-hidden="true"><svg viewBox="0 0 300 160" preserveAspectRatio="xMidYMid meet"><rect x="22" y="30" width="54" height="24" rx="4" fill="#fff" stroke="#141414" stroke-width="1.3"/><rect x="41" y="35" width="16" height="10" rx="2" fill="none" stroke="#8A8A84"/><circle class="seat" style="--i:0" cx="49" cy="68" r="7"/><rect x="90" y="30" width="54" height="24" rx="4" fill="#fff" stroke="#141414" stroke-width="1.3"/><rect x="109" y="35" width="16" height="10" rx="2" fill="none" stroke="#8A8A84"/><circle class="seat" style="--i:1" cx="117" cy="68" r="7"/><rect x="158" y="30" width="54" height="24" rx="4" fill="#fff" stroke="#141414" stroke-width="1.3"/><rect x="177" y="35" width="16" height="10" rx="2" fill="none" stroke="#8A8A84"/><circle class="seat" style="--i:2" cx="185" cy="68" r="7"/><rect x="226" y="30" width="54" height="24" rx="4" fill="#fff" stroke="#141414" stroke-width="1.3"/><rect x="245" y="35" width="16" height="10" rx="2" fill="none" stroke="#8A8A84"/><circle class="seat free" style="--i:3" cx="253" cy="68" r="7"/><rect x="22" y="96" width="54" height="24" rx="4" fill="#fff" stroke="#141414" stroke-width="1.3"/><rect x="41" y="101" width="16" height="10" rx="2" fill="none" stroke="#8A8A84"/><circle class="seat" style="--i:4" cx="49" cy="134" r="7"/><rect x="90" y="96" width="54" height="24" rx="4" fill="#fff" stroke="#141414" stroke-width="1.3"/><rect x="109" y="101" width="16" height="10" rx="2" fill="none" stroke="#8A8A84"/><circle class="seat" style="--i:5" cx="117" cy="134" r="7"/><rect x="158" y="96" width="54" height="24" rx="4" fill="#fff" stroke="#141414" stroke-width="1.3"/><rect x="177" y="101" width="16" height="10" rx="2" fill="none" stroke="#8A8A84"/><circle class="seat free" style="--i:6" cx="185" cy="134" r="7"/><rect x="226" y="96" width="54" height="24" rx="4" fill="#fff" stroke="#141414" stroke-width="1.3"/><rect x="245" y="101" width="16" height="10" rx="2" fill="none" stroke="#8A8A84"/><circle class="seat" style="--i:7" cx="253" cy="134" r="7"/></svg></div><span class="mono kind">space</span><h3>Space for your company</h3><p>Desks and private offices for your team, plus rooms for meetings, team days and offsites.</p></article>
-        <article class="card tile w2"><div class="ill" aria-hidden="true"><div class="clock-wrap"><div class="clock" data-clock>48:00:00</div><div class="clock-bar"><i></i></div><span class="mono">time left to build</span></div></div><span class="mono kind">events</span><h3>Hackathons</h3><p>Room for every team to build, and a community to fill it.</p></article>
-        <article class="card tile "><div class="ill" aria-hidden="true"><div class="wave"><span style="--i:0;--h:0.35"></span><span style="--i:1;--h:0.55"></span><span style="--i:2;--h:0.4"></span><span style="--i:3;--h:0.8"></span><span style="--i:4;--h:0.5"></span><span style="--i:5;--h:0.95"></span><span style="--i:6;--h:0.6"></span><span style="--i:7;--h:0.75"></span><span style="--i:8;--h:1"></span><span style="--i:9;--h:0.85"></span><span style="--i:10;--h:0.95"></span><span style="--i:11;--h:0.7"></span><span style="--i:12;--h:0.5"></span><span style="--i:13;--h:0.8"></span><span style="--i:14;--h:0.45"></span><span style="--i:15;--h:0.65"></span><span style="--i:16;--h:0.3"></span><span style="--i:17;--h:0.55"></span><span style="--i:18;--h:0.4"></span><span style="--i:19;--h:0.25"></span></div></div><span class="mono kind">events</span><h3>Tech talks</h3><p>Talks and panels for founders and engineers.</p></article>
-        <article class="card tile "><div class="ill" aria-hidden="true"><div class="stack"><span class="box " style="left:0px;top:60px;--i:0"></span><span class="box " style="left:41px;top:60px;--i:1"></span><span class="box g" style="left:82px;top:60px;--i:2"></span><span class="box " style="left:20px;top:31px;--i:3"></span><span class="box " style="left:61px;top:31px;--i:4"></span><span class="box " style="left:41px;top:2px;--i:5"></span></div></div><span class="mono kind">space</span><h3>Warehouse</h3><p>Storage space on site. You run your stock.</p></article>
-        <article class="card tile w2 h2"><div class="ill" aria-hidden="true"><svg viewBox="0 0 300 180" preserveAspectRatio="xMidYMid meet"><rect x="46" y="70" width="208" height="40" rx="20" fill="#fff" stroke="#141414" stroke-width="1.3"/><rect x="128" y="80" width="4" height="16" rx="1" fill="#141414"/><ellipse class="flame" cx="130" cy="76" rx="3" ry="5" fill="#32B36F"/><rect x="168" y="80" width="4" height="16" rx="1" fill="#141414"/><ellipse class="flame" cx="170" cy="76" rx="3" ry="5" fill="#32B36F"/><g class="plate" style="--i:0"><circle cx="78" cy="52" r="11" fill="#fff" stroke="#8A8A84" stroke-width="1.2"/><circle cx="78" cy="52" r="5" fill="none" stroke="#CFCFC8"/></g><g class="plate" style="--i:1"><circle cx="126" cy="52" r="11" fill="#fff" stroke="#8A8A84" stroke-width="1.2"/><circle cx="126" cy="52" r="5" fill="none" stroke="#CFCFC8"/></g><g class="plate" style="--i:2"><circle cx="174" cy="52" r="11" fill="#fff" stroke="#8A8A84" stroke-width="1.2"/><circle cx="174" cy="52" r="5" fill="none" stroke="#CFCFC8"/></g><g class="plate" style="--i:3"><circle cx="222" cy="52" r="11" fill="#fff" stroke="#8A8A84" stroke-width="1.2"/><circle cx="222" cy="52" r="5" fill="none" stroke="#CFCFC8"/></g><g class="plate" style="--i:4"><circle cx="78" cy="128" r="11" fill="#fff" stroke="#8A8A84" stroke-width="1.2"/><circle cx="78" cy="128" r="5" fill="none" stroke="#CFCFC8"/></g><g class="plate" style="--i:5"><circle cx="126" cy="128" r="11" fill="#fff" stroke="#8A8A84" stroke-width="1.2"/><circle cx="126" cy="128" r="5" fill="none" stroke="#CFCFC8"/></g><g class="plate" style="--i:6"><circle cx="174" cy="128" r="11" fill="#fff" stroke="#8A8A84" stroke-width="1.2"/><circle cx="174" cy="128" r="5" fill="none" stroke="#CFCFC8"/></g><g class="plate" style="--i:7"><circle cx="222" cy="128" r="11" fill="#fff" stroke="#8A8A84" stroke-width="1.2"/><circle cx="222" cy="128" r="5" fill="none" stroke="#CFCFC8"/></g></svg></div><span class="mono kind">events</span><h3>Private dinners</h3><p>Hosted dinners with food from our merchants, or bring your own.</p></article>
-        <article class="card tile "><div class="ill" aria-hidden="true"><div class="count" data-count>3</div></div><span class="mono kind">events</span><h3>Launch nights</h3><p>Show your product to a room that came to see it.</p></article>
-        <article class="card tile "><div class="ill" aria-hidden="true"><svg viewBox="0 0 300 150" preserveAspectRatio="xMidYMid meet"><line class="edge" pathLength="1" style="--i:0" x1="150" y1="60" x2="70" y2="30"/><line class="edge" pathLength="1" style="--i:1" x1="150" y1="60" x2="232" y2="28"/><line class="edge" pathLength="1" style="--i:2" x1="150" y1="60" x2="60" y2="98"/><line class="edge" pathLength="1" style="--i:3" x1="150" y1="60" x2="238" y2="100"/><line class="edge" pathLength="1" style="--i:4" x1="150" y1="60" x2="118" y2="118"/><line class="edge" pathLength="1" style="--i:5" x1="150" y1="60" x2="190" y2="122"/><line class="edge" pathLength="1" style="--i:6" x1="70" y1="30" x2="60" y2="98"/><line class="edge" pathLength="1" style="--i:7" x1="232" y1="28" x2="238" y2="100"/><line class="edge" pathLength="1" style="--i:8" x1="118" y1="118" x2="190" y2="122"/><line class="edge" pathLength="1" style="--i:9" x1="60" y1="98" x2="118" y2="118"/><circle class="node hub" cx="150" cy="60" r="9"/><circle class="node " cx="70" cy="30" r="6"/><circle class="node " cx="232" cy="28" r="6"/><circle class="node " cx="60" cy="98" r="6"/><circle class="node " cx="238" cy="100" r="6"/><circle class="node " cx="118" cy="118" r="6"/><circle class="node " cx="190" cy="122" r="6"/></svg></div><span class="mono kind">support</span><h3>Network</h3><p>The chamber of commerce and our founder community.</p></article>
-        <article class="card tile "><div class="ill" aria-hidden="true"><svg viewBox="0 0 300 150" preserveAspectRatio="xMidYMid meet"><g><path class="steam" d="M136 52c-6-8 6-12 0-22"/><path class="steam" d="M150 50c-6-8 6-12 0-22"/><path class="steam" d="M164 52c-6-8 6-12 0-22"/></g><path d="M118 62h64v26a24 24 0 0 1-24 24h-16a24 24 0 0 1-24-24z" fill="#fff" stroke="#141414" stroke-width="1.4"/><path d="M182 70h6a10 10 0 0 1 0 20h-7" fill="none" stroke="#141414" stroke-width="1.4"/><ellipse cx="150" cy="118" rx="52" ry="6" fill="none" stroke="#8A8A84" stroke-width="1.2"/><circle cx="138" cy="94" r="3" fill="#141414"/><circle cx="150" cy="98" r="3" fill="#141414"/><circle cx="161" cy="93" r="3" fill="#141414"/></svg></div><span class="mono kind">support</span><h3>Food on site</h3><p>Restaurants and milk tea, and catering as a package.</p></article>
-        <article class="card tile "><div class="ill" aria-hidden="true"><div class="board"><span class="sticky " style="left:12px;top:12px;--r:-6deg;--i:0"></span><span class="sticky g" style="left:52px;top:10px;--r:4deg;--i:1"></span><span class="sticky " style="left:94px;top:14px;--r:-3deg;--i:2"></span><span class="sticky " style="left:28px;top:52px;--r:5deg;--i:3"></span><span class="sticky " style="left:74px;top:50px;--r:-5deg;--i:4"></span><span class="sticky g" style="left:112px;top:54px;--r:3deg;--i:5"></span></div></div><span class="mono kind">events</span><h3>Workshops</h3><p>Hands-on sessions for founders and teams.</p></article>
-        <article class="card tile w2"><div class="ill" aria-hidden="true"><svg viewBox="0 0 300 130" preserveAspectRatio="xMidYMid meet"><path d="M30 50 Q150 120 270 50" fill="none" stroke="#141414" stroke-width="1.2"/><line x1="30" y1="50.0" x2="30" y2="58.0" stroke="#8A8A84"/><circle class="bulb" style="--i:0" cx="30" cy="62.0" r="5"/><line x1="50" y1="57.2" x2="50" y2="65.2" stroke="#8A8A84"/><circle class="bulb on" style="--i:1" cx="50" cy="69.2" r="5"/><line x1="70" y1="64.0" x2="70" y2="72.0" stroke="#8A8A84"/><circle class="bulb" style="--i:2" cx="70" cy="76.0" r="5"/><line x1="90" y1="69.8" x2="90" y2="77.8" stroke="#8A8A84"/><circle class="bulb" style="--i:3" cx="90" cy="81.8" r="5"/><line x1="110" y1="74.2" x2="110" y2="82.2" stroke="#8A8A84"/><circle class="bulb on" style="--i:4" cx="110" cy="86.2" r="5"/><line x1="130" y1="77.0" x2="130" y2="85.0" stroke="#8A8A84"/><circle class="bulb" style="--i:5" cx="130" cy="89.0" r="5"/><line x1="150" y1="78.0" x2="150" y2="86.0" stroke="#8A8A84"/><circle class="bulb" style="--i:6" cx="150" cy="90.0" r="5"/><line x1="170" y1="77.0" x2="170" y2="85.0" stroke="#8A8A84"/><circle class="bulb on" style="--i:7" cx="170" cy="89.0" r="5"/><line x1="190" y1="74.2" x2="190" y2="82.2" stroke="#8A8A84"/><circle class="bulb" style="--i:8" cx="190" cy="86.2" r="5"/><line x1="210" y1="69.8" x2="210" y2="77.8" stroke="#8A8A84"/><circle class="bulb" style="--i:9" cx="210" cy="81.8" r="5"/><line x1="230" y1="64.0" x2="230" y2="72.0" stroke="#8A8A84"/><circle class="bulb on" style="--i:10" cx="230" cy="76.0" r="5"/><line x1="250" y1="57.2" x2="250" y2="65.2" stroke="#8A8A84"/><circle class="bulb" style="--i:11" cx="250" cy="69.2" r="5"/><line x1="270" y1="50.0" x2="270" y2="58.0" stroke="#8A8A84"/><circle class="bulb" style="--i:12" cx="270" cy="62.0" r="5"/></svg></div><span class="mono kind">events</span><h3>Private events</h3><p>Book the venue for a private party or a company event.</p></article>
-        <article class="card tile w2"><div class="ill" aria-hidden="true"><div class="win"><div class="win-bar"><i></i><i></i><i></i></div><div class="win-body"><span class="code " style="--w:62%;--i:0"></span><span class="code " style="--w:84%;--i:1"></span><span class="code g" style="--w:46%;--i:2"></span><span class="code " style="--w:70%;--i:3"></span><span class="code " style="--w:38%;--i:4"></span></div></div></div><span class="mono kind">support</span><h3>Tech help</h3><p>Websites and product advice when you need them.</p></article>
+      <h2 id="space-title">A desk by day. A venue by night.</h2>
+      <p class="sub">Rent space for your team, and book the same place for your events.</p>
+      <div class="pillars">
+        <article class="card pillar" id="desks" aria-labelledby="desks-title">
+          <div class="pillar-head"><span class="mono">01 / desks</span><span class="mono">for your team</span></div>
+          <h3 id="desks-title">Work here.</h3>
+          <p class="lead">From one desk to room for your whole company, below market rent.</p>
+          <div class="big anim" aria-hidden="true"><svg viewBox="0 0 300 160" preserveAspectRatio="xMidYMid meet"><rect x="22" y="30" width="54" height="24" rx="4" fill="#fff" stroke="#141414" stroke-width="1.3"/><rect x="41" y="35" width="16" height="10" rx="2" fill="none" stroke="#8A8A84"/><circle class="seat" style="--i:0" cx="49" cy="68" r="7"/><rect x="90" y="30" width="54" height="24" rx="4" fill="#fff" stroke="#141414" stroke-width="1.3"/><rect x="109" y="35" width="16" height="10" rx="2" fill="none" stroke="#8A8A84"/><circle class="seat" style="--i:1" cx="117" cy="68" r="7"/><rect x="158" y="30" width="54" height="24" rx="4" fill="#fff" stroke="#141414" stroke-width="1.3"/><rect x="177" y="35" width="16" height="10" rx="2" fill="none" stroke="#8A8A84"/><circle class="seat" style="--i:2" cx="185" cy="68" r="7"/><rect x="226" y="30" width="54" height="24" rx="4" fill="#fff" stroke="#141414" stroke-width="1.3"/><rect x="245" y="35" width="16" height="10" rx="2" fill="none" stroke="#8A8A84"/><circle class="seat free" style="--i:3" cx="253" cy="68" r="7"/><rect x="22" y="96" width="54" height="24" rx="4" fill="#fff" stroke="#141414" stroke-width="1.3"/><rect x="41" y="101" width="16" height="10" rx="2" fill="none" stroke="#8A8A84"/><circle class="seat" style="--i:4" cx="49" cy="134" r="7"/><rect x="90" y="96" width="54" height="24" rx="4" fill="#fff" stroke="#141414" stroke-width="1.3"/><rect x="109" y="101" width="16" height="10" rx="2" fill="none" stroke="#8A8A84"/><circle class="seat" style="--i:5" cx="117" cy="134" r="7"/><rect x="158" y="96" width="54" height="24" rx="4" fill="#fff" stroke="#141414" stroke-width="1.3"/><rect x="177" y="101" width="16" height="10" rx="2" fill="none" stroke="#8A8A84"/><circle class="seat free" style="--i:6" cx="185" cy="134" r="7"/><rect x="226" y="96" width="54" height="24" rx="4" fill="#fff" stroke="#141414" stroke-width="1.3"/><rect x="245" y="101" width="16" height="10" rx="2" fill="none" stroke="#8A8A84"/><circle class="seat" style="--i:7" cx="253" cy="134" r="7"/></svg></div>
+          <div class="subs">
+            <div class="sub-tile anim"><div class="mini" aria-hidden="true"><svg viewBox="0 0 120 64"><rect x="33" y="10" width="54" height="22" rx="4" fill="#fff" stroke="#141414" stroke-width="1.3"/><rect x="52" y="14" width="16" height="10" rx="2" fill="none" stroke="#8A8A84"/><circle class="seat" style="--i:1" cx="60" cy="46" r="7"/></svg></div><strong>Desks</strong><span class="d">A seat for one, or a row for your team.</span></div>
+            <div class="sub-tile anim"><div class="mini" aria-hidden="true"><svg viewBox="0 0 120 64"><path d="M50 56H28V8h64v48H70" fill="#fff" stroke="#141414" stroke-width="1.4"/><rect x="42" y="16" width="36" height="13" rx="3" fill="none" stroke="#8A8A84"/><circle class="seat" style="--i:1" cx="50" cy="40" r="5"/><circle class="seat" style="--i:2" cx="70" cy="40" r="5"/><path class="door" d="M50 56 L64 46" stroke="#1F8A55" stroke-width="1.6" stroke-linecap="round"/></svg></div><strong>Private offices</strong><span class="d">A room with a door for your team.</span></div>
+            <div class="sub-tile anim"><div class="mini" aria-hidden="true"><svg viewBox="0 0 120 64"><rect x="10" y="8" width="100" height="48" rx="6" fill="#fff" stroke="#141414" stroke-width="1.3"/><circle class="seat" style="--i:0" cx="22" cy="22" r="5"/><circle class="seat" style="--i:1" cx="37" cy="22" r="5"/><circle class="seat" style="--i:2" cx="52" cy="22" r="5"/><circle class="seat" style="--i:3" cx="67" cy="22" r="5"/><circle class="seat" style="--i:4" cx="82" cy="22" r="5"/><circle class="seat free" style="--i:5" cx="97" cy="22" r="5"/><circle class="seat" style="--i:6" cx="22" cy="42" r="5"/><circle class="seat" style="--i:7" cx="37" cy="42" r="5"/><circle class="seat" style="--i:8" cx="52" cy="42" r="5"/><circle class="seat" style="--i:9" cx="67" cy="42" r="5"/><circle class="seat free" style="--i:10" cx="82" cy="42" r="5"/><circle class="seat" style="--i:11" cx="97" cy="42" r="5"/></svg></div><strong>Your whole company</strong><span class="d">Room to grow as you hire.</span></div>
+          </div>
+          <div class="pillar-foot">
+            <ul class="pillar-notes"><li class="mono">Below market rent</li><li class="mono">Use the venue for team days</li><li class="mono">Food and storage on site</li></ul>
+            <a class="btn btn-primary" href="#contact" data-pick="desk">Book a desk</a>
+          </div>
+        </article>
+        <article class="card pillar" id="events" aria-labelledby="events-title">
+          <div class="pillar-head"><span class="mono">02 / events</span><span class="mono">for your community</span></div>
+          <h3 id="events-title">Host here.</h3>
+          <p class="lead">A venue for your night, at well below what SF venues charge.</p>
+          <!-- TODO: add venue rates, capacity, sound and projection once confirmed -->
+          <div class="formats" aria-label="Events you can host"><div class="formats-head"><span class="mono">hosted here</span><span class="mono">tonight</span></div><ul><li><span class="no">01</span><span class="ev">Hackathons</span></li><li><span class="no">02</span><span class="ev">Tech talks</span></li><li><span class="no">03</span><span class="ev">Private dinners</span></li><li><span class="no">04</span><span class="ev">Workshops</span></li><li><span class="no">05</span><span class="ev">Socials</span></li><li><span class="no">06</span><span class="ev">Private events</span></li></ul></div>
+          <div class="subs">
+            <div class="sub-tile anim"><div class="mini" aria-hidden="true"><div class="clock-wrap"><div class="clock" data-clock>48:00:00</div><div class="clock-bar"><i></i></div></div></div><strong>Hackathons</strong><span class="d">Room for every team to build.</span></div>
+            <div class="sub-tile anim"><div class="mini" aria-hidden="true"><div class="wave"><span style="--i:0;--h:0.35"></span><span style="--i:1;--h:0.6"></span><span style="--i:2;--h:0.45"></span><span style="--i:3;--h:0.85"></span><span style="--i:4;--h:0.55"></span><span style="--i:5;--h:1"></span><span style="--i:6;--h:0.7"></span><span style="--i:7;--h:0.95"></span><span style="--i:8;--h:0.6"></span><span style="--i:9;--h:0.8"></span><span style="--i:10;--h:0.45"></span><span style="--i:11;--h:0.65"></span><span style="--i:12;--h:0.3"></span><span style="--i:13;--h:0.5"></span></div></div><strong>Tech talks</strong><span class="d">Talks and panels for builders.</span></div>
+            <div class="sub-tile anim"><div class="mini" aria-hidden="true"><svg viewBox="0 0 120 64"><rect x="22" y="24" width="76" height="16" rx="8" fill="#fff" stroke="#141414" stroke-width="1.3"/><ellipse class="flame" cx="60" cy="29" rx="2.2" ry="3.6" fill="#32B36F"/><circle class="plate" style="--i:0" cx="38" cy="13" r="6" fill="#fff" stroke="#8A8A84" stroke-width="1.2"/><circle class="plate" style="--i:1" cx="60" cy="13" r="6" fill="#fff" stroke="#8A8A84" stroke-width="1.2"/><circle class="plate" style="--i:2" cx="82" cy="13" r="6" fill="#fff" stroke="#8A8A84" stroke-width="1.2"/><circle class="plate" style="--i:3" cx="38" cy="51" r="6" fill="#fff" stroke="#8A8A84" stroke-width="1.2"/><circle class="plate" style="--i:4" cx="60" cy="51" r="6" fill="#fff" stroke="#8A8A84" stroke-width="1.2"/><circle class="plate" style="--i:5" cx="82" cy="51" r="6" fill="#fff" stroke="#8A8A84" stroke-width="1.2"/></svg></div><strong>Private dinners</strong><span class="d">One table, food from our merchants.</span></div>
+          </div>
+          <div class="pillar-foot">
+            <ul class="pillar-notes"><li class="mono">Our community helps fill the room</li><li class="mono">Catering if you want it, or bring your own</li><li class="mono">Keep your own event page</li></ul>
+            <a class="btn btn-primary" href="#contact" data-pick="event">Book a date</a>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -426,30 +489,15 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     </div>
   </section>
 
-  <section class="section" id="venue" aria-labelledby="venue-title">
+  <section class="section" id="extras" aria-labelledby="extras-title">
     <div class="wrap">
-      <h2 id="venue-title">An event venue that comes with an audience.</h2>
-      <p class="sub">Host your launch, talk or dinner here, for well below market rent.</p>
-      <!-- TODO: add rates, capacity, sound and projection once confirmed -->
-      <div class="grid-3">
-        <div class="card point"><h3>Below market rent</h3><p>Hosts pay for the room, at a price well under what SF venues charge.</p></div>
-        <div class="card point"><h3>People in the room</h3><p>Our community helps promote your event.</p></div>
-        <div class="card point"><h3>Food if you want it</h3><p>Catering from our on-site merchants, or bring your own.</p></div>
-      </div>
-      <div class="card formats" aria-label="Events you can host">
-        <div class="formats-head"><span class="mono">hosted here</span></div>
-        <ul>
-          <li><span class="no">01</span><span class="ev">Private events</span></li>
-          <li><span class="no">02</span><span class="ev">Private dinners</span></li>
-          <li><span class="no">03</span><span class="ev">Hackathons</span></li>
-          <li><span class="no">04</span><span class="ev">Tech talks</span></li>
-          <li><span class="no">05</span><span class="ev">Workshops</span></li>
-          <li><span class="no">06</span><span class="ev">Launch nights</span></li>
-        </ul>
-      </div>
-      <div class="venue-foot">
-        <p class="mono">Keep your own event page. We just host the night.</p>
-        <div class="actions"><a class="btn btn-primary" href="#contact">Ask about a date</a></div>
+      <h2 id="extras-title">On site, when you need it.</h2>
+      <p class="sub">Extras around your desk and your events. Use them, or don't.</p>
+      <div class="extras">
+        <article class="card tile anim"><div class="ill" aria-hidden="true"><div class="stack"><span class="box " style="left:0px;top:60px;--i:0"></span><span class="box " style="left:41px;top:60px;--i:1"></span><span class="box g" style="left:82px;top:60px;--i:2"></span><span class="box " style="left:20px;top:31px;--i:3"></span><span class="box " style="left:61px;top:31px;--i:4"></span><span class="box " style="left:41px;top:2px;--i:5"></span></div></div><span class="mono kind">space</span><h3>Warehouse</h3><p>Storage space on site. Your stock stays yours to run.</p></article>
+        <article class="card tile anim"><div class="ill" aria-hidden="true"><svg viewBox="0 0 300 150" preserveAspectRatio="xMidYMid meet"><g><path class="steam" d="M136 52c-6-8 6-12 0-22"/><path class="steam" d="M150 50c-6-8 6-12 0-22"/><path class="steam" d="M164 52c-6-8 6-12 0-22"/></g><path d="M118 62h64v26a24 24 0 0 1-24 24h-16a24 24 0 0 1-24-24z" fill="#fff" stroke="#141414" stroke-width="1.4"/><path d="M182 70h6a10 10 0 0 1 0 20h-7" fill="none" stroke="#141414" stroke-width="1.4"/><ellipse cx="150" cy="118" rx="52" ry="6" fill="none" stroke="#8A8A84" stroke-width="1.2"/><circle cx="138" cy="94" r="3" fill="#141414"/><circle cx="150" cy="98" r="3" fill="#141414"/><circle cx="161" cy="93" r="3" fill="#141414"/></svg></div><span class="mono kind">food</span><h3>Food on site</h3><p>Restaurants and milk tea, and a private dinner package for events.</p></article>
+        <article class="card tile anim"><div class="ill" aria-hidden="true"><svg viewBox="0 0 300 150" preserveAspectRatio="xMidYMid meet"><line class="edge" pathLength="1" style="--i:0" x1="150" y1="60" x2="70" y2="30"/><line class="edge" pathLength="1" style="--i:1" x1="150" y1="60" x2="232" y2="28"/><line class="edge" pathLength="1" style="--i:2" x1="150" y1="60" x2="60" y2="98"/><line class="edge" pathLength="1" style="--i:3" x1="150" y1="60" x2="238" y2="100"/><line class="edge" pathLength="1" style="--i:4" x1="150" y1="60" x2="118" y2="118"/><line class="edge" pathLength="1" style="--i:5" x1="150" y1="60" x2="190" y2="122"/><line class="edge" pathLength="1" style="--i:6" x1="70" y1="30" x2="60" y2="98"/><line class="edge" pathLength="1" style="--i:7" x1="232" y1="28" x2="238" y2="100"/><line class="edge" pathLength="1" style="--i:8" x1="118" y1="118" x2="190" y2="122"/><line class="edge" pathLength="1" style="--i:9" x1="60" y1="98" x2="118" y2="118"/><circle class="node hub" cx="150" cy="60" r="9"/><circle class="node " cx="70" cy="30" r="6"/><circle class="node " cx="232" cy="28" r="6"/><circle class="node " cx="60" cy="98" r="6"/><circle class="node " cx="238" cy="100" r="6"/><circle class="node " cx="118" cy="118" r="6"/><circle class="node " cx="190" cy="122" r="6"/></svg></div><span class="mono kind">network</span><h3>Network</h3><p>Introductions through the chamber of commerce and our founder community.</p></article>
+        <article class="card tile anim"><div class="ill" aria-hidden="true"><div class="win"><div class="win-bar"><i></i><i></i><i></i></div><div class="win-body"><span class="code " style="--w:62%;--i:0"></span><span class="code " style="--w:84%;--i:1"></span><span class="code g" style="--w:46%;--i:2"></span><span class="code " style="--w:70%;--i:3"></span><span class="code " style="--w:38%;--i:4"></span></div></div></div><span class="mono kind">support</span><h3>Tech help</h3><p>Websites and product advice when you need them.</p></article>
       </div>
     </div>
   </section>
@@ -457,21 +505,52 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   <section class="section" id="contact" aria-labelledby="contact-title">
     <div class="wrap">
       <div class="card cta">
-        <h2 id="contact-title">Join the group.</h2>
+        <h2 id="contact-title">Book a desk or a date.</h2>
         <p class="sub">We're opening to startups and event hosts. Tell us what you need.</p>
         <!-- TODO: connect this form to a contact email or a form service; until then it sends nothing -->
         <form id="interest-form" novalidate>
-          <label class="field" for="f-name">Name
-            <input id="f-name" name="name" type="text" autocomplete="name"></label>
-          <label class="field" for="f-email">Email
-            <input id="f-email" name="email" type="email" autocomplete="email"></label>
           <fieldset>
-            <legend>Interested in</legend>
+            <legend>What are you booking?</legend>
+            <div class="choice">
+              <label for="k-desk"><input id="k-desk" type="radio" name="kind" value="desk"><span class="c-title">A desk</span><span class="c-sub">Desks or an office for your team</span></label>
+              <label for="k-event"><input id="k-event" type="radio" name="kind" value="event"><span class="c-title">An event date</span><span class="c-sub">A hackathon, talk, dinner or social</span></label>
+            </div>
+          </fieldset>
+          <div class="group" data-for="desk">
+            <div class="row">
+              <label class="field" for="f-team">Team size
+                <input id="f-team" name="team" type="number" min="1" inputmode="numeric" placeholder="e.g. 4"></label>
+              <label class="field" for="f-start">When to start
+                <select id="f-start" name="start">
+                  <option>As soon as possible</option><option>Within a month</option><option>In 1 to 3 months</option><option>Just looking</option>
+                </select></label>
+            </div>
+          </div>
+          <div class="group" data-for="event">
+            <label class="field" for="f-type">Event type
+              <select id="f-type" name="event">
+                <option>Hackathon</option><option>Tech talk</option><option>Private dinner</option><option>Workshop</option><option>Social</option><option>Private event</option><option>Something else</option>
+              </select></label>
+            <div class="row">
+              <label class="field" for="f-guests">Guests
+                <input id="f-guests" name="guests" type="number" min="1" inputmode="numeric" placeholder="e.g. 60"></label>
+              <label class="field" for="f-date">Preferred date
+                <input id="f-date" name="date" type="date"></label>
+            </div>
+          </div>
+          <div class="row">
+            <label class="field" for="f-name">Name
+              <input id="f-name" name="name" type="text" autocomplete="name"></label>
+            <label class="field" for="f-email">Email
+              <input id="f-email" name="email" type="email" autocomplete="email"></label>
+          </div>
+          <fieldset>
+            <legend>Also interested in <span class="opt">optional</span></legend>
             <div class="checks">
-              <label for="c-office"><input id="c-office" type="checkbox" name="need" value="office">Office</label>
-              <label for="c-venue"><input id="c-venue" type="checkbox" name="need" value="venue">Event venue</label>
-              <label for="c-warehouse"><input id="c-warehouse" type="checkbox" name="need" value="warehouse">Warehouse</label>
-              <label for="c-food"><input id="c-food" type="checkbox" name="need" value="food">Food</label>
+              <label for="c-warehouse"><input id="c-warehouse" type="checkbox" name="extra" value="warehouse">Warehouse</label>
+              <label for="c-food"><input id="c-food" type="checkbox" name="extra" value="food">Food</label>
+              <label for="c-network"><input id="c-network" type="checkbox" name="extra" value="network">Network</label>
+              <label for="c-tech"><input id="c-tech" type="checkbox" name="extra" value="tech">Tech help</label>
             </div>
           </fieldset>
           <button class="btn btn-primary" type="submit">Send my details</button>
@@ -492,7 +571,22 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 
 <script>
   // No backend yet: nothing is sent or stored.
-  document.getElementById('interest-form').addEventListener('submit', function (e) { e.preventDefault(); });
+  (function () {
+    var form = document.getElementById('interest-form');
+    form.addEventListener('submit', function (e) { e.preventDefault(); });
+    var groups = Array.prototype.slice.call(form.querySelectorAll('.group'));
+    function show(kind) { groups.forEach(function (g) { g.hidden = g.getAttribute('data-for') !== kind; }); }
+    form.classList.add('js-ready');
+    form.querySelectorAll('input[name="kind"]').forEach(function (r) { r.addEventListener('change', function () { show(r.value); }); });
+    var checked = form.querySelector('input[name="kind"]:checked');
+    show(checked ? checked.value : '');
+    document.querySelectorAll('[data-pick]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var r = document.getElementById(btn.getAttribute('data-pick') === 'desk' ? 'k-desk' : 'k-event');
+        r.checked = true; show(r.value);
+      });
+    });
+  })();
 
   (function () {
     var root = document.documentElement;
@@ -596,44 +690,29 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
     onScroll();
 
-    /* bento drawings: play when a tile comes into view */
-    var tiles = Array.prototype.slice.call(document.querySelectorAll('.tile'));
-    var clockEl = document.querySelector('[data-clock]'), countEl = document.querySelector('[data-count]');
+    /* live drawings: play when they come into view */
+    var tiles = Array.prototype.slice.call(document.querySelectorAll('.anim'));
+    var clockEl = document.querySelector('[data-clock]');
     function pad(n) { return (n < 10 ? '0' : '') + n; }
     var clockLeft = 48 * 3600, clockTimer = 0;
     function startClock() {
-      if (clockTimer) return;
+      if (clockTimer || !clockEl) return;
       clockTimer = setInterval(function () {
         if (document.hidden) return;
         clockLeft = clockLeft > 0 ? clockLeft - 1 : 48 * 3600;
         var h = Math.floor(clockLeft / 3600), m = Math.floor(clockLeft % 3600 / 60), sec = clockLeft % 60;
         clockEl.textContent = pad(h) + ':' + pad(m) + ':' + pad(sec);
-        clockEl.parentNode.parentNode.style.setProperty('--left', (clockLeft / (48 * 3600)).toFixed(4));
+        clockEl.parentNode.style.setProperty('--left', (clockLeft / (48 * 3600)).toFixed(4));
       }, 1000);
-    }
-    var counting = false;
-    function countdown() {
-      if (counting) return; counting = true;
-      var seq = ['3', '2', '1', 'Live'], n = 0;
-      (function next() {
-        countEl.textContent = seq[n];
-        countEl.classList.toggle('go', seq[n] === 'Live');
-        countEl.classList.remove('tick'); void countEl.offsetWidth; countEl.classList.add('tick');
-        n++;
-        if (n < seq.length) setTimeout(next, 800); else counting = false;
-      })();
     }
     if (!motion) {
       tiles.forEach(function (t) { t.classList.add('live'); });
-      countEl.textContent = 'Live'; countEl.classList.add('go');
     } else {
       tiles.forEach(function (t) {
         onView(t, function () {
           t.classList.add('live');
-          if (t.contains(clockEl)) startClock();
-          if (t.contains(countEl)) countdown();
+          if (clockEl && t.contains(clockEl)) startClock();
         }, 0.35);
-        if (t.contains(countEl)) t.addEventListener('mouseenter', countdown);
       });
     }
 
@@ -678,7 +757,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 
     /* 3. the headline word */
     var word = document.querySelector('.cycle-word');
-    var words = ['launches', 'hackathons', 'dinners', 'founders'];
+    var words = ['startups', 'teams', 'builders', 'founders'];
     function swap(w) {
       word.classList.add('out');
       setTimeout(function () {
@@ -728,11 +807,11 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 
     /* 5. sections fade and rise in */
     var groups = [
-      '.section h2', '.section .sub', '.grid-3 .card', '.formats', '.venue-foot', '.cta form'
+      '.section h2', '.section .sub', '.pillar', '.extras .tile', '.cta form'
     ];
     document.querySelectorAll(groups.join(',')).forEach(function (el) {
       var sib = el.parentNode.children, idx = Array.prototype.indexOf.call(sib, el);
-      if (el.classList.contains('card')) { idx = idx % 3; el.style.setProperty('--d', (idx * 90) + 'ms'); }
+      if (el.classList.contains('card')) { idx = idx % 4; el.style.setProperty('--d', (idx * 90) + 'ms'); }
       el.setAttribute('data-reveal', '');
       onView(el, function () {
         el.classList.add('shown');
