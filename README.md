@@ -4,7 +4,7 @@ Promotional landing page for **Founder Base 创业者基地**, a startup space i
 
 ## What's here
 
-- `index.html`: the whole site in one static file (HTML, CSS and a few lines of JS). It is drawn as a transit line ("一站式 / One stop"), with English and Chinese side by side like SF station signs, so there is no language switch.
+- `index.html`: the whole site in one static file (HTML, CSS and a few lines of JS). English first, with small Chinese lines; the page is drawn as one thin "one stop" line whose stops are the services.
 
 No build step. Open `index.html` in a browser to preview it.
 
