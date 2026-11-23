@@ -81,7 +81,12 @@ header .wrap { display: flex; align-items: center; justify-content: space-betwee
 .hero { text-align: center; padding-block: clamp(72px, 10vw, 120px) clamp(64px, 8vw, 96px); }
 .eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--ink-2); font-size: 16px; margin-bottom: 20px; }
 .tag { font: 400 13px/1 var(--f-mono); color: var(--ink); background: #EEEEEA; border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px; }
-.hero h1 { font-size: clamp(46px, 5.6vw + 16px, 92px); line-height: 1.02; letter-spacing: -0.04em; max-width: 13ch; margin-inline: auto; }
+.hero h1 { font-size: clamp(40px, 5.6vw + 16px, 92px); line-height: 1.04; letter-spacing: -0.04em; }
+.hero h1 > span { display: block; }
+.cycle { height: 1.12em; overflow: hidden; color: var(--accent); }
+.cycle-word { display: inline-block; transition: transform 520ms var(--ease), opacity 420ms var(--ease); }
+.cycle-word.out { transform: translateY(-60%); opacity: 0; }
+.cycle-word.in { transform: translateY(60%); opacity: 0; transition: none; }
 .hero .lede { font-size: clamp(20px, 0.6vw + 16px, 24px); line-height: 1.4; margin: 28px auto 0; max-width: 28ch; }
 .hero .body { color: var(--ink-2); margin: 20px auto 0; max-width: 38rem; }
 .hero .actions { margin-top: 36px; }
@@ -90,11 +95,30 @@ header .wrap { display: flex; align-items: center; justify-content: space-betwee
 /* the line, in a card */
 .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; }
 .line-card { margin-top: clamp(48px, 6vw, 72px); padding: 24px 28px 28px; text-align: left; }
-.line-head { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 28px; }
+.line-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 28px; }
+.replay { font: 400 12px/1 var(--f-mono); color: var(--ink-2); background: var(--ground); border: 1px solid var(--border); border-radius: 6px; padding: 7px 10px; cursor: pointer; transition: border-color 160ms var(--ease), color 160ms var(--ease); }
+.replay:hover { border-color: var(--ink-3); color: var(--ink); }
+.no-motion .replay { display: none; }
+.track { position: relative; }
+.track-fill { position: absolute; display: none; background: var(--accent-dot); z-index: 1; pointer-events: none; }
+.train { position: absolute; left: 0; top: 0; width: 13px; height: 13px; border-radius: 50%; background: var(--accent-dot); z-index: 3; pointer-events: none; opacity: 0;
+  box-shadow: 0 0 0 5px rgba(50, 179, 111, 0.18), 0 2px 8px rgba(31, 138, 85, 0.35); transition: opacity 240ms var(--ease); }
 .stops { list-style: none; margin: 0; padding: 0; position: relative; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); }
-.stops::before { content: ""; position: absolute; left: 6px; right: calc(12.5% - 6px); top: 6px; height: 1px; background: var(--ink); transform-origin: left; }
-.stop { position: relative; display: grid; gap: 4px; align-content: start; padding-right: 12px; }
-.stop .dot { width: 13px; height: 13px; border-radius: 50%; background: var(--card); border: 1.5px solid var(--ink); position: relative; z-index: 1; margin-bottom: 16px; }
+.stops::before { content: ""; position: absolute; left: 6px; right: calc(12.5% - 6px); top: 6px; height: 1px; background: #CFCFC8; }
+.stop { position: relative; display: grid; gap: 4px; align-content: start; padding-right: 12px; transition: transform 260ms var(--ease); }
+.stop .dot { width: 13px; height: 13px; border-radius: 50%; background: var(--card); border: 1.5px solid var(--ink); position: relative; z-index: 2; margin-bottom: 16px; transition: border-color 240ms var(--ease), background-color 240ms var(--ease); }
+.stop .name, .stop .note { transition: color 300ms var(--ease), opacity 400ms var(--ease), transform 400ms var(--ease); }
+.motion .stop:not(.lit) .name { color: var(--ink-3); }
+.motion .stop:not(.lit) .note { opacity: 0; transform: translateY(4px); }
+.motion .stop:not(.lit) .dot { border-color: #CFCFC8; }
+.motion .stop.start:not(.lit) .dot { background: #CFCFC8; }
+.motion .stop.lit:not(.end):not(.start) .dot { border-color: var(--accent); animation: pop 420ms var(--ease); }
+@keyframes pop { 40% { transform: scale(1.35); } }
+@media (hover: hover) and (min-width: 901px) {
+  .stop:hover { transform: translateY(-3px); }
+  .stop:hover .note { opacity: 1 !important; transform: none !important; }
+  .stop:hover .name { color: var(--ink) !important; }
+}
 .stop.start .dot { background: var(--ink); }
 .stop.end .dot { background: var(--accent-dot); border-color: var(--accent-dot); box-shadow: 0 0 0 4px rgba(50, 179, 111, 0.16); }
 .stop .name { font-weight: 500; font-size: 16px; letter-spacing: -0.01em; line-height: 1.3; }
@@ -124,7 +148,13 @@ header .wrap { display: flex; align-items: center; justify-content: space-betwee
 .formats li { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 16px 24px; border-bottom: 1px solid var(--border); }
 .formats li:nth-child(odd) { border-right: 1px solid var(--border); }
 .formats li:nth-last-child(-n+2) { border-bottom: 0; }
-.formats .ev { font-size: 17px; font-weight: 500; letter-spacing: -0.01em; }
+.formats li { justify-content: flex-start; gap: 16px; }
+.formats .no { font: 400 12px/1 var(--f-mono); color: var(--ink-3); min-width: 2ch; }
+.formats .ev { font: 500 16px/1.2 var(--f-mono); letter-spacing: 0.04em; text-transform: uppercase; display: inline-flex; }
+.flap { display: inline-block; min-width: 0.62em; text-align: center; }
+.flap.set { animation: flip 260ms var(--ease); }
+@keyframes flip { from { transform: perspective(200px) rotateX(-80deg); opacity: 0.3; } to { transform: none; opacity: 1; } }
+.flap.spin { color: var(--ink-3); }
 .venue-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; margin-top: 24px; }
 .venue-foot .actions { justify-content: flex-start; }
 @media (max-width: 640px) {
@@ -166,9 +196,31 @@ form .btn { width: 100%; }
 footer { border-top: 1px solid var(--border); padding-block: 24px 36px; font-size: 14px; color: var(--ink-2); }
 footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
 
-@keyframes draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-@media (min-width: 901px) { .stops::before { animation: draw 1000ms var(--ease) 150ms both; } }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before { animation: none !important; transition: none !important; } }
+/* scroll progress, a thin line under the header ending in the green stop */
+.progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; pointer-events: none; }
+.progress .bar { position: absolute; inset: 0; background: var(--accent-dot); transform: scaleX(0); transform-origin: left; }
+.progress .knob { position: absolute; top: -3px; left: -4px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent-dot); opacity: 0; transition: opacity 200ms var(--ease); }
+
+/* reveal on scroll */
+.motion [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity 700ms var(--ease), transform 700ms var(--ease); transition-delay: var(--d, 0ms); }
+.motion [data-reveal].shown { opacity: 1; transform: none; }
+
+/* small hovers */
+.btn-primary { position: relative; overflow: hidden; }
+.btn-primary::after { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 40%; pointer-events: none;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.22), transparent); transform: translateX(-160%) skewX(-12deg); }
+.btn-primary:hover::after { transform: translateX(320%) skewX(-12deg); transition: transform 800ms var(--ease); }
+.point, .partner { transition: transform 260ms var(--ease), border-color 260ms var(--ease), box-shadow 260ms var(--ease), opacity 700ms var(--ease); }
+@media (hover: hover) {
+  .point:hover, .partner:hover { transform: translateY(-2px); border-color: #D2D2CC; box-shadow: 0 8px 24px -16px rgba(20, 20, 20, 0.25); }
+  .motion .point.shown:hover, .motion .partner.shown:hover { transform: translateY(-2px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .cycle-word, .stop:hover { transform: none !important; }
+}
 </style>
 </head>
 <body>
@@ -186,6 +238,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       <a class="nav-cta" href="#contact">Join</a>
     </nav>
   </div>
+  <div class="progress" aria-hidden="true"><span class="bar"></span><span class="knob"></span></div>
 </header>
 
 <main id="main">
@@ -193,7 +246,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   <section class="hero" aria-labelledby="hero-title">
     <div class="wrap">
       <div class="eyebrow">San Francisco <span class="tag">first group open</span></div>
-      <h1 id="hero-title">One stop for founders in San Francisco.</h1>
+      <h1 id="hero-title" aria-label="One stop for founders in San Francisco."><span aria-hidden="true">One stop for</span><span class="cycle" aria-hidden="true"><span class="cycle-word">founders</span></span><span aria-hidden="true">in San Francisco.</span></h1>
       <p class="lede">Desks, an event venue, warehouse space and food, all on site.</p>
       <p class="body">Below market rates, in one place. You build the company, and the space is ready when you need it.</p>
       <div class="actions">
@@ -203,7 +256,10 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       <p class="mono fine">We provide the places. Your company stays yours to run.</p>
 
       <div class="card line-card" aria-label="What's at Founder Base">
-        <div class="line-head"><span class="mono">the founder base line</span></div>
+        <div class="line-head"><span class="mono">the founder base line</span><button class="replay" type="button">Ride again</button></div>
+        <div class="track">
+        <span class="track-fill" aria-hidden="true"></span>
+        <span class="train" aria-hidden="true"></span>
         <ol class="stops">
           <li class="stop start"><span class="dot"></span><span class="name">Your idea</span></li>
           <li class="stop"><span class="dot"></span><span class="name">Office</span><span class="note">Desks and private offices</span></li>
@@ -214,6 +270,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
           <li class="stop"><span class="dot"></span><span class="name">Tech help</span><span class="note">Websites and product advice</span></li>
           <li class="stop end"><span class="dot"></span><span class="name">Launch</span></li>
         </ol>
+        </div>
       </div>
     </div>
   </section>
@@ -231,12 +288,12 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       <div class="card formats" aria-label="Events you can host">
         <div class="formats-head"><span class="mono">hosted here</span></div>
         <ul>
-          <li><span class="ev">Launch nights</span></li>
-          <li><span class="ev">Hiring nights</span></li>
-          <li><span class="ev">Workshops</span></li>
-          <li><span class="ev">Hackathons</span></li>
-          <li><span class="ev">Talks</span></li>
-          <li><span class="ev">Private dinners</span></li>
+          <li><span class="no">01</span><span class="ev">Launch nights</span></li>
+          <li><span class="no">02</span><span class="ev">Hiring nights</span></li>
+          <li><span class="no">03</span><span class="ev">Workshops</span></li>
+          <li><span class="no">04</span><span class="ev">Hackathons</span></li>
+          <li><span class="no">05</span><span class="ev">Talks</span></li>
+          <li><span class="no">06</span><span class="ev">Private dinners</span></li>
         </ul>
       </div>
       <div class="venue-foot">
@@ -307,6 +364,175 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 <script>
   // No backend yet: nothing is sent or stored.
   document.getElementById('interest-form').addEventListener('submit', function (e) { e.preventDefault(); });
+
+  (function () {
+    var root = document.documentElement;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var hasIO = 'IntersectionObserver' in window;
+    var motion = !reduce && hasIO;
+    root.classList.add(motion ? 'motion' : 'no-motion');
+
+    function onView(el, cb, threshold) {
+      if (!hasIO) { cb(); return; }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { io.disconnect(); cb(); } });
+      }, { threshold: threshold || 0.2 });
+      io.observe(el);
+    }
+    var ease = function (t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
+
+    /* 1. the train on the one-stop line */
+    var track = document.querySelector('.track');
+    var fill = track.querySelector('.track-fill');
+    var train = track.querySelector('.train');
+    var stops = Array.prototype.slice.call(track.querySelectorAll('.stop'));
+    var pts = [], horizontal = true, length = 0, progress = motion ? 0 : 1, running = false, raf = 0;
+
+    function measure() {
+      var tr = track.getBoundingClientRect();
+      pts = stops.map(function (s) {
+        var d = s.querySelector('.dot').getBoundingClientRect();
+        return { x: d.left - tr.left + d.width / 2, y: d.top - tr.top + d.height / 2 };
+      });
+      var a = pts[0], b = pts[pts.length - 1];
+      horizontal = Math.abs(b.x - a.x) > Math.abs(b.y - a.y);
+      length = horizontal ? b.x - a.x : b.y - a.y;
+      fill.style.display = 'block';
+      if (horizontal) { fill.style.cssText = 'display:block;left:' + a.x + 'px;top:' + (a.y - 1) + 'px;width:' + length + 'px;height:2px;transform-origin:left center'; }
+      else { fill.style.cssText = 'display:block;left:' + (a.x - 1) + 'px;top:' + a.y + 'px;width:2px;height:' + length + 'px;transform-origin:center top'; }
+      draw();
+    }
+    function at(p) { // position along the line, p from 0 to 1
+      var target = pts[0][horizontal ? 'x' : 'y'] + p * length;
+      for (var i = 1; i < pts.length; i++) {
+        var a = pts[i - 1], b = pts[i], ka = horizontal ? a.x : a.y, kb = horizontal ? b.x : b.y;
+        if (target <= kb || i === pts.length - 1) {
+          var t = kb === ka ? 1 : Math.min(1, Math.max(0, (target - ka) / (kb - ka)));
+          return { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t };
+        }
+      }
+      return pts[0];
+    }
+    function draw() {
+      fill.style.transform = horizontal ? 'scaleX(' + progress + ')' : 'scaleY(' + progress + ')';
+      var p = at(progress);
+      train.style.transform = 'translate3d(' + (p.x - 6.5) + 'px,' + (p.y - 6.5) + 'px,0)';
+    }
+    function stopProgress(i) {
+      var k = horizontal ? 'x' : 'y';
+      return length ? (pts[i][k] - pts[0][k]) / length : 0;
+    }
+    function ride() {
+      if (!motion || running) return;
+      running = true;
+      cancelAnimationFrame(raf);
+      stops.forEach(function (s) { s.classList.remove('lit'); });
+      progress = 0; draw();
+      train.style.opacity = '1';
+      var i = 0, travel = 520, dwell = 220, phaseStart = performance.now(), from = 0, phase = 'dwell';
+      stops[0].classList.add('lit');
+      function frame(now) {
+        var t = now - phaseStart;
+        if (phase === 'dwell') {
+          if (t >= dwell) {
+            if (i >= stops.length - 1) { train.style.opacity = '0'; running = false; return; }
+            phase = 'travel'; phaseStart = now; from = progress;
+          }
+        } else {
+          var to = stopProgress(i + 1), k = Math.min(1, t / travel);
+          progress = from + (to - from) * ease(k); draw();
+          if (k >= 1) { i++; stops[i].classList.add('lit'); phase = 'dwell'; phaseStart = now; }
+        }
+        raf = requestAnimationFrame(frame);
+      }
+      raf = requestAnimationFrame(frame);
+    }
+    measure();
+    if (motion) { onView(track, function () { setTimeout(ride, 250); }, 0.35); }
+    else { stops.forEach(function (s) { s.classList.add('lit'); }); }
+    document.querySelector('.replay').addEventListener('click', ride);
+    var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(measure, 120); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+
+    /* 2. scroll progress under the header */
+    var bar = document.querySelector('.progress .bar'), knob = document.querySelector('.progress .knob'), ticking = false;
+    function onScroll() {
+      ticking = false;
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+      bar.style.transform = 'scaleX(' + p + ')';
+      knob.style.transform = 'translateX(' + (p * document.documentElement.clientWidth) + 'px)';
+      knob.style.opacity = p > 0.005 ? '1' : '0';
+    }
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+    onScroll();
+
+    if (!motion) return;
+
+    /* 3. the headline word */
+    var word = document.querySelector('.cycle-word');
+    var words = ['launches', 'hackathons', 'dinners', 'founders'];
+    function swap(w) {
+      word.classList.add('out');
+      setTimeout(function () {
+        word.textContent = w;
+        word.classList.remove('out'); word.classList.add('in');
+        void word.offsetWidth;
+        word.classList.remove('in');
+      }, 380);
+    }
+    function cycle() {
+      words.forEach(function (w, n) { setTimeout(function () { swap(w); }, 1700 * (n + 1)); });
+    }
+    setTimeout(cycle, 600);
+    setInterval(function () { if (!document.hidden && window.scrollY < window.innerHeight) cycle(); }, 16000);
+
+    /* 4. the venue list as a split-flap board */
+    var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var evs = Array.prototype.slice.call(document.querySelectorAll('.formats .ev'));
+    evs.forEach(function (ev) {
+      var text = ev.textContent;
+      ev.parentNode.setAttribute('aria-label', text);
+      ev.setAttribute('aria-hidden', 'true');
+      ev.textContent = '';
+      ev._cells = text.split('').map(function (c) {
+        var s = document.createElement('span'); s.className = 'flap'; s.textContent = c === ' ' ? ' ' : c;
+        s._final = s.textContent; ev.appendChild(s); return s;
+      });
+    });
+    function flapRow(ev, delay) {
+      ev._cells.forEach(function (cell, n) {
+        if (cell._final === ' ') return;
+        var spins = 4 + n;
+        cell.classList.add('spin');
+        for (var k = 0; k < spins; k++) {
+          (function (k) {
+            setTimeout(function () {
+              if (k === spins - 1) { cell.textContent = cell._final; cell.classList.remove('spin'); cell.classList.add('set'); }
+              else { cell.textContent = chars[Math.floor(Math.random() * chars.length)]; }
+            }, delay + k * 45);
+          })(k);
+        }
+      });
+    }
+    onView(document.querySelector('.formats'), function () {
+      evs.forEach(function (ev, r) { flapRow(ev, r * 140); });
+    }, 0.35);
+
+    /* 5. sections fade and rise in */
+    var groups = [
+      '.section h2', '.section .sub', '.grid-3 .card', '.formats', '.venue-foot', '.cta form'
+    ];
+    document.querySelectorAll(groups.join(',')).forEach(function (el) {
+      var sib = el.parentNode.children, idx = Array.prototype.indexOf.call(sib, el);
+      if (el.classList.contains('card') && el.parentNode.classList.contains('grid-3')) el.style.setProperty('--d', (idx * 90) + 'ms');
+      el.setAttribute('data-reveal', '');
+      onView(el, function () {
+        el.classList.add('shown');
+        setTimeout(function () { el.removeAttribute('data-reveal'); el.classList.remove('shown'); el.style.removeProperty('--d'); }, 1000 + idx * 90);
+      }, 0.15);
+    });
+  })();
 </script>
 </body>
 </html>
