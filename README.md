@@ -19,7 +19,6 @@ Facts that aren't confirmed yet are left off the page. Each spot is marked with 
 
 - Street and district (hero and footer)
 - Event venue rates, capacity, sound and projection
-- One line about each partner
 - A contact email or form service: the interest form says it isn't connected and sends nothing until one is wired up
 
 Design guided by [unslop](https://github.com/heydamir/unslop) by Damir Sokolovsky (CC BY 4.0) and the copy and layout rules of [taste-skill](https://github.com/leonxlnx/taste-skill).

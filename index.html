@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -23,7 +23,6 @@
    Facts still to add (left off the page until they are real):
    - street and district (hero line and footer)
    - event venue rates, capacity, sound and projection
-   - one line about each partner
    - a contact email or a form service for the interest form (it sends nothing yet) */
 :root {
   color-scheme: light;
@@ -163,12 +162,27 @@ header .wrap { display: flex; align-items: center; justify-content: space-betwee
   .formats li:nth-last-child(2) { border-bottom: 1px solid var(--border); }
 }
 
-/* partners */
-.partner { padding: 24px; display: grid; gap: 10px; align-content: start; }
-.partner .who { display: flex; align-items: center; gap: 12px; }
-.partner .initial { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border); background: var(--ground); display: grid; place-items: center; font: 500 14px/1 var(--f-mono); }
-.partner h3 { font-size: 20px; letter-spacing: -0.02em; }
-.partner p { color: var(--ink-2); font-size: 15px; }
+/* services */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: clamp(28px, 3vw, 40px); }
+.filter { font: 400 13px/1 var(--f-mono); color: var(--ink-2); background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; min-height: 40px; cursor: pointer;
+  transition: border-color 160ms var(--ease), color 160ms var(--ease), background-color 160ms var(--ease); }
+.filter:hover { border-color: var(--ink-3); color: var(--ink); }
+.filter[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+.no-js .filters { display: none; }
+.services { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
+.service { padding: 22px 24px 24px; display: grid; gap: 8px; align-content: start; }
+.service .meta { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.service .meta .kind { display: inline-flex; align-items: center; gap: 6px; }
+.service .meta .kind::before { content: ""; width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid var(--ink-3); }
+.service[data-kind="events"] .meta .kind::before { border-color: var(--accent-dot); }
+.service[data-kind="space"] .meta .kind::before { background: var(--ink); border-color: var(--ink); }
+.service h3 { font-size: 20px; letter-spacing: -0.02em; line-height: 1.25; }
+.service p { color: var(--ink-2); font-size: 15px; }
+.service.hide { display: none; }
+.service.enter { animation: enter 420ms var(--ease) both; animation-delay: var(--d, 0ms); }
+@keyframes enter { from { opacity: 0; transform: translateY(10px); } }
+@media (max-width: 900px) { .services { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .services { grid-template-columns: 1fr; } }
 
 /* contact */
 .cta { padding: clamp(32px, 5vw, 56px); text-align: center; }
@@ -210,10 +224,10 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 .btn-primary::after { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 40%; pointer-events: none;
   background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.22), transparent); transform: translateX(-160%) skewX(-12deg); }
 .btn-primary:hover::after { transform: translateX(320%) skewX(-12deg); transition: transform 800ms var(--ease); }
-.point, .partner { transition: transform 260ms var(--ease), border-color 260ms var(--ease), box-shadow 260ms var(--ease), opacity 700ms var(--ease); }
+.point, .service { transition: transform 260ms var(--ease), border-color 260ms var(--ease), box-shadow 260ms var(--ease), opacity 700ms var(--ease); }
 @media (hover: hover) {
-  .point:hover, .partner:hover { transform: translateY(-2px); border-color: #D2D2CC; box-shadow: 0 8px 24px -16px rgba(20, 20, 20, 0.25); }
-  .motion .point.shown:hover, .motion .partner.shown:hover { transform: translateY(-2px); }
+  .point:hover, .service:hover { transform: translateY(-2px); border-color: #D2D2CC; box-shadow: 0 8px 24px -16px rgba(20, 20, 20, 0.25); }
+  .motion .point.shown:hover, .motion .service.shown:hover { transform: translateY(-2px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -233,8 +247,8 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       Founder Base
     </a>
     <nav class="nav" aria-label="Main">
+      <a href="#services">Services</a>
       <a href="#venue">Venue</a>
-      <a href="#partners">Partners</a>
       <a class="nav-cta" href="#contact">Join</a>
     </nav>
   </div>
@@ -264,13 +278,40 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
           <li class="stop start"><span class="dot"></span><span class="name">Your idea</span></li>
           <li class="stop"><span class="dot"></span><span class="name">Office</span><span class="note">Desks and private offices</span></li>
           <li class="stop"><span class="dot"></span><span class="name">Food</span><span class="note">Restaurants and milk tea on site</span></li>
-          <li class="stop"><span class="dot"></span><span class="name">Events</span><span class="note">Talks, workshops, hackathons</span></li>
+          <li class="stop"><span class="dot"></span><span class="name">Events</span><span class="note">Private events, hackathons, tech talks</span></li>
           <li class="stop"><span class="dot"></span><span class="name">Network</span><span class="note">The chamber of commerce and our community</span></li>
           <li class="stop"><span class="dot"></span><span class="name">Warehouse</span><span class="note">Storage space on site</span></li>
           <li class="stop"><span class="dot"></span><span class="name">Tech help</span><span class="note">Websites and product advice</span></li>
           <li class="stop end"><span class="dot"></span><span class="name">Launch</span></li>
         </ol>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="services" aria-labelledby="services-title">
+    <div class="wrap">
+      <h2 id="services-title">What we provide.</h2>
+      <p class="sub">Space to work, rooms to host in, and help around both. Pick what you need.</p>
+      <div class="filters" role="group" aria-label="Filter services">
+        <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter" type="button" data-filter="space" aria-pressed="false">Space</button>
+        <button class="filter" type="button" data-filter="events" aria-pressed="false">Events</button>
+        <button class="filter" type="button" data-filter="support" aria-pressed="false">Support</button>
+      </div>
+      <div class="services">
+        <article class="card service" data-kind="space"><div class="meta"><span class="mono kind">space</span><span class="mono">01</span></div><h3>Office space</h3><p>Desks and private offices for your team.</p></article>
+        <article class="card service" data-kind="space"><div class="meta"><span class="mono kind">space</span><span class="mono">02</span></div><h3>Space for your company</h3><p>Rent rooms for your company’s meetings, team days and offsites.</p></article>
+        <article class="card service" data-kind="space"><div class="meta"><span class="mono kind">space</span><span class="mono">03</span></div><h3>Warehouse</h3><p>Storage space on site. You run your stock, we provide the room.</p></article>
+        <article class="card service" data-kind="events"><div class="meta"><span class="mono kind">events</span><span class="mono">04</span></div><h3>Private events</h3><p>Book the venue for a private party or a company event.</p></article>
+        <article class="card service" data-kind="events"><div class="meta"><span class="mono kind">events</span><span class="mono">05</span></div><h3>Private dinners</h3><p>Hosted dinners with food from our merchants, or bring your own.</p></article>
+        <article class="card service" data-kind="events"><div class="meta"><span class="mono kind">events</span><span class="mono">06</span></div><h3>Hackathons</h3><p>Room for every team to build, with the community to fill it.</p></article>
+        <article class="card service" data-kind="events"><div class="meta"><span class="mono kind">events</span><span class="mono">07</span></div><h3>Tech talks</h3><p>Host talks and panels for founders and engineers.</p></article>
+        <article class="card service" data-kind="events"><div class="meta"><span class="mono kind">events</span><span class="mono">08</span></div><h3>Workshops</h3><p>Hands-on sessions for founders and their teams.</p></article>
+        <article class="card service" data-kind="events"><div class="meta"><span class="mono kind">events</span><span class="mono">09</span></div><h3>Launch nights</h3><p>Show your product to a room that came to see it.</p></article>
+        <article class="card service" data-kind="support"><div class="meta"><span class="mono kind">support</span><span class="mono">10</span></div><h3>Food on site</h3><p>Restaurants and milk tea on site, and catering as a package.</p></article>
+        <article class="card service" data-kind="support"><div class="meta"><span class="mono kind">support</span><span class="mono">11</span></div><h3>Network</h3><p>The chamber of commerce and our founder community.</p></article>
+        <article class="card service" data-kind="support"><div class="meta"><span class="mono kind">support</span><span class="mono">12</span></div><h3>Tech help</h3><p>Websites and product advice when you need them.</p></article>
       </div>
     </div>
   </section>
@@ -288,39 +329,17 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       <div class="card formats" aria-label="Events you can host">
         <div class="formats-head"><span class="mono">hosted here</span></div>
         <ul>
-          <li><span class="no">01</span><span class="ev">Launch nights</span></li>
-          <li><span class="no">02</span><span class="ev">Hiring nights</span></li>
-          <li><span class="no">03</span><span class="ev">Workshops</span></li>
-          <li><span class="no">04</span><span class="ev">Hackathons</span></li>
-          <li><span class="no">05</span><span class="ev">Talks</span></li>
-          <li><span class="no">06</span><span class="ev">Private dinners</span></li>
+          <li><span class="no">01</span><span class="ev">Private events</span></li>
+          <li><span class="no">02</span><span class="ev">Private dinners</span></li>
+          <li><span class="no">03</span><span class="ev">Hackathons</span></li>
+          <li><span class="no">04</span><span class="ev">Tech talks</span></li>
+          <li><span class="no">05</span><span class="ev">Workshops</span></li>
+          <li><span class="no">06</span><span class="ev">Launch nights</span></li>
         </ul>
       </div>
       <div class="venue-foot">
         <p class="mono">Keep your own event page. We just host the night.</p>
         <div class="actions"><a class="btn btn-primary" href="#contact">Ask about a date</a></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="partners" aria-labelledby="partners-title">
-    <div class="wrap">
-      <h2 id="partners-title">Three partners, one front door.</h2>
-      <p class="sub">Each of us brings one part of the base.</p>
-      <!-- TODO: add one line about each partner -->
-      <div class="grid-3">
-        <article class="card partner">
-          <div class="who"><span class="initial" aria-hidden="true">W</span><h3>Will</h3></div>
-          <p>The building, the venue and the merchants, through the chamber of commerce.</p>
-        </article>
-        <article class="card partner">
-          <div class="who"><span class="initial" aria-hidden="true">C</span><h3>Carrie</h3></div>
-          <p>The community from Career Pathfinders, who fill the room.</p>
-        </article>
-        <article class="card partner">
-          <div class="who"><span class="initial" aria-hidden="true">M</span><h3>Minglei</h3></div>
-          <p>The website, tech and product advice, and founders from the tech scene.</p>
-        </article>
       </div>
     </div>
   </section>
@@ -370,7 +389,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var hasIO = 'IntersectionObserver' in window;
     var motion = !reduce && hasIO;
-    root.classList.add(motion ? 'motion' : 'no-motion');
+    root.classList.add(motion ? 'motion' : 'no-motion'); root.classList.remove('no-js');
 
     function onView(el, cb, threshold) {
       if (!hasIO) { cb(); return; }
@@ -467,6 +486,22 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
     onScroll();
 
+    /* services filter */
+    var filters = Array.prototype.slice.call(document.querySelectorAll('.filter'));
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.service'));
+    filters.forEach(function (f) {
+      f.addEventListener('click', function () {
+        var k = f.getAttribute('data-filter'), n = 0;
+        filters.forEach(function (o) { o.setAttribute('aria-pressed', o === f ? 'true' : 'false'); });
+        cards.forEach(function (c) {
+          var show = k === 'all' || c.getAttribute('data-kind') === k;
+          c.classList.toggle('hide', !show);
+          c.classList.remove('enter');
+          if (show && motion) { c.removeAttribute('data-reveal'); c.classList.remove('shown'); void c.offsetWidth; c.style.setProperty('--d', (n++ * 50) + 'ms'); c.classList.add('enter'); }
+        });
+      });
+    });
+
     if (!motion) return;
 
     /* 3. the headline word */
@@ -521,11 +556,11 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 
     /* 5. sections fade and rise in */
     var groups = [
-      '.section h2', '.section .sub', '.grid-3 .card', '.formats', '.venue-foot', '.cta form'
+      '.section h2', '.section .sub', '.filters', '.grid-3 .card', '.services .card', '.formats', '.venue-foot', '.cta form'
     ];
     document.querySelectorAll(groups.join(',')).forEach(function (el) {
       var sib = el.parentNode.children, idx = Array.prototype.indexOf.call(sib, el);
-      if (el.classList.contains('card') && el.parentNode.classList.contains('grid-3')) el.style.setProperty('--d', (idx * 90) + 'ms');
+      if (el.classList.contains('card')) { idx = idx % 3; el.style.setProperty('--d', (idx * 90) + 'ms'); }
       el.setAttribute('data-reveal', '');
       onView(el, function () {
         el.classList.add('shown');
