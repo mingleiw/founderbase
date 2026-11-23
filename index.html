@@ -5,20 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Founder Base</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Founder Base 创业者基地: one stop for founders in San Francisco. Desks, an event venue, warehouse space and food on site, below market rates.">
-<meta property="og:title" content="Founder Base 创业者基地">
+<meta name="description" content="Founder Base: one stop for founders in San Francisco. Desks, an event venue, warehouse space and food on site, below market rates.">
+<meta property="og:title" content="Founder Base">
 <meta property="og:description" content="One stop for founders in San Francisco. Desks, an event venue, warehouse space and food on site, below market rates.">
-<meta name="theme-color" content="#111111">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23FFC21A'/%3E%3Ctext x='16' y='21.5' font-family='Arial' font-weight='900' font-size='14' text-anchor='middle' fill='%23111'%3EFB%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#F6F6F3">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23141414'/%3E%3Cpath d='M7 16h18' stroke='%23F6F6F3' stroke-width='2'/%3E%3Ccircle cx='8' cy='16' r='3' fill='%23141414' stroke='%23F6F6F3' stroke-width='2'/%3E%3Ccircle cx='24' cy='16' r='3.5' fill='%2332B36F'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Noto+Sans+SC:wght@400&display=swap">
 <style>
-/* Founder Base, "one stop" (一站式).
-   The page is drawn as a transit line: SF stations are signed in English and Chinese, so the
-   site is bilingual as layout, with no language switch. One line colour (signal yellow), black
-   station signs, white enamel ground. The hero's line map runs from "your idea" to "launch",
-   with each service as a stop on the way.
+/* Founder Base, "one stop".
+   Restrained and quiet: a light warm-grey page, white cards with hairline borders, one neutral
+   grotesk at medium weight with tight tracking for headlines, a mono for small notes, and one
+   small green accent. English leads; Chinese sits in small grey lines. The one idea: a thin line
+   with stops, from your idea to launch, where each stop is something on site.
 
    Facts still to add (left off the page until they are real):
    - street and district (hero line and footer)
@@ -27,179 +27,169 @@
    - a contact email or a form service for the interest form (it sends nothing yet) */
 :root {
   color-scheme: light;
-  --ground: #F7F6F1;      /* white enamel */
-  --ink: #111111;
-  --ink-2: #4A4A46;
-  --ink-3: #7A7A73;
-  --rule: #111111;
-  --line: #FFC21A;        /* the Founder Base line */
-  --sign: #111111;        /* station sign */
-  --sign-ink: #F7F6F1;
+  --ground: #F6F6F3;
+  --card: #FFFFFF;
+  --border: #E3E3DE;
+  --ink: #141414;
+  --ink-2: #55554F;
+  --ink-3: #8A8A84;
+  --accent: #1F8A55;
+  --accent-dot: #32B36F;
 
-  --f-sign: "Archivo", "Noto Sans SC", "Arial Narrow", Arial, sans-serif;
+  --f-sans: "Geist", "Noto Sans SC", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
   --f-zh: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
-  --f-body: "Archivo", "Noto Sans SC", "Helvetica Neue", Arial, sans-serif;
-  --f-mono: "IBM Plex Mono", "Noto Sans SC", ui-monospace, Menlo, monospace;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--f-body); font-size: 17px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--f-sans); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
 a { color: inherit; }
-:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 4px; }
 p { margin: 0; }
-h1, h2, h3 { margin: 0; font-weight: 800; }
-.zh { font-family: var(--f-zh); }
+h1, h2, h3 { margin: 0; font-weight: 500; letter-spacing: -0.03em; }
+.zh { font-family: var(--f-zh); font-size: 13px; letter-spacing: 0.04em; color: var(--ink-3); }
+.mono { font-family: var(--f-mono); font-size: 13px; color: var(--ink-2); }
 
-.wrap { width: 100%; max-width: 1280px; margin: 0 auto;
+.wrap { width: 100%; max-width: 1080px; margin: 0 auto;
   padding-left: max(24px, env(safe-area-inset-left, 0px));
   padding-right: max(24px, env(safe-area-inset-right, 0px)); }
 
-.skip { position: absolute; left: 16px; top: -60px; background: var(--line); color: var(--ink); padding: 10px 14px; z-index: 30; font-weight: 700; }
+.skip { position: absolute; left: 16px; top: -60px; background: var(--ink); color: var(--ground); padding: 10px 14px; border-radius: 8px; z-index: 30; }
 .skip:focus { top: 12px; }
 
-/* station sign header */
-.sign { background: var(--sign); color: var(--sign-ink); }
-.sign .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; }
-.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.bullet { width: 36px; height: 36px; border-radius: 50%; background: var(--line); color: var(--ink);
-  display: grid; place-items: center; font: 900 14px/1 var(--f-sign); letter-spacing: -0.02em; flex: none; }
-.brand-name { font: 800 18px/1 var(--f-sign); font-stretch: 90%; letter-spacing: 0.01em; }
-.brand-name .zh { font-weight: 500; font-size: 15px; margin-left: 10px; opacity: 0.8; }
-.nav { display: flex; gap: 28px; font: 600 15px/1 var(--f-sign); }
-.nav a { text-decoration: none; padding-block: 8px; border-bottom: 2px solid transparent; transition: border-color 160ms var(--ease); }
-.nav a:hover { border-color: var(--line); }
-.nav .zh { font-weight: 400; margin-left: 6px; opacity: 0.7; }
-@media (max-width: 760px) { .nav { display: none; } }
+/* header */
+header { border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; background: rgba(246, 246, 243, 0.9); backdrop-filter: saturate(1.2) blur(8px); }
+header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; font-size: 18px; letter-spacing: -0.02em; }
+.brand .zh { font-weight: 400; letter-spacing: 0.04em; }
+.nav { display: flex; align-items: center; gap: 28px; font-size: 15px; color: var(--ink-2); }
+.nav a { text-decoration: none; transition: color 160ms var(--ease); }
+.nav a:hover { color: var(--ink); }
+.nav .nav-cta { color: var(--ink); background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 7px 14px; }
+@media (max-width: 760px) { .nav a:not(.nav-cta) { display: none; } }
+
+/* buttons */
+.actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 24px; border-radius: 10px;
+  font: 500 17px/1 var(--f-sans); text-decoration: none; cursor: pointer; border: 1px solid transparent;
+  transition: background-color 160ms var(--ease), border-color 160ms var(--ease); }
+.btn:active { transform: scale(0.99); }
+.btn-primary { background: var(--ink); color: #fff; }
+.btn-primary:hover { background: #2E2E2C; }
+.btn-secondary { background: var(--card); color: var(--ink); border-color: var(--border); }
+.btn-secondary:hover { border-color: var(--ink-3); }
 
 /* hero */
-.hero { padding-block: clamp(48px, 7vw, 96px) clamp(56px, 8vw, 112px); border-bottom: 3px solid var(--rule); overflow: hidden; }
-.hero-top { display: grid; grid-template-columns: auto 1fr; gap: clamp(24px, 4vw, 56px); align-items: end; }
-.big-zh { font: 900 clamp(112px, 22vw, 300px)/0.82 var(--f-zh); letter-spacing: -0.04em; margin-left: -0.04em; }
-.hero-en { display: grid; gap: 20px; padding-bottom: 0.4em; min-width: 0; }
-.hero-en h1 { font: 800 clamp(34px, 2.4vw + 22px, 64px)/0.98 var(--f-sign); font-stretch: 78%; letter-spacing: -0.01em; text-transform: none; max-width: 14ch; }
-.hero-en .sub { font-size: 18px; color: var(--ink-2); max-width: 34rem; }
-.hero-en .sub .zh { display: block; margin-top: 4px; color: var(--ink); font-weight: 500; }
-@media (max-width: 760px) { .hero-top { grid-template-columns: 1fr; gap: 16px; } .hero-en { padding-bottom: 0; } }
+.hero { text-align: center; padding-block: clamp(72px, 10vw, 120px) clamp(64px, 8vw, 96px); }
+.eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--ink-2); font-size: 16px; margin-bottom: 20px; }
+.tag { font: 400 13px/1 var(--f-mono); color: var(--ink); background: #EEEEEA; border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px; }
+.hero h1 { font-size: clamp(46px, 5.6vw + 16px, 92px); line-height: 1.02; letter-spacing: -0.04em; max-width: 13ch; margin-inline: auto; }
+.hero .lede { font-size: clamp(20px, 0.6vw + 16px, 24px); line-height: 1.4; margin: 28px auto 0; max-width: 28ch; }
+.hero .body { color: var(--ink-2); margin: 20px auto 0; max-width: 38rem; }
+.hero .zh-line { display: block; margin-top: 10px; }
+.hero .actions { margin-top: 36px; }
+.hero .fine { margin-top: 20px; }
 
-.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; }
-.btn-block { display: inline-flex; align-items: center; gap: 12px; min-height: 52px; padding: 14px 22px;
-  background: var(--ink); color: var(--ground); text-decoration: none; font: 700 16px/1 var(--f-sign);
-  border: 0; cursor: pointer; transition: background-color 160ms var(--ease), color 160ms var(--ease); }
-.btn-block .zh { font-weight: 400; opacity: 0.75; }
-.btn-block:hover { background: var(--line); color: var(--ink); }
-.btn-block:hover .zh { opacity: 1; }
-.btn-text { font: 700 16px/1 var(--f-sign); text-decoration: none; padding-block: 8px; border-bottom: 3px solid var(--line); }
-.btn-text .zh { font-weight: 400; margin-left: 6px; }
-.btn-text:hover { border-color: var(--ink); }
-
-/* the line map */
-.map { margin-top: clamp(56px, 7vw, 96px); }
-.map-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; font: 600 13px/1.4 var(--f-mono); color: var(--ink-3); margin-bottom: 20px; }
-.map-head strong { color: var(--ink); font-weight: 600; }
-.stops { list-style: none; margin: 0; padding: 0; position: relative;
-  display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); }
-.stops::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 14px; transform: translateY(-50%); background: var(--line); }
-.stop { position: relative; display: grid; grid-template-rows: 1fr 40px 1fr; justify-items: center; text-align: center; min-height: 220px; }
-.stop .dot { grid-row: 2; width: 34px; height: 34px; border-radius: 50%; background: var(--ground); border: 7px solid var(--ink); z-index: 1; }
-.stop .label { display: grid; gap: 2px; padding-inline: 4px; }
-.stop:nth-child(odd) .label { grid-row: 1; align-self: end; padding-bottom: 16px; }
-.stop:nth-child(even) .label { grid-row: 3; align-self: start; padding-top: 16px; }
-.stop .zh { font: 700 22px/1.1 var(--f-zh); }
-.stop .en { font: 700 15px/1.2 var(--f-sign); font-stretch: 85%; }
-.stop .note { font-size: 13px; line-height: 1.35; color: var(--ink-3); }
-.stop.end .dot { width: 44px; height: 44px; border-radius: 6px; background: var(--ink); border: 0; }
-.stop.end .zh, .stop.end .en { color: var(--ink); }
+/* the line, in a card */
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; }
+.line-card { margin-top: clamp(48px, 6vw, 72px); padding: 24px 28px 28px; text-align: left; }
+.line-head { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 28px; }
+.stops { list-style: none; margin: 0; padding: 0; position: relative; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); }
+.stops::before { content: ""; position: absolute; left: 6px; right: calc(12.5% - 6px); top: 6px; height: 1px; background: var(--ink); transform-origin: left; }
+.stop { position: relative; display: grid; gap: 4px; align-content: start; padding-right: 12px; }
+.stop .dot { width: 13px; height: 13px; border-radius: 50%; background: var(--card); border: 1.5px solid var(--ink); position: relative; z-index: 1; margin-bottom: 16px; }
+.stop.start .dot { background: var(--ink); }
+.stop.end .dot { background: var(--accent-dot); border-color: var(--accent-dot); box-shadow: 0 0 0 4px rgba(50, 179, 111, 0.16); }
+.stop .name { font-weight: 500; font-size: 16px; letter-spacing: -0.01em; line-height: 1.3; }
+.stop .note { font-size: 13px; line-height: 1.45; color: var(--ink-2); }
+.stop .zh { font-size: 12px; }
 @media (max-width: 900px) {
-  .stops { grid-template-columns: 1fr; padding-left: 8px; }
-  .stops::before { left: 22px; right: auto; top: 0; bottom: 0; width: 14px; height: auto; transform: none; }
-  .stop { grid-template-rows: none; grid-template-columns: 34px 1fr; justify-items: start; text-align: left; min-height: 0; gap: 20px; padding-block: 14px; align-items: center; }
-  .stop .dot { grid-row: auto; margin-left: 4px; }
-  .stop.end .dot { margin-left: -1px; }
-  .stop:nth-child(odd) .label, .stop:nth-child(even) .label { grid-row: auto; padding: 0; align-self: center; }
+  .stops { grid-template-columns: 1fr; }
+  .stops::before { left: 6px; right: auto; top: 8px; bottom: 30px; width: 1px; height: auto; }
+  .stop { grid-template-columns: 13px 1fr; column-gap: 20px; padding: 0 0 22px; }
+  .stop .dot { grid-row: 1 / span 3; margin: 5px 0 0; }
+  .stop:last-child { padding-bottom: 0; }
 }
 
-/* sections, numbered like platform signs */
-.section { padding-block: clamp(72px, 10vw, 136px); border-bottom: 3px solid var(--rule); }
-.platform { display: inline-flex; align-items: stretch; margin-bottom: clamp(32px, 4vw, 56px); }
-.platform .no { background: var(--line); color: var(--ink); font: 900 20px/1 var(--f-sign); padding: 14px 16px; display: grid; place-items: center; min-width: 56px; }
-.platform .name { background: var(--sign); color: var(--sign-ink); font: 700 20px/1 var(--f-sign); padding: 14px 20px; display: flex; gap: 12px; align-items: center; }
-.platform .name .zh { font-weight: 500; }
-.section h2 { font: 800 clamp(36px, 3.4vw + 20px, 76px)/0.98 var(--f-sign); font-stretch: 78%; letter-spacing: -0.01em; max-width: 16ch; }
-.section h2 .zh { display: block; font: 900 0.62em/1.25 var(--f-zh); letter-spacing: 0; margin-top: 10px; }
+/* sections */
+.section { padding-block: clamp(80px, 10vw, 128px); }
+.section h2 { font-size: clamp(36px, 2.8vw + 20px, 60px); line-height: 1.05; max-width: 17ch; }
+.section .sub { color: var(--ink-2); font-size: 19px; margin-top: 16px; max-width: 36rem; }
+.section .sub .zh { display: block; margin-top: 6px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: clamp(36px, 4vw, 48px); }
+.point { padding: 24px; display: grid; gap: 8px; align-content: start; }
+.point h3 { font-size: 18px; letter-spacing: -0.015em; line-height: 1.3; }
+.point p { color: var(--ink-2); font-size: 15px; }
+@media (max-width: 820px) { .grid-3 { grid-template-columns: 1fr; } }
 
-/* venue: departure board */
-.venue-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(40px, 6vw, 96px); align-items: start; }
-.venue-copy { display: grid; gap: 32px; }
-.facts { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--rule); }
-.facts li { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--rule); font-size: 16px; }
-.facts .zh { color: var(--ink-2); }
-.board { background: var(--sign); color: var(--line); font-family: var(--f-mono); padding: 24px 24px 12px; min-width: 0; }
-.board-head { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; color: var(--sign-ink); opacity: 0.7; padding-bottom: 12px; border-bottom: 1px solid rgba(247,246,241,0.25); }
-.board ul { list-style: none; margin: 0; padding: 0; }
-.board li { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: baseline; padding: 14px 0; border-bottom: 1px dashed rgba(255,194,26,0.3); }
-.board li:last-child { border-bottom: 0; }
-.board .ev { font-size: clamp(17px, 0.8vw + 12px, 22px); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
-.board .zh { font-family: var(--f-zh); color: var(--sign-ink); font-size: 16px; }
-@media (max-width: 900px) { .venue-grid { grid-template-columns: 1fr; } }
-
-/* partners: three line bullets */
-.partners { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 2px solid var(--rule); }
-.partner { display: grid; gap: 14px; align-content: start; padding: 28px 28px 8px 0; }
-.partner + .partner { padding-left: 28px; border-left: 1px solid var(--rule); }
-.partner .bullet { width: 52px; height: 52px; font-size: 22px; }
-.partner h3 { font: 800 28px/1 var(--f-sign); font-stretch: 85%; }
-.partner p { color: var(--ink-2); max-width: 30ch; }
-.partner p.zh { color: var(--ink); }
-@media (max-width: 820px) {
-  .partners { grid-template-columns: 1fr; }
-  .partner, .partner + .partner { padding: 24px 0; border-left: 0; border-bottom: 1px solid var(--rule); }
+/* venue formats, as a quiet table card */
+.formats { margin-top: 16px; overflow: hidden; }
+.formats-head { display: flex; justify-content: space-between; gap: 16px; padding: 14px 24px; border-bottom: 1px solid var(--border); background: #FAFAF8; }
+.formats ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.formats li { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 16px 24px; border-bottom: 1px solid var(--border); }
+.formats li:nth-child(odd) { border-right: 1px solid var(--border); }
+.formats li:nth-last-child(-n+2) { border-bottom: 0; }
+.formats .ev { font-size: 17px; font-weight: 500; letter-spacing: -0.01em; }
+.venue-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; margin-top: 24px; }
+.venue-foot .actions { justify-content: flex-start; }
+@media (max-width: 640px) {
+  .formats ul { grid-template-columns: 1fr; }
+  .formats li:nth-child(odd) { border-right: 0; }
+  .formats li:nth-last-child(2) { border-bottom: 1px solid var(--border); }
 }
+
+/* partners */
+.partner { padding: 24px; display: grid; gap: 10px; align-content: start; }
+.partner .who { display: flex; align-items: center; gap: 12px; }
+.partner .initial { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border); background: var(--ground); display: grid; place-items: center; font: 500 14px/1 var(--f-mono); }
+.partner h3 { font-size: 20px; letter-spacing: -0.02em; }
+.partner p { color: var(--ink-2); font-size: 15px; }
 
 /* contact */
-.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 96px); align-items: start; }
-.contact-copy { display: grid; gap: 20px; }
-.contact-copy p { color: var(--ink-2); max-width: 32rem; }
-.contact-copy p.zh { color: var(--ink); }
-form { display: grid; gap: 28px; min-width: 0; }
-label.field { display: grid; gap: 6px; font: 700 14px/1.2 var(--f-sign); }
-label.field .zh { font-weight: 400; margin-left: 6px; color: var(--ink-2); }
-input[type="text"], input[type="email"] { font: 400 20px/1.3 var(--f-body); padding: 10px 0; border: 0; border-bottom: 2px solid var(--ink);
-  background: transparent; color: var(--ink); width: 100%; border-radius: 0; transition: border-color 160ms var(--ease); }
-input:focus { outline: none; border-color: var(--line); }
+.cta { padding: clamp(32px, 5vw, 56px); text-align: center; }
+.cta h2 { margin-inline: auto; }
+.cta .sub { margin-inline: auto; }
+form { display: grid; gap: 20px; max-width: 480px; margin: 36px auto 0; text-align: left; }
+label.field { display: grid; gap: 6px; font-size: 14px; font-weight: 500; }
+input[type="text"], input[type="email"] { font: 400 16px/1.4 var(--f-sans); padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px;
+  background: var(--ground); color: var(--ink); width: 100%; transition: border-color 160ms var(--ease), background-color 160ms var(--ease); }
+input:focus { outline: none; border-color: var(--ink); background: var(--card); }
 fieldset { border: 0; padding: 0; margin: 0; }
-legend { font: 700 14px/1.2 var(--f-sign); padding: 0; margin-bottom: 12px; }
-legend .zh { font-weight: 400; margin-left: 6px; color: var(--ink-2); }
+legend { font-size: 14px; font-weight: 500; padding: 0; margin-bottom: 8px; }
 .checks { display: flex; flex-wrap: wrap; gap: 8px; }
-.checks label { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 14px; border: 2px solid var(--ink); cursor: pointer; font-size: 15px; transition: background-color 160ms var(--ease); }
-.checks label .zh { color: var(--ink-2); }
+.checks label { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--card);
+  cursor: pointer; font-size: 15px; transition: border-color 160ms var(--ease); }
+.checks label::before { content: ""; width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--ink-3); }
+.checks label:hover { border-color: var(--ink-3); }
 .checks input { position: absolute; opacity: 0; pointer-events: none; }
-.checks label:has(input:checked) { background: var(--line); }
-.checks label:has(input:focus-visible) { outline: 3px solid var(--ink); outline-offset: 3px; }
-.form-note { font: 400 13px/1.4 var(--f-mono); color: var(--ink-3); }
-@media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
+.checks label:has(input:checked) { border-color: var(--ink); }
+.checks label:has(input:checked)::before { background: var(--accent-dot); border-color: var(--accent-dot); }
+.checks label:has(input:focus-visible) { outline: 2px solid var(--ink); outline-offset: 2px; }
+form .btn { width: 100%; }
+.form-note { text-align: center; }
 
-footer { background: var(--sign); color: var(--sign-ink); padding-block: 28px 36px; font: 400 14px/1.4 var(--f-mono); }
+footer { border-top: 1px solid var(--border); padding-block: 24px 36px; font-size: 14px; color: var(--ink-2); }
 footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
 
-@keyframes draw { from { transform: translateY(-50%) scaleX(0); } to { transform: translateY(-50%) scaleX(1); } }
-@media (min-width: 901px) { .stops::before { transform-origin: left; animation: draw 900ms var(--ease) both; } }
+@keyframes draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@media (min-width: 901px) { .stops::before { animation: draw 1000ms var(--ease) 150ms both; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before { animation: none !important; transition: none !important; } }
 </style>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content 跳到正文</a>
+<a class="skip" href="#main">Skip to content</a>
 
-<header class="sign">
+<header>
   <div class="wrap">
     <a class="brand" href="#main" aria-label="Founder Base home">
-      <span class="bullet" aria-hidden="true">FB</span>
-      <span class="brand-name">Founder Base<span class="zh">创业者基地</span></span>
+      <svg width="26" height="14" viewBox="0 0 26 14" aria-hidden="true"><path d="M3 7h20" stroke="#141414" stroke-width="1.5"/><circle cx="4" cy="7" r="3" fill="#141414"/><circle cx="22" cy="7" r="3.5" fill="#32B36F"/></svg>
+      Founder Base <span class="zh" lang="zh-Hans">创业者基地</span>
     </a>
     <nav class="nav" aria-label="Main">
-      <a href="#venue">Venue<span class="zh">场地</span></a>
-      <a href="#partners">Partners<span class="zh">合伙人</span></a>
-      <a href="#contact">Contact<span class="zh">联系</span></a>
+      <a href="#venue">Venue</a>
+      <a href="#partners">Partners</a>
+      <a class="nav-cta" href="#contact">Join</a>
     </nav>
   </div>
 </header>
@@ -208,30 +198,28 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 
   <section class="hero" aria-labelledby="hero-title">
     <div class="wrap">
-      <div class="hero-top">
-        <div class="big-zh" aria-hidden="true">一站式</div>
-        <div class="hero-en">
-          <h1 id="hero-title">One stop for founders in San Francisco</h1>
-          <p class="sub">Desks, an event venue, warehouse space and food on site, below market rates. You build the company.
-            <span class="zh" lang="zh-Hans">你只管创业，地方和资源我们都准备好。</span></p>
-          <div class="actions">
-            <a class="btn-block" href="#contact">Join the first group <span class="zh" lang="zh-Hans">登记入驻</span></a>
-            <a class="btn-text" href="#venue">See the venue<span class="zh" lang="zh-Hans">看活动场地</span></a>
-          </div>
-        </div>
+      <div class="eyebrow">San Francisco <span class="tag">first group open</span></div>
+      <h1 id="hero-title">One stop for founders in San Francisco.</h1>
+      <p class="lede">Desks, an event venue, warehouse space and food, all on site.</p>
+      <p class="body">Below market rates, in one place. You build the company, and the space is ready when you need it.
+        <span class="zh zh-line" lang="zh-Hans">你只管创业，地方和资源我们来准备。</span></p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#contact">Join the first group</a>
+        <a class="btn btn-secondary" href="#venue">See the venue</a>
       </div>
+      <p class="mono fine">We provide the places. Your company stays yours to run.</p>
 
-      <div class="map" aria-label="What's at Founder Base">
-        <div class="map-head"><span><strong>Founder Base Line</strong> 创业者基地线</span><span>San Francisco</span></div>
+      <div class="card line-card" aria-label="What's at Founder Base">
+        <div class="line-head"><span class="mono">the founder base line</span><span class="zh" lang="zh-Hans">一站式</span></div>
         <ol class="stops">
-          <li class="stop end"><span class="dot"></span><span class="label"><span class="zh" lang="zh-Hans">想法</span><span class="en">Your idea</span></span></li>
-          <li class="stop"><span class="dot"></span><span class="label"><span class="zh" lang="zh-Hans">办公</span><span class="en">Office</span><span class="note">Desks and private offices by the month</span></span></li>
-          <li class="stop"><span class="dot"></span><span class="label"><span class="zh" lang="zh-Hans">吃喝</span><span class="en">Food</span><span class="note">Restaurants and milk tea downstairs</span></span></li>
-          <li class="stop"><span class="dot"></span><span class="label"><span class="zh" lang="zh-Hans">活动</span><span class="en">Events</span><span class="note">Talks, workshops, hackathons</span></span></li>
-          <li class="stop"><span class="dot"></span><span class="label"><span class="zh" lang="zh-Hans">人脉</span><span class="en">Network</span><span class="note">Chamber of commerce, mentors, investors</span></span></li>
-          <li class="stop"><span class="dot"></span><span class="label"><span class="zh" lang="zh-Hans">仓库</span><span class="en">Warehouse</span><span class="note">Storage by area, pop-up booths</span></span></li>
-          <li class="stop"><span class="dot"></span><span class="label"><span class="zh" lang="zh-Hans">技术</span><span class="en">Tech help</span><span class="note">Websites and product advice</span></span></li>
-          <li class="stop end"><span class="dot"></span><span class="label"><span class="zh" lang="zh-Hans">上线</span><span class="en">Launch</span></span></li>
+          <li class="stop start"><span class="dot"></span><span class="name">Your idea</span><span class="zh" lang="zh-Hans">想法</span></li>
+          <li class="stop"><span class="dot"></span><span class="name">Office</span><span class="note">Desks and private offices</span><span class="zh" lang="zh-Hans">办公</span></li>
+          <li class="stop"><span class="dot"></span><span class="name">Food</span><span class="note">Restaurants and milk tea on site</span><span class="zh" lang="zh-Hans">餐饮</span></li>
+          <li class="stop"><span class="dot"></span><span class="name">Events</span><span class="note">Talks, workshops, hackathons</span><span class="zh" lang="zh-Hans">活动</span></li>
+          <li class="stop"><span class="dot"></span><span class="name">Network</span><span class="note">The chamber of commerce and our community</span><span class="zh" lang="zh-Hans">人脉</span></li>
+          <li class="stop"><span class="dot"></span><span class="name">Warehouse</span><span class="note">Storage space on site</span><span class="zh" lang="zh-Hans">仓库</span></li>
+          <li class="stop"><span class="dot"></span><span class="name">Tech help</span><span class="note">Websites and product advice</span><span class="zh" lang="zh-Hans">技术</span></li>
+          <li class="stop end"><span class="dot"></span><span class="name">Launch</span><span class="zh" lang="zh-Hans">上线</span></li>
         </ol>
       </div>
     </div>
@@ -239,57 +227,51 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 
   <section class="section" id="venue" aria-labelledby="venue-title">
     <div class="wrap">
-      <div class="platform"><span class="no">01</span><span class="name">Event venue <span class="zh" lang="zh-Hans">活动场地</span></span></div>
-      <div class="venue-grid">
-        <div class="venue-copy">
-          <h2 id="venue-title">A room that comes with an audience <span class="zh" lang="zh-Hans">自带人气的场地，租金远低于市场</span></h2>
-          <!-- TODO: add rates, capacity, sound and projection once confirmed -->
-          <ul class="facts">
-            <li><span>Rent well below market</span><span class="zh" lang="zh-Hans">租金远低于市场价</span></li>
-            <li><span>Our community helps promote it</span><span class="zh" lang="zh-Hans">社区帮你宣传</span></li>
-            <li><span>Catering optional, or bring your own</span><span class="zh" lang="zh-Hans">餐饮可选，也可自带</span></li>
-            <li><span>Keep your own event page</span><span class="zh" lang="zh-Hans">活动页面照常用你自己的</span></li>
-          </ul>
-          <div class="actions"><a class="btn-block" href="#contact">Ask about a date <span class="zh" lang="zh-Hans">咨询档期</span></a></div>
-        </div>
-        <div class="board" aria-label="Events you can host">
-          <div class="board-head"><span>Now hosting</span><span class="zh" lang="zh-Hans">本站可办</span></div>
-          <ul>
-            <li><span class="ev">Launch night</span><span class="zh" lang="zh-Hans">发布会</span></li>
-            <li><span class="ev">Hiring night</span><span class="zh" lang="zh-Hans">招聘夜</span></li>
-            <li><span class="ev">Workshop</span><span class="zh" lang="zh-Hans">工作坊</span></li>
-            <li><span class="ev">Hackathon</span><span class="zh" lang="zh-Hans">黑客松</span></li>
-            <li><span class="ev">Talk</span><span class="zh" lang="zh-Hans">讲座</span></li>
-            <li><span class="ev">Private dinner</span><span class="zh" lang="zh-Hans">私宴</span></li>
-          </ul>
-        </div>
+      <h2 id="venue-title">An event venue that comes with an audience.</h2>
+      <p class="sub">Host your launch, talk or dinner here, for well below market rent.
+        <span class="zh" lang="zh-Hans">自带人气的活动场地，租金远低于市场</span></p>
+      <!-- TODO: add rates, capacity, sound and projection once confirmed -->
+      <div class="grid-3">
+        <div class="card point"><h3>Below market rent</h3><p>Hosts pay for the room, at a price well under what SF venues charge.</p></div>
+        <div class="card point"><h3>People in the room</h3><p>Our community helps promote your event.</p></div>
+        <div class="card point"><h3>Food if you want it</h3><p>Catering from our on-site merchants, or bring your own.</p></div>
+      </div>
+      <div class="card formats" aria-label="Events you can host">
+        <div class="formats-head"><span class="mono">hosted here</span><span class="zh" lang="zh-Hans">本场地可办</span></div>
+        <ul>
+          <li><span class="ev">Launch nights</span><span class="zh" lang="zh-Hans">发布会</span></li>
+          <li><span class="ev">Hiring nights</span><span class="zh" lang="zh-Hans">招聘夜</span></li>
+          <li><span class="ev">Workshops</span><span class="zh" lang="zh-Hans">工作坊</span></li>
+          <li><span class="ev">Hackathons</span><span class="zh" lang="zh-Hans">黑客松</span></li>
+          <li><span class="ev">Talks</span><span class="zh" lang="zh-Hans">讲座</span></li>
+          <li><span class="ev">Private dinners</span><span class="zh" lang="zh-Hans">私宴</span></li>
+        </ul>
+      </div>
+      <div class="venue-foot">
+        <p class="mono">Keep your own event page. We just host the night.</p>
+        <div class="actions"><a class="btn btn-primary" href="#contact">Ask about a date</a></div>
       </div>
     </div>
   </section>
 
   <section class="section" id="partners" aria-labelledby="partners-title">
     <div class="wrap">
-      <div class="platform"><span class="no">02</span><span class="name">Partners <span class="zh" lang="zh-Hans">合伙人</span></span></div>
-      <h2 id="partners-title" style="margin-bottom: clamp(32px, 4vw, 56px)">Three lines, one station <span class="zh" lang="zh-Hans">三条线，一个站</span></h2>
+      <h2 id="partners-title">Three partners, one front door.</h2>
+      <p class="sub">Each of us brings one part of the base.
+        <span class="zh" lang="zh-Hans">三位合伙人，各管一块</span></p>
       <!-- TODO: add one line about each partner -->
-      <div class="partners">
-        <article class="partner">
-          <span class="bullet" aria-hidden="true">W</span>
-          <h3>Will</h3>
-          <p>The building, the venue and the merchants, through the chamber of commerce</p>
-          <p class="zh" lang="zh-Hans">场地、仓库和进驻商家，背靠商会</p>
+      <div class="grid-3">
+        <article class="card partner">
+          <div class="who"><span class="initial" aria-hidden="true">W</span><h3>Will</h3></div>
+          <p>The building, the venue and the merchants, through the chamber of commerce.</p>
         </article>
-        <article class="partner">
-          <span class="bullet" aria-hidden="true">C</span>
-          <h3>Carrie</h3>
-          <p>The community from Career Pathfinders, who fill the room</p>
-          <p class="zh" lang="zh-Hans">Career Pathfinders 社区，负责宣传和会员</p>
+        <article class="card partner">
+          <div class="who"><span class="initial" aria-hidden="true">C</span><h3>Carrie</h3></div>
+          <p>The community from Career Pathfinders, who fill the room.</p>
         </article>
-        <article class="partner">
-          <span class="bullet" aria-hidden="true">M</span>
-          <h3>Minglei</h3>
-          <p>The website, tech and product advice, and founders from the tech scene</p>
-          <p class="zh" lang="zh-Hans">网站和技术、产品建议，以及科技圈的创始人</p>
+        <article class="card partner">
+          <div class="who"><span class="initial" aria-hidden="true">M</span><h3>Minglei</h3></div>
+          <p>The website, tech and product advice, and founders from the tech scene.</p>
         </article>
       </div>
     </div>
@@ -297,30 +279,27 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 
   <section class="section" id="contact" aria-labelledby="contact-title">
     <div class="wrap">
-      <div class="platform"><span class="no">03</span><span class="name">Next stop <span class="zh" lang="zh-Hans">下一站</span></span></div>
-      <div class="contact-grid">
-        <div class="contact-copy">
-          <h2 id="contact-title">Join the first group <span class="zh" lang="zh-Hans">成为第一批入驻团队</span></h2>
-          <p>We're opening to our first startups and event hosts. Tell us what you need.</p>
-          <p class="zh" lang="zh-Hans">我们正在接第一批创业团队和活动承办方，告诉我们你需要什么。</p>
-        </div>
+      <div class="card cta">
+        <h2 id="contact-title">Join the first group.</h2>
+        <p class="sub">We're opening to our first startups and event hosts. Tell us what you need.
+          <span class="zh" lang="zh-Hans">成为第一批入驻团队</span></p>
         <!-- TODO: connect this form to a contact email or a form service; until then it sends nothing -->
         <form id="interest-form" novalidate>
-          <label class="field" for="f-name"><span>Name<span class="zh" lang="zh-Hans">姓名</span></span>
+          <label class="field" for="f-name">Name
             <input id="f-name" name="name" type="text" autocomplete="name"></label>
-          <label class="field" for="f-email"><span>Email<span class="zh" lang="zh-Hans">邮箱</span></span>
+          <label class="field" for="f-email">Email
             <input id="f-email" name="email" type="email" autocomplete="email"></label>
           <fieldset>
-            <legend>Interested in<span class="zh" lang="zh-Hans">感兴趣的</span></legend>
+            <legend>Interested in</legend>
             <div class="checks">
-              <label for="c-office"><input id="c-office" type="checkbox" name="need" value="office">Office <span class="zh" lang="zh-Hans">办公</span></label>
-              <label for="c-venue"><input id="c-venue" type="checkbox" name="need" value="venue">Venue <span class="zh" lang="zh-Hans">场地</span></label>
-              <label for="c-warehouse"><input id="c-warehouse" type="checkbox" name="need" value="warehouse">Warehouse <span class="zh" lang="zh-Hans">仓库</span></label>
-              <label for="c-food"><input id="c-food" type="checkbox" name="need" value="food">Food <span class="zh" lang="zh-Hans">餐饮</span></label>
+              <label for="c-office"><input id="c-office" type="checkbox" name="need" value="office">Office</label>
+              <label for="c-venue"><input id="c-venue" type="checkbox" name="need" value="venue">Event venue</label>
+              <label for="c-warehouse"><input id="c-warehouse" type="checkbox" name="need" value="warehouse">Warehouse</label>
+              <label for="c-food"><input id="c-food" type="checkbox" name="need" value="food">Food</label>
             </div>
           </fieldset>
-          <div><button class="btn-block" type="submit">Send my details <span class="zh" lang="zh-Hans">提交</span></button></div>
-          <p class="form-note" role="status">This form isn't connected yet, so nothing is sent. 表单尚未接通，提交后不会发出。</p>
+          <button class="btn btn-primary" type="submit">Send my details</button>
+          <p class="mono form-note" role="status">This form isn't connected yet, so nothing is sent.</p>
         </form>
       </div>
     </div>
@@ -330,8 +309,8 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 
 <footer>
   <div class="wrap">
-    <span>Founder Base · 创业者基地 · San Francisco</span>
-    <span>© 2026</span>
+    <span>© 2026 Founder Base.</span>
+    <span>San Francisco · <span class="zh" lang="zh-Hans">创业者基地</span></span>
   </div>
 </footer>
 
