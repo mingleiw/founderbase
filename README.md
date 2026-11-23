@@ -15,13 +15,11 @@ No build step. Open `index.html` in a browser to preview it.
 
 ## Before going live
 
-The page marks facts that still need filling in with a dashed yellow box. Search `index.html` for `class="ph"`:
+Facts that aren't confirmed yet are left off the page. Each spot is marked with a `TODO` comment in `index.html`:
 
-- Address or neighborhood (hero and footer)
-- Contact email (contact section)
-- Event venue pricing, capacity and A/V details (event hosts section)
-- Short bios for Will, Carrie and Minglei (partners section)
-- Form backend: the interest form shows a "not connected" note and sends nothing until one is wired up
-- Confirm the office amenities listed (internet, printing, meeting rooms) and the venue's sound and projection
+- Street and district (hero and footer)
+- Event venue rates, capacity, sound and projection
+- One line about each partner
+- A contact email or form service: the interest form says it isn't connected and sends nothing until one is wired up
 
-Design pass guided by [unslop](https://github.com/heydamir/unslop) by Damir Sokolovsky (CC BY 4.0).
+Design guided by [unslop](https://github.com/heydamir/unslop) by Damir Sokolovsky (CC BY 4.0) and the copy and layout rules of [taste-skill](https://github.com/leonxlnx/taste-skill).

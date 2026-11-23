@@ -1,25 +1,29 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-type="place">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Founder Base</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Founder Base (创业者基地): desks, an event venue, warehouse space, food on site and a network for startups in San Francisco.">
+<meta name="page-type" content="place">
+<meta name="description" content="Startup space in San Francisco: desks, an event venue, warehouse space and food on site, below market rates.">
 <meta property="og:title" content="Founder Base 创业者基地">
-<meta property="og:description" content="You build the startup. We have the desks, the event space and the people. Office, events, warehouse space, food and network in San Francisco.">
+<meta property="og:description" content="Startup space in San Francisco: desks, an event venue, warehouse space and food on site, below market rates.">
+<meta name="theme-color" content="#F2F4F6">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2317232D'/%3E%3Cpath d='M10 23V9h12v3h-8v3h7v3h-7v5z' fill='%23C99A45'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&family=Noto+Sans+SC:wght@400;500&display=swap">
 <style>
-/* Direction
-   Product: one place in San Francisco where startups get desks, an event venue, warehouse space, food and a network.
-   Character: grounded, neighborly, practical.
-   World: a building lobby on a foggy SF morning, a directory board with brass letters.
-   Moment: the lobby directory board in the hero. It alone carries the dark ground and the brass.
-   Signature: directory rows, a name on the left and a short line on the right, reused for the services list.
-   Layout: split hero (text left, board right); quiet bands below on an ink-tinted ramp with one green accent. */
+/* Founder Base landing page.
+   One section per screen: hero (with the lobby directory board), event venue, partners, contact.
+   Ink-tinted neutrals, one green accent; the dark board and brass appear only in the hero.
+
+   Facts still to add (left out of the page until they are real):
+   - street and district (hero line and footer)
+   - event venue rates, capacity, sound and projection
+   - one line about each partner
+   - a contact email or a form service for the interest form (it sends nothing yet) */
 :root {
   --bg: #F2F4F6;
   --surface: #FFFFFF;
@@ -35,14 +39,12 @@
   --board-text: #ECE4CF;
   --board-dim: #9AA5AD;
   --brass: #C99A45;
-  --ph-bg: #FBF1DA;
-  --ph-line: #B98A2E;
 
   --f-display: "Archivo", "Noto Sans SC", "Helvetica Neue", Arial, sans-serif;
   --f-body: "IBM Plex Sans", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
   --f-mono: "IBM Plex Mono", "Noto Sans SC", ui-monospace, Menlo, monospace;
-
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --header: 64px;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -50,7 +52,6 @@
     --text: #EEF0F5; --text-2: #A3A9B8; --text-3: #7A8296;
     --accent: #4CC3A5; --on-accent: #06120E;
     --board: #151C25; --board-line: rgba(236, 228, 207, 0.12);
-    --ph-bg: #3A2F17; --ph-line: #C99A45;
     color-scheme: dark;
   }
 }
@@ -59,7 +60,6 @@
   --text: #EEF0F5; --text-2: #A3A9B8; --text-3: #7A8296;
   --accent: #4CC3A5; --on-accent: #06120E;
   --board: #151C25; --board-line: rgba(236, 228, 207, 0.12);
-  --ph-bg: #3A2F17; --ph-line: #C99A45;
   color-scheme: dark;
 }
 
@@ -67,489 +67,276 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0; background: var(--bg); color: var(--text);
-  font-family: var(--f-body); font-size: 16px; line-height: 1.6;
+  font-family: var(--f-body); font-size: 17px; line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
-img { max-width: 100%; }
 a { color: inherit; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
 
-/* language: English by default, Chinese on toggle */
 body[data-lang="en"] [lang="zh"], body[data-lang="zh"] [lang="en"] { display: none !important; }
 body[data-lang="zh"] { line-height: 1.75; }
 
+.skip { position: absolute; left: 16px; top: -48px; background: var(--surface); padding: 8px 12px; border-radius: 8px; z-index: 20; }
+.skip:focus { top: 8px; }
+
 .wrap {
-  max-width: 1120px; margin: 0 auto;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  width: 100%; max-width: 1200px; margin: 0 auto;
+  padding-left: max(24px, env(safe-area-inset-left, 0px));
+  padding-right: max(24px, env(safe-area-inset-right, 0px));
 }
-.band { padding-block: clamp(64px, 40px + 5vw, 112px); border-top: 1px solid var(--line); }
+
+/* one section per screen */
+.screen {
+  min-height: 100svh; display: flex; align-items: flex-start;
+  padding-block: clamp(80px, 12vh, 128px); border-top: 1px solid var(--line);
+}
+.screen > .wrap { display: grid; gap: 48px; align-content: start; }
 
 h1, h2, h3 { font-family: var(--f-display); font-weight: 500; margin: 0; text-wrap: balance; }
-h1 { font-size: clamp(36px, 22px + 3.6vw, 68px); line-height: 1.04; letter-spacing: -0.03em; font-stretch: 108%; }
-h2 { font-size: clamp(28px, 22px + 1.4vw, 40px); line-height: 1.12; letter-spacing: -0.02em; font-stretch: 104%; }
-h3 { font-size: 18px; line-height: 1.35; letter-spacing: 0; }
-body[data-lang="zh"] h1, body[data-lang="zh"] h2 { letter-spacing: 0; line-height: 1.25; font-stretch: 100%; }
-p { margin: 0; max-width: 62ch; }
-.kicker { font-size: 14px; font-weight: 500; color: var(--text-3); }
-.lede { font-size: 19px; line-height: 1.55; color: var(--text-2); max-width: 36rem; }
-.muted { color: var(--text-2); }
-.section-head { display: grid; gap: 12px; margin-bottom: 48px; max-width: 720px; }
-
-/* placeholder marker: visible on purpose until the real fact is filled in */
-.ph {
-  background: var(--ph-bg); border: 1px dashed var(--ph-line); border-radius: 4px;
-  padding: 0 4px; font-family: var(--f-mono); font-size: 0.875em; white-space: nowrap;
-}
+h1 { font-size: clamp(40px, 24px + 4.4vw, 80px); line-height: 1.02; letter-spacing: -0.035em; font-stretch: 106%; }
+h2 { font-size: clamp(32px, 22px + 2.2vw, 56px); line-height: 1.06; letter-spacing: -0.03em; font-stretch: 104%; max-width: 18ch; }
+h2 .muted { color: var(--text-3); }
+h3 { font-size: 20px; line-height: 1.3; }
+body[data-lang="zh"] h1, body[data-lang="zh"] h2 { letter-spacing: 0; line-height: 1.22; font-stretch: 100%; }
+p { margin: 0; max-width: 46ch; }
+.sub { font-size: 20px; line-height: 1.5; color: var(--text-2); max-width: 34rem; }
 
 /* buttons */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  min-height: 48px; padding: 12px 20px; border-radius: 10px;
-  font: 500 16px/1 var(--f-body); text-decoration: none; cursor: pointer;
-  border: 1px solid transparent;
+  min-height: 48px; padding: 12px 22px; border-radius: 10px;
+  font: 500 16px/1 var(--f-body); text-decoration: none; cursor: pointer; border: 1px solid transparent;
   transition: background-color 160ms var(--ease), border-color 160ms var(--ease), transform 120ms var(--ease);
 }
+.btn:hover { transform: translateY(-1px); }
 .btn:active { transform: scale(0.98); }
 .btn-primary { background: var(--accent); color: var(--on-accent); }
 .btn-primary:hover { background: color-mix(in srgb, var(--accent) 88%, var(--text)); }
-.btn-secondary { background: var(--raised); color: var(--text); border-color: var(--line); }
+.btn-secondary { background: var(--surface); color: var(--text); border-color: var(--line); }
 .btn-secondary:hover { border-color: var(--text-3); }
 .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+@media (max-width: 560px) { .actions .btn { width: 100%; } }
 
 /* header */
-.top { padding-block: 16px; }
-.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.top { position: absolute; inset: 0 0 auto; height: var(--header); z-index: 5; }
+.top .wrap { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
 .mark { width: 32px; height: 32px; border-radius: 8px; background: var(--board); color: var(--brass);
   display: grid; place-items: center; font: 600 17px/1 var(--f-display); }
-.brand-name { font: 600 17px/1.1 var(--f-display); font-stretch: 108%; }
-.brand-sub { display: block; font-size: 12px; line-height: 16px; color: var(--text-3); }
-.nav { display: flex; align-items: center; gap: 24px; font-size: 15px; }
+.brand-name { font: 600 17px/1 var(--f-display); font-stretch: 108%; }
+.brand-name small { font: 400 14px/1 var(--f-body); color: var(--text-3); margin-left: 8px; }
+.nav { display: flex; align-items: center; gap: 28px; font-size: 15px; }
 .nav a { text-decoration: none; color: var(--text-2); transition: color 160ms var(--ease); }
 .nav a:hover { color: var(--text); }
-.lang-btn {
-  font: 500 14px/1 var(--f-body); min-height: 36px; padding: 8px 12px; border-radius: 8px;
+.lang-btn { font: 500 14px/1 var(--f-body); min-height: 40px; padding: 8px 14px; border-radius: 8px;
   border: 1px solid var(--line); background: var(--surface); color: var(--text); cursor: pointer;
-  transition: border-color 160ms var(--ease);
-}
+  transition: border-color 160ms var(--ease); }
 .lang-btn:hover { border-color: var(--text-3); }
-@media (max-width: 720px) { .nav .nav-link { display: none; } }
+@media (max-width: 760px) { .nav .nav-link { display: none; } .brand-name small { display: none; } }
 
-/* hero */
-.hero { padding-block: 48px 96px; }
-.hero .wrap { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: center; }
-.hero-copy { display: grid; gap: 24px; min-width: 0; }
-.hero-note { font-size: 14px; color: var(--text-3); }
-@media (max-width: 880px) { .hero { padding-block: 32px 64px; } .hero .wrap { grid-template-columns: 1fr; gap: 48px; } }
+/* hero: alone on the first screen */
+.hero { min-height: 100svh; display: flex; align-items: center; padding-block: calc(var(--header) + 48px) 64px; }
+.hero .wrap { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 72px; align-items: center; }
+.hero-copy { display: grid; gap: 32px; min-width: 0; }
+@media (max-width: 920px) { .hero .wrap { grid-template-columns: 1fr; gap: 48px; } }
 
-/* the moment: lobby directory board */
-.board {
-  background: var(--board); color: var(--board-text); border-radius: 16px; padding: 24px;
+@keyframes enter { from { opacity: 0.001; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+[data-enter] > * { animation: enter 480ms var(--ease) both; }
+[data-enter] > *:nth-child(2) { animation-delay: 60ms; }
+[data-enter] > *:nth-child(3) { animation-delay: 120ms; }
+
+/* the lobby directory board */
+.board { background: var(--board); color: var(--board-text); border-radius: 16px; padding: 28px;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 8px 24px rgba(0,0,0,0.10);
-  font-family: var(--f-mono); min-width: 0;
-}
-.board-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
-  padding-bottom: 12px; margin-bottom: 4px; border-bottom: 1px solid var(--board-line); font-size: 13px; }
-.board-title { color: var(--brass); font-weight: 500; }
-.board-city { color: var(--board-dim); }
+  font-family: var(--f-mono); min-width: 0; }
+.board-head { display: flex; justify-content: space-between; gap: 16px; font-size: 13px;
+  padding-bottom: 16px; border-bottom: 1px solid var(--board-line); }
+.board-head span:first-child { color: var(--brass); }
+.board-head span:last-child { color: var(--board-dim); }
 .board ul { list-style: none; margin: 0; padding: 0; }
-.board li { border-bottom: 1px solid var(--board-line); }
-.board li:last-child { border-bottom: 0; }
-.board a { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: baseline;
-  padding: 12px 0; text-decoration: none; }
-.board .name { font-size: 16px; font-weight: 500; color: var(--brass); }
-.board .what { grid-column: 1 / -1; font-size: 13px; line-height: 20px; color: var(--board-dim); }
-.board .go { font-size: 14px; color: var(--board-dim); transition: color 160ms var(--ease); }
-.board a:hover .go { color: var(--board-text); }
+.board li { display: grid; grid-template-columns: 9.5rem 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--board-line); align-items: baseline; }
+.board li:last-child { border-bottom: 0; padding-bottom: 0; }
+.board .name { color: var(--brass); font-size: 15px; font-weight: 500; }
+.board .what { color: var(--board-dim); font-size: 14px; line-height: 20px; }
+@media (max-width: 420px) { .board { padding: 20px; } .board li { grid-template-columns: 1fr; gap: 4px; } }
 
-/* why */
-.why .wrap { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; }
-.why .copy { display: grid; gap: 20px; }
-.why .pull { font: 500 22px/1.4 var(--f-display); color: var(--text); max-width: 30ch; }
-@media (max-width: 880px) { .why .wrap { grid-template-columns: 1fr; gap: 24px; } }
-
-/* services, in the directory signature */
-.dir { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
-.dir li { display: grid; grid-template-columns: 240px 1fr; gap: 8px 32px; padding: 24px 0; border-bottom: 1px solid var(--line); }
-.dir .label { display: grid; gap: 4px; align-content: start; }
-.dir .zh-name { font-size: 13px; color: var(--text-3); }
-.dir p { color: var(--text-2); }
-@media (max-width: 720px) { .dir li { grid-template-columns: 1fr; } }
-.rule { margin-top: 32px; padding: 20px 24px; background: var(--surface); border: 1px solid var(--line);
-  border-radius: 12px; max-width: 760px; color: var(--text-2); }
-.rule strong { color: var(--text); font-weight: 500; }
-
-/* how it works: a real sequence */
-.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; counter-reset: step; }
-.steps li { counter-increment: step; display: grid; gap: 8px; align-content: start; padding-top: 20px; border-top: 1px solid var(--text); min-width: 0; }
-.steps li::before { content: counter(step); font: 500 32px/1 var(--f-display); color: var(--accent); margin-bottom: 8px; font-variant-numeric: tabular-nums; }
-.steps p { color: var(--text-2); }
-@media (max-width: 760px) { .steps { grid-template-columns: 1fr; gap: 24px; } }
-
-/* a month */
-.month { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 64px; align-items: start; }
-.month-intro { display: grid; gap: 12px; position: sticky; top: 24px; }
-.timeline { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
-.timeline li { display: grid; grid-template-columns: 104px 1fr; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--line); }
-.timeline .when { font: 400 13px/24px var(--f-mono); color: var(--text-3); }
-.timeline h3 { margin-bottom: 4px; }
-.timeline p { color: var(--text-2); }
-@media (max-width: 880px) { .month { grid-template-columns: 1fr; gap: 32px; } .month-intro { position: static; } }
-@media (max-width: 460px) { .timeline li { grid-template-columns: 1fr; gap: 4px; } }
-
-/* hosts */
-.hosts-band { background: var(--surface); }
-.hosts { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
-.hosts .intro { display: grid; gap: 20px; }
-.formats { display: flex; flex-wrap: wrap; gap: 8px; }
-.formats span { font-size: 14px; line-height: 20px; padding: 6px 12px; border-radius: 6px; background: var(--raised); color: var(--text-2); }
-.host-list { list-style: none; margin: 0 0 32px; padding: 0; border-top: 1px solid var(--line); }
-.host-list li { display: grid; gap: 4px; padding: 20px 0; border-bottom: 1px solid var(--line); }
-.host-list strong { font-weight: 500; }
-.host-list span.d { color: var(--text-2); }
-@media (max-width: 880px) { .hosts { grid-template-columns: 1fr; gap: 40px; } }
+/* event venue */
+.venue .wrap { grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+.venue .copy { display: grid; gap: 32px; }
+.facts { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); max-width: 30rem; }
+.facts li { padding: 16px 0; border-bottom: 1px solid var(--line); color: var(--text-2); }
+.formats { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; align-content: start; }
+.formats li { font: 500 clamp(28px, 18px + 2.4vw, 52px)/1.12 var(--f-display); letter-spacing: -0.02em; color: var(--text-3); }
+.formats li:first-child { color: var(--accent); }
+body[data-lang="zh"] .formats li { letter-spacing: 0; }
+@media (max-width: 920px) { .venue .wrap { grid-template-columns: 1fr; gap: 48px; } }
 
 /* partners */
 .partners { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
-.partner { display: grid; gap: 12px; align-content: start; padding-top: 24px; border-top: 1px solid var(--line); }
-.who { display: flex; align-items: center; gap: 12px; }
-.avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--raised); color: var(--accent);
-  display: grid; place-items: center; font: 500 20px/1 var(--f-display); flex: none; }
-.role { font-size: 14px; color: var(--text-3); }
-.partner ul { margin: 0; padding-left: 20px; color: var(--text-2); display: grid; gap: 4px; }
-@media (max-width: 880px) { .partners { grid-template-columns: 1fr; gap: 24px; } }
+.partner { display: grid; gap: 16px; align-content: start; padding-top: 28px; border-top: 1px solid var(--text); }
+.avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--raised); color: var(--accent);
+  display: grid; place-items: center; font: 500 22px/1 var(--f-display); }
+.partner p { color: var(--text-2); }
+@media (max-width: 820px) { .partners { grid-template-columns: 1fr; gap: 24px; } }
 
 /* contact */
-.contact { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: start; }
-.contact-copy { display: grid; gap: 16px; }
-form { display: grid; gap: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 24px; min-width: 0; }
-.row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-@media (max-width: 560px) { .row { grid-template-columns: 1fr; } }
-label { display: grid; gap: 8px; font-size: 14px; font-weight: 500; }
-input[type="text"], input[type="email"], textarea {
-  font: inherit; font-size: 16px; font-weight: 400; min-height: 44px; padding: 10px 12px; border-radius: 8px;
-  border: 1px solid var(--line); background: var(--bg); color: var(--text); width: 100%;
+.contact .wrap { grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+.contact .copy { display: grid; gap: 24px; }
+form { display: grid; gap: 20px; min-width: 0; }
+label { display: grid; gap: 8px; font-size: 15px; font-weight: 500; }
+input[type="text"], input[type="email"] {
+  font: inherit; font-size: 17px; font-weight: 400; min-height: 52px; padding: 12px 14px; border-radius: 10px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--text); width: 100%;
   transition: border-color 160ms var(--ease);
 }
-input:focus, textarea:focus { border-color: var(--accent); outline: none; }
-textarea { min-height: 104px; resize: vertical; }
+input:focus { border-color: var(--accent); outline: none; }
 fieldset { border: 0; padding: 0; margin: 0; }
-legend { font-size: 14px; font-weight: 500; margin-bottom: 8px; padding: 0; }
+legend { font-size: 15px; font-weight: 500; margin-bottom: 8px; padding: 0; }
 .checks { display: flex; flex-wrap: wrap; gap: 8px; }
-.checks label { display: inline-flex; align-items: center; gap: 8px; font-weight: 400; min-height: 40px;
-  padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; cursor: pointer;
-  transition: border-color 160ms var(--ease), background-color 160ms var(--ease); }
+.checks label { display: inline-flex; align-items: center; gap: 8px; font-weight: 400; min-height: 44px;
+  padding: 8px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); cursor: pointer;
+  transition: border-color 160ms var(--ease); }
 .checks input { accent-color: var(--accent); margin: 0; }
-.checks label:has(input:checked) { border-color: var(--accent); background: var(--raised); }
-.form-note { font-size: 13px; color: var(--text-3); }
-.form-result { padding: 12px 16px; border-radius: 8px; background: var(--raised); font-size: 15px; }
-.form-actions { display: grid; gap: 12px; justify-items: start; }
-@media (max-width: 880px) { .contact { grid-template-columns: 1fr; gap: 32px; } }
+.checks label:has(input:checked) { border-color: var(--accent); }
+.form-note { font-size: 14px; color: var(--text-3); }
+@media (max-width: 920px) { .contact .wrap { grid-template-columns: 1fr; gap: 40px; } }
 
-/* footer */
 footer { padding-block: 32px 48px; border-top: 1px solid var(--line); font-size: 14px; color: var(--text-3); }
 footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
 </style>
 </head>
 <body data-lang="en">
+<a class="skip" href="#main"><span lang="en">Skip to content</span><span lang="zh">跳到正文</span></a>
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#top" aria-label="Founder Base home">
+    <a class="brand" href="#main" aria-label="Founder Base home">
       <span class="mark" aria-hidden="true">F</span>
-      <span><span class="brand-name">Founder Base</span><span class="brand-sub">创业者基地 · San Francisco</span></span>
+      <span class="brand-name">Founder Base<small>创业者基地</small></span>
     </a>
     <nav class="nav" aria-label="Main">
-      <a class="nav-link" href="#offer"><span lang="en">What's here</span><span lang="zh">我们提供什么</span></a>
-      <a class="nav-link" href="#hosts"><span lang="en">Host an event</span><span lang="zh">办活动</span></a>
+      <a class="nav-link" href="#venue"><span lang="en">Event venue</span><span lang="zh">活动场地</span></a>
       <a class="nav-link" href="#partners"><span lang="en">Partners</span><span lang="zh">合伙人</span></a>
+      <a class="nav-link" href="#contact"><span lang="en">Contact</span><span lang="zh">联系</span></a>
       <button class="lang-btn" id="lang-toggle" type="button" aria-label="Switch language"><span lang="en">中文</span><span lang="zh">English</span></button>
     </nav>
   </div>
 </header>
 
-<main id="top">
+<main id="main">
 
   <section class="hero" aria-labelledby="hero-title">
     <div class="wrap">
-      <div class="hero-copy">
-        <span class="kicker"><span lang="en">For startups in San Francisco</span><span lang="zh">为旧金山的创业公司</span></span>
-        <h1 id="hero-title">
-          <span lang="en">You build the startup. We have the desks, the event space and the people</span>
-          <span lang="zh">你只管创业，地方和资源我们都准备好</span>
-        </h1>
-        <p class="lede">
-          <span lang="en">Office space, an event venue, warehouse space, food on site and a real network. One place, one contact, below market rates.</span>
-          <span lang="zh">办公室、活动场地、仓库空间、场内餐饮和人脉，都在一个地方，找一个人就行，价格低于市场。</span>
+      <div class="hero-copy" data-enter>
+        <h1 id="hero-title"><span lang="en">Startup space in San Francisco</span><span lang="zh">旧金山的创业空间</span></h1>
+        <p class="sub">
+          <span lang="en">Desks, an event venue, warehouse space and food on site, in one place and below market rates. You build the company.</span>
+          <span lang="zh">工位、活动场地、仓库空间、场内餐饮，都在一个地方，价格低于市场。你只管创业。</span>
         </p>
         <div class="actions">
-          <a class="btn btn-primary" href="#contact"><span lang="en">Join the interest list</span><span lang="zh">登记意向</span></a>
-          <a class="btn btn-secondary" href="#hosts"><span lang="en">Host an event</span><span lang="zh">来这里办活动</span></a>
+          <a class="btn btn-primary" href="#contact"><span lang="en">Join the first group</span><span lang="zh">登记入驻意向</span></a>
+          <a class="btn btn-secondary" href="#venue"><span lang="en">See the event venue</span><span lang="zh">看活动场地</span></a>
         </div>
-        <p class="hero-note">
-          <span lang="en"><span class="ph">[Neighborhood / address]</span>, San Francisco</span>
-          <span lang="zh">旧金山 <span class="ph">[街区 / 地址]</span></span>
-        </p>
       </div>
 
-      <aside class="board" aria-label="Building directory">
-        <div class="board-head">
-          <span class="board-title"><span lang="en">Directory</span><span lang="zh">楼内指引</span></span>
-          <span class="board-city">Founder Base, SF</span>
-        </div>
+      <aside class="board" aria-label="What's in the building">
+        <div class="board-head"><span><span lang="en">Directory</span><span lang="zh">楼内指引</span></span><span>San Francisco</span></div>
         <ul>
-          <li><a href="#offer"><span class="name"><span lang="en">Office</span><span lang="zh">办公</span></span><span class="go" aria-hidden="true">→</span>
-            <span class="what"><span lang="en">Desks and private offices, by the month</span><span lang="zh">工位和独立办公室，按月租</span></span></a></li>
-          <li><a href="#hosts"><span class="name"><span lang="en">Event venue</span><span lang="zh">活动场地</span></span><span class="go" aria-hidden="true">→</span>
-            <span class="what"><span lang="en">Talks, socials, workshops, hackathons</span><span lang="zh">讲座、社交、workshop、hackathon</span></span></a></li>
-          <li><a href="#offer"><span class="name"><span lang="en">Warehouse space</span><span lang="zh">仓库空间</span></span><span class="go" aria-hidden="true">→</span>
-            <span class="what"><span lang="en">Storage by area, pop-up booths at events</span><span lang="zh">按面积租，活动时可租快闪展位</span></span></a></li>
-          <li><a href="#offer"><span class="name"><span lang="en">Food and drink</span><span lang="zh">吃喝</span></span><span class="go" aria-hidden="true">→</span>
-            <span class="what"><span lang="en">Restaurants and milk tea on site</span><span lang="zh">场内饭店和奶茶店</span></span></a></li>
-          <li><a href="#partners"><span class="name"><span lang="en">Network</span><span lang="zh">人脉</span></span><span class="go" aria-hidden="true">→</span>
-            <span class="what"><span lang="en">Chamber of commerce and community</span><span lang="zh">商会和社区资源</span></span></a></li>
-          <li><a href="#offer"><span class="name"><span lang="en">Tech help</span><span lang="zh">技术支持</span></span><span class="go" aria-hidden="true">→</span>
-            <span class="what"><span lang="en">Websites, product and AI advice</span><span lang="zh">建网站、产品和 AI 建议</span></span></a></li>
+          <li><span class="name"><span lang="en">Office</span><span lang="zh">办公</span></span>
+            <span class="what"><span lang="en">Desks and private offices, by the month</span><span lang="zh">工位和独立办公室，按月租</span></span></li>
+          <li><span class="name"><span lang="en">Event venue</span><span lang="zh">活动场地</span></span>
+            <span class="what"><span lang="en">Talks, workshops, hackathons, dinners</span><span lang="zh">讲座、workshop、hackathon、晚宴</span></span></li>
+          <li><span class="name"><span lang="en">Warehouse</span><span lang="zh">仓库空间</span></span>
+            <span class="what"><span lang="en">Storage by area, pop-up booths</span><span lang="zh">按面积租，可租快闪展位</span></span></li>
+          <li><span class="name"><span lang="en">Food</span><span lang="zh">吃喝</span></span>
+            <span class="what"><span lang="en">Restaurants and milk tea downstairs</span><span lang="zh">楼下的饭店和奶茶店</span></span></li>
+          <li><span class="name"><span lang="en">Network</span><span lang="zh">人脉</span></span>
+            <span class="what"><span lang="en">Chamber of commerce, mentors, investors</span><span lang="zh">商会、导师、投资人</span></span></li>
+          <li><span class="name"><span lang="en">Tech help</span><span lang="zh">技术支持</span></span>
+            <span class="what"><span lang="en">Websites and product advice</span><span lang="zh">建网站和产品建议</span></span></li>
         </ul>
       </aside>
     </div>
   </section>
 
-  <section class="band why" aria-labelledby="why-title">
+  <section class="screen venue" id="venue" aria-labelledby="venue-title">
     <div class="wrap">
-      <div class="section-head" style="margin-bottom:0">
-        <span class="kicker"><span lang="en">Why Founder Base</span><span lang="zh">为什么选我们</span></span>
-        <h2 id="why-title"><span lang="en">Early teams lose weeks to errands</span><span lang="zh">早期团队的时间，不该花在跑腿上</span></h2>
-      </div>
       <div class="copy">
-        <p class="muted">
-          <span lang="en">A desk for the team. A room for a launch night. Somewhere to keep inventory. A place to take investors to dinner. Each one is a separate search and a separate bill. At Founder Base it's one place and one contact, so your team gets back to the product.</span>
-          <span lang="zh">团队要找工位，发布会要找场地，货要找地方放，请投资人吃饭还要找餐厅。每一样都要单独找、单独付钱。在 Founder Base，这些都在一个地方，找一个人就能搞定，团队把时间花回产品上。</span>
-        </p>
-        <p class="pull">
-          <span lang="en">Other spaces rent you a room. We bring the people too</span>
-          <span lang="zh">别人只租房间，我们还带着人</span>
-        </p>
-        <p class="muted">
-          <span lang="en">Our community helps promote your events, and our chamber of commerce ties bring merchants, partners and introductions.</span>
-          <span lang="zh">社区帮你的活动做宣传，商会带来商家、合作方和人脉。</span>
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section class="band" id="offer" aria-labelledby="offer-title">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="kicker"><span lang="en">What's here</span><span lang="zh">我们提供什么</span></span>
-        <h2 id="offer-title"><span lang="en">Space, food and people under one roof</span><span lang="zh">场地、餐饮和人脉，一站配齐</span></h2>
-      </div>
-      <ul class="dir">
-        <li>
-          <div class="label"><h3><span lang="en">Office</span><span lang="zh">办公</span></h3></div>
-          <p><span lang="en">Desks or private offices by the month, with internet, printing and meeting rooms</span><span lang="zh">工位或独立办公室按月租，带网络、打印和会议室</span></p>
-        </li>
-        <li>
-          <div class="label"><h3><span lang="en">Events</span><span lang="zh">活动</span></h3></div>
-          <p><span lang="en">A venue for launches, hiring nights, workshops, hackathons and private dinners, with sound and projection. Our community helps spread the word.</span><span lang="zh">发布会、招聘夜、workshop、hackathon、private dinner 的场地，配音响和投影。社区帮忙宣传。</span></p>
-        </li>
-        <li>
-          <div class="label"><h3><span lang="en">Food and drink</span><span lang="zh">吃喝</span></h3></div>
-          <p><span lang="en">Restaurants and milk tea shops on site, with member discounts. Add a food package to your event or private dinner, or bring your own.</span><span lang="zh">场内有饭店和奶茶店，会员有折扣。办活动或 private dinner 时可以选我们的餐饮套餐，也可以自己安排。</span></p>
-        </li>
-        <li>
-          <div class="label"><h3><span lang="en">Warehouse space</span><span lang="zh">仓库空间</span></h3></div>
-          <p><span lang="en">Space by area for your inventory, plus pop-up booths during events to test-sell your product</span><span lang="zh">按面积出租仓库空间放货，活动时还能租快闪展位试卖产品</span></p>
-        </li>
-        <li>
-          <div class="label"><h3><span lang="en">Network</span><span lang="zh">人脉</span></h3></div>
-          <p><span lang="en">Chamber of commerce merchants, community members, and introductions to mentors and investors</span><span lang="zh">商会商家资源、社区会员，以及导师和投资人介绍</span></p>
-        </li>
-        <li>
-          <div class="label"><h3><span lang="en">Tech and advice</span><span lang="zh">技术和咨询</span></h3></div>
-          <p><span lang="en">Websites, product and architecture advice, and help choosing AI tools. Merchants on site can get a website built too.</span><span lang="zh">建网站、产品和架构建议、AI 工具选型。进驻商家也可以找我们建网站。</span></p>
-        </li>
-      </ul>
-      <p class="rule">
-        <span lang="en"><strong>We provide the places and resources.</strong> Your company's own work stays with your team. We give you the warehouse space, for example, and you run your own inventory and shipping.</span>
-        <span lang="zh"><strong>我们提供地方和资源。</strong>创业公司自己的业务由团队自己做。比如仓库空间我们提供，存货和发货由你们自己负责。</span>
-      </p>
-    </div>
-  </section>
-
-  <section class="band" aria-labelledby="how-title">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="kicker"><span lang="en">How it works</span><span lang="zh">怎么用</span></span>
-        <h2 id="how-title"><span lang="en">Three steps, then back to building</span><span lang="zh">三步，然后回去做产品</span></h2>
-      </div>
-      <ol class="steps">
-        <li>
-          <h3><span lang="en">Tell us what you need</span><span lang="zh">告诉我们你需要什么</span></h3>
-          <p><span lang="en">A few desks, a room for your launch night, space for inventory, or all of it</span><span lang="zh">几个工位、一场发布会的场地、放货的空间，或者全都要</span></p>
-        </li>
-        <li>
-          <h3><span lang="en">We set it up</span><span lang="zh">我们来安排</span></h3>
-          <p><span lang="en">We match you with space, food and people from our network, below market rates</span><span lang="zh">我们帮你配好场地、餐饮和人脉资源，价格低于市场</span></p>
-        </li>
-        <li>
-          <h3><span lang="en">You build</span><span lang="zh">你专心创业</span></h3>
-          <p><span lang="en">Your team works on the product. Online booking is on the way, so this gets faster.</span><span lang="zh">团队专心做产品。在线预订系统也在路上，以后会更快。</span></p>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <section class="band" aria-labelledby="month-title">
-    <div class="wrap month">
-      <div class="month-intro">
-        <span class="kicker"><span lang="en">Example</span><span lang="zh">示例</span></span>
-        <h2 id="month-title"><span lang="en">A month at Founder Base</span><span lang="zh">在 Founder Base 的一个月</span></h2>
-        <p class="muted"><span lang="en">Picture a four-person AI team moving in. Their first month could look like this.</span><span lang="zh">假设一个 4 人 AI 团队入驻，他们的第一个月可以是这样的。</span></p>
-      </div>
-      <ol class="timeline">
-        <li>
-          <span class="when"><span lang="en">Day 1</span><span lang="zh">第 1 天</span></span>
-          <div><h3><span lang="en">Move in</span><span lang="zh">入驻开工</span></h3>
-          <p><span lang="en">Desks are ready, and the internet and meeting rooms work from the first hour</span><span lang="zh">工位已备好，网络和会议室当天就能用</span></p></div>
-        </li>
-        <li>
-          <span class="when"><span lang="en">Every day</span><span lang="zh">每天</span></span>
-          <div><h3><span lang="en">Lunch downstairs</span><span lang="zh">楼下吃午饭</span></h3>
-          <p><span lang="en">The team eats at the merchants on site, at member prices</span><span lang="zh">在场内商家吃饭，用会员价</span></p></div>
-        </li>
-        <li>
-          <span class="when"><span lang="en">Week 2</span><span lang="zh">第 2 周</span></span>
-          <div><h3><span lang="en">Hiring night</span><span lang="zh">招聘夜</span></h3>
-          <p><span lang="en">They book the venue below market rates. The community helps promote it, catering is optional, and the team runs the night.</span><span lang="zh">以低于市场的价格订场地，社区帮忙宣传，餐饮可选，活动由团队自己办。</span></p></div>
-        </li>
-        <li>
-          <span class="when"><span lang="en">Week 3</span><span lang="zh">第 3 周</span></span>
-          <div><h3><span lang="en">Investor dinner</span><span lang="zh">投资人晚宴</span></h3>
-          <p><span lang="en">A private dinner with the room and food booked together, and introductions from our network</span><span lang="zh">办一场 private dinner，场地和餐饮一起订，我们帮忙介绍人</span></p></div>
-        </li>
-        <li>
-          <span class="when"><span lang="en">Week 4</span><span lang="zh">第 4 周</span></span>
-          <div><h3><span lang="en">Ready to launch</span><span lang="zh">准备上线</span></h3>
-          <p><span lang="en">An architecture review before launch, a check on scaling and monitoring, advice on AI tools, and help hiring the first engineer</span><span lang="zh">上线前做架构评审，检查扩容和监控，推荐合适的 AI 工具，帮忙把关第一位工程师的招聘</span></p></div>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <section class="band hosts-band" id="hosts" aria-labelledby="hosts-title">
-    <div class="wrap hosts">
-      <div class="intro">
-        <span class="kicker"><span lang="en">For event hosts</span><span lang="zh">给活动承办方</span></span>
-        <h2 id="hosts-title"><span lang="en">Host your next event here</span><span lang="zh">下一场活动，来这里办</span></h2>
-        <p class="lede"><span lang="en">The room comes with an audience. Keep your own event page and ticketing. The venue, food and promotion are here.</span><span lang="zh">场地自带人气。活动页面和报名照常用你自己的，场地、餐饮和宣传在这里。</span></p>
-        <div class="formats" aria-label="Event formats">
-          <span lang="en">Talks</span><span lang="zh">讲座</span>
-          <span lang="en">Socials</span><span lang="zh">社交活动</span>
-          <span lang="en">Workshops</span><span lang="zh">Workshop</span>
-          <span lang="en">Hackathons</span><span lang="zh">Hackathon</span>
-          <span lang="en">Launch nights</span><span lang="zh">发布会</span>
-          <span lang="en">Hiring nights</span><span lang="zh">招聘夜</span>
-          <span lang="en">Private dinners</span><span lang="zh">Private dinner</span>
-        </div>
-      </div>
-      <div>
-        <ul class="host-list">
-          <li><strong><span lang="en">Venue rent well below market</span><span lang="zh">场地租金远低于市场价</span></strong>
-            <span class="d"><span lang="en">Per event or per time slot. Rates <span class="ph">[pricing]</span></span><span lang="zh">按场次或时段计费。价格 <span class="ph">[价格]</span></span></span></li>
-          <li><strong><span lang="en">An audience, not only a room</span><span lang="zh">不只是房间，还有观众</span></strong>
-            <span class="d"><span lang="en">Our community helps promote your event</span><span lang="zh">社区帮你宣传活动</span></span></li>
-          <li><strong><span lang="en">Food if you want it</span><span lang="zh">餐饮可选</span></strong>
-            <span class="d"><span lang="en">A catering package from our on-site merchants, or bring your own</span><span lang="zh">可以加场内商家的餐饮套餐，也可以自己安排</span></span></li>
-          <li><strong><span lang="en">The space</span><span lang="zh">场地信息</span></strong>
-            <span class="d"><span lang="en">Capacity <span class="ph">[number of guests]</span>, equipment <span class="ph">[A/V details]</span></span><span lang="zh">容纳 <span class="ph">[人数]</span>，设备 <span class="ph">[音响投影配置]</span></span></span></li>
+        <h2 id="venue-title">
+          <span lang="en">Event venue with an audience. <span class="muted">Rent well below market.</span></span>
+          <span lang="zh">自带人气的活动场地。<span class="muted">租金远低于市场。</span></span>
+        </h2>
+        <!-- TODO: add rates, capacity, sound and projection once confirmed -->
+        <ul class="facts">
+          <li><span lang="en">Our community helps promote your event</span><span lang="zh">社区帮你宣传活动</span></li>
+          <li><span lang="en">Add catering from the merchants downstairs, or bring your own</span><span lang="zh">可以加楼下商家的餐饮套餐，也可以自己安排</span></li>
+          <li><span lang="en">Keep your own event page and ticketing</span><span lang="zh">活动页面和报名照常用你自己的</span></li>
         </ul>
-        <a class="btn btn-primary" href="#contact"><span lang="en">Ask about a date</span><span lang="zh">咨询档期</span></a>
+        <div class="actions"><a class="btn btn-primary" href="#contact"><span lang="en">Ask about a date</span><span lang="zh">咨询档期</span></a></div>
       </div>
+      <ul class="formats" aria-label="Event formats">
+        <li><span lang="en">Launch nights</span><span lang="zh">发布会</span></li>
+        <li><span lang="en">Hiring nights</span><span lang="zh">招聘夜</span></li>
+        <li><span lang="en">Workshops</span><span lang="zh">Workshop</span></li>
+        <li><span lang="en">Hackathons</span><span lang="zh">Hackathon</span></li>
+        <li><span lang="en">Talks</span><span lang="zh">讲座</span></li>
+        <li><span lang="en">Private dinners</span><span lang="zh">Private dinner</span></li>
+      </ul>
     </div>
   </section>
 
-  <section class="band" id="partners" aria-labelledby="partners-title">
+  <section class="screen" id="partners" aria-labelledby="partners-title">
     <div class="wrap">
-      <div class="section-head">
-        <span class="kicker"><span lang="en">Who's behind it</span><span lang="zh">我们是谁</span></span>
-        <h2 id="partners-title"><span lang="en">Three partners, one front door</span><span lang="zh">三位合伙人，一个入口</span></h2>
-      </div>
+      <h2 id="partners-title"><span lang="en">Three partners, one front door</span><span lang="zh">三位合伙人，一个入口</span></h2>
+      <!-- TODO: add one line about each partner -->
       <div class="partners">
         <article class="partner">
-          <div class="who"><span class="avatar" aria-hidden="true">W</span>
-            <div><h3>Will</h3><span class="role"><span lang="en">Places and merchants</span><span lang="zh">场地和商家</span></span></div></div>
-          <ul>
-            <li><span lang="en">Chamber of commerce relationships</span><span lang="zh">商会关系</span></li>
-            <li><span lang="en">Offices, event venue and warehouse space</span><span lang="zh">办公室、活动场地、仓库空间</span></li>
-            <li><span lang="en">On-site restaurants and shops</span><span lang="zh">场内饭店和商家</span></li>
-          </ul>
-          <p><span class="ph">[short bio]</span></p>
+          <span class="avatar" aria-hidden="true">W</span>
+          <h3>Will</h3>
+          <p><span lang="en">The building, the venue and the merchants, through the chamber of commerce</span><span lang="zh">通过商会，负责场地、仓库和进驻商家</span></p>
         </article>
         <article class="partner">
-          <div class="who"><span class="avatar" aria-hidden="true">C</span>
-            <div><h3>Carrie</h3><span class="role"><span lang="en">Community</span><span lang="zh">社区</span></span></div></div>
-          <ul>
-            <li><span lang="en">Career Pathfinders community</span><span lang="zh">Career Pathfinders 社区</span></li>
-            <li><span lang="en">Event promotion and members</span><span lang="zh">活动宣传和会员</span></li>
-            <li><span lang="en">Mentors and introductions</span><span lang="zh">导师和人脉介绍</span></li>
-          </ul>
-          <p><span class="ph">[short bio]</span></p>
+          <span class="avatar" aria-hidden="true">C</span>
+          <h3>Carrie</h3>
+          <p><span lang="en">The community, from Career Pathfinders, who fill the room</span><span lang="zh">来自 Career Pathfinders 的社区，负责宣传和会员</span></p>
         </article>
         <article class="partner">
-          <div class="who"><span class="avatar" aria-hidden="true">M</span>
-            <div><h3>Minglei</h3><span class="role"><span lang="en">Tech and platform</span><span lang="zh">技术和平台</span></span></div></div>
-          <ul>
-            <li><span lang="en">Founder Base website and booking platform</span><span lang="zh">Founder Base 网站和预订平台</span></li>
-            <li><span lang="en">Product, architecture and AI advice</span><span lang="zh">产品、架构和 AI 建议</span></li>
-            <li><span lang="en">Founders and engineers from the tech scene</span><span lang="zh">科技圈的创始人和工程师</span></li>
-          </ul>
-          <p><span class="ph">[short bio]</span></p>
+          <span class="avatar" aria-hidden="true">M</span>
+          <h3>Minglei</h3>
+          <p><span lang="en">The website, tech and product advice, and founders from the tech scene</span><span lang="zh">网站和技术，产品建议，以及科技圈的创始人</span></p>
         </article>
       </div>
     </div>
   </section>
 
-  <section class="band" id="contact" aria-labelledby="contact-title">
-    <div class="wrap contact">
-      <div class="contact-copy">
-        <span class="kicker"><span lang="en">Get in touch</span><span lang="zh">联系我们</span></span>
-        <h2 id="contact-title"><span lang="en">Be one of our first teams</span><span lang="zh">成为第一批入驻团队</span></h2>
-        <p class="muted"><span lang="en">We're opening to our first startups and event hosts. Tell us what you need and we'll get back to you.</span><span lang="zh">我们正在接第一批创业团队和活动承办方。告诉我们你需要什么，我们会联系你。</span></p>
-        <p class="muted"><span lang="en">Email <span class="ph">[contact email]</span></span><span lang="zh">邮箱 <span class="ph">[联系邮箱]</span></span></p>
+  <section class="screen contact" id="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <div class="copy">
+        <h2 id="contact-title"><span lang="en">Join the first group</span><span lang="zh">成为第一批入驻团队</span></h2>
+        <p class="sub"><span lang="en">We're opening to our first startups and event hosts. Tell us what you need.</span><span lang="zh">我们正在接第一批创业团队和活动承办方。告诉我们你需要什么。</span></p>
       </div>
+      <!-- TODO: connect this form to a contact email or a form service; until then it sends nothing -->
       <form id="interest-form" novalidate>
-        <div class="row">
-          <label for="f-name"><span><span lang="en">Name</span><span lang="zh">姓名</span></span>
-            <input id="f-name" name="name" type="text" autocomplete="name"></label>
-          <label for="f-email"><span><span lang="en">Email</span><span lang="zh">邮箱</span></span>
-            <input id="f-email" name="email" type="email" autocomplete="email"></label>
-        </div>
-        <label for="f-company"><span><span lang="en">Company or event</span><span lang="zh">公司或活动名称</span></span>
-          <input id="f-company" name="company" type="text" autocomplete="organization"></label>
+        <label for="f-name"><span><span lang="en">Name</span><span lang="zh">姓名</span></span>
+          <input id="f-name" name="name" type="text" autocomplete="name"></label>
+        <label for="f-email"><span><span lang="en">Email</span><span lang="zh">邮箱</span></span>
+          <input id="f-email" name="email" type="email" autocomplete="email"></label>
         <fieldset>
           <legend><span lang="en">Interested in</span><span lang="zh">感兴趣的服务</span></legend>
           <div class="checks">
             <label for="c-office"><input id="c-office" type="checkbox" name="need" value="office"><span lang="en">Office</span><span lang="zh">办公</span></label>
             <label for="c-venue"><input id="c-venue" type="checkbox" name="need" value="venue"><span lang="en">Event venue</span><span lang="zh">活动场地</span></label>
-            <label for="c-warehouse"><input id="c-warehouse" type="checkbox" name="need" value="warehouse"><span lang="en">Warehouse space</span><span lang="zh">仓库空间</span></label>
-            <label for="c-food"><input id="c-food" type="checkbox" name="need" value="food"><span lang="en">Food package</span><span lang="zh">餐饮套餐</span></label>
-            <label for="c-network"><input id="c-network" type="checkbox" name="need" value="network"><span lang="en">Network</span><span lang="zh">人脉</span></label>
-            <label for="c-tech"><input id="c-tech" type="checkbox" name="need" value="tech"><span lang="en">Tech help</span><span lang="zh">技术支持</span></label>
+            <label for="c-warehouse"><input id="c-warehouse" type="checkbox" name="need" value="warehouse"><span lang="en">Warehouse</span><span lang="zh">仓库空间</span></label>
+            <label for="c-food"><input id="c-food" type="checkbox" name="need" value="food"><span lang="en">Food</span><span lang="zh">餐饮</span></label>
           </div>
         </fieldset>
-        <label for="f-msg"><span><span lang="en">Anything else</span><span lang="zh">其他想说的</span></span>
-          <textarea id="f-msg" name="message"></textarea></label>
-        <div class="form-actions">
-          <button class="btn btn-primary" type="submit"><span lang="en">Send</span><span lang="zh">提交</span></button>
-          <p class="form-note"><span lang="en">Form not connected yet <span class="ph">[form backend]</span></span><span lang="zh">表单尚未接通 <span class="ph">[表单后台]</span></span></p>
-          <p class="form-result" id="form-result" hidden>
-            <span lang="en">Thanks. This form isn't connected yet, so nothing was sent. Please email us at <span class="ph">[contact email]</span>.</span>
-            <span lang="zh">谢谢。表单还没有接通，所以没有发出。请发邮件到 <span class="ph">[联系邮箱]</span>。</span>
-          </p>
-        </div>
+        <div class="actions"><button class="btn btn-primary" type="submit"><span lang="en">Send my details</span><span lang="zh">提交</span></button></div>
+        <p class="form-note" id="form-note" role="status"><span lang="en">This form isn't connected yet, so nothing is sent.</span><span lang="zh">表单还没有接通，提交后不会发出。</span></p>
       </form>
     </div>
   </section>
@@ -558,7 +345,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 
 <footer>
   <div class="wrap">
-    <span>Founder Base · 创业者基地 · San Francisco · <span class="ph">[address]</span></span>
+    <span>Founder Base · 创业者基地 · San Francisco</span>
     <span>© 2026 Founder Base</span>
   </div>
 </footer>
@@ -577,12 +364,8 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   document.getElementById('lang-toggle').addEventListener('click', function () {
     setLang(body.getAttribute('data-lang') === 'zh' ? 'en' : 'zh');
   });
-
   // No backend yet: nothing is sent or stored.
-  document.getElementById('interest-form').addEventListener('submit', function (e) {
-    e.preventDefault();
-    document.getElementById('form-result').hidden = false;
-  });
+  document.getElementById('interest-form').addEventListener('submit', function (e) { e.preventDefault(); });
 })();
 </script>
 </body>
