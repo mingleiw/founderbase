@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Spaces · Founder Base</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Founder Base spaces in San Francisco: four rooms for 6 to 1,000 people, plus offices to work in.">
+<meta property="og:title" content="Spaces · Founder Base">
+<meta property="og:description" content="Four spaces in one San Francisco building, for 6 to 1,000 people.">
+<meta name="theme-color" content="#F6F6F3">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23141414'/%3E%3Cpath d='M7 16h18' stroke='%23F6F6F3' stroke-width='2'/%3E%3Ccircle cx='8' cy='16' r='3' fill='%23141414' stroke='%23F6F6F3' stroke-width='2'/%3E%3Ccircle cx='24' cy='16' r='3.5' fill='%2332B36F'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Founder Base, spaces.
+   Same look as the home page. The one idea here: the building as a line that runs up and down,
+   an elevator shaft with a stop at each floor. Photos open like elevator doors.
+   No prices anywhere on this page, on purpose. Sizes are rounded and the building is not named, on purpose. */
+:root {
+  color-scheme: light;
+  --ground: #F6F6F3;
+  --card: #FFFFFF;
+  --border: #E3E3DE;
+  --ink: #141414;
+  --ink-2: #55554F;
+  --ink-3: #8A8A84;
+  --rail: #CFCFC8;
+  --accent: #1F8A55;
+  --accent-dot: #32B36F;
+  --f-sans: "Geist", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--f-sans); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; }
+img { display: block; max-width: 100%; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 4px; }
+p { margin: 0; }
+h1, h2, h3 { margin: 0; font-weight: 500; letter-spacing: -0.03em; }
+.mono { font-family: var(--f-mono); font-size: 13px; color: var(--ink-2); }
+.wrap { width: 100%; max-width: 1080px; margin: 0 auto;
+  padding-left: max(24px, env(safe-area-inset-left, 0px));
+  padding-right: max(24px, env(safe-area-inset-right, 0px)); }
+.skip { position: absolute; left: 16px; top: -60px; background: var(--ink); color: var(--ground); padding: 10px 14px; border-radius: 8px; z-index: 30; }
+.skip:focus { top: 12px; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; }
+
+/* header (same as home) */
+header { border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; background: rgba(246, 246, 243, 0.9); backdrop-filter: saturate(1.2) blur(8px); }
+header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; font-size: 18px; letter-spacing: -0.02em; }
+.nav { display: flex; align-items: center; gap: 28px; font-size: 15px; color: var(--ink-2); }
+.nav a { text-decoration: none; transition: color 160ms var(--ease); }
+.nav a:hover, .nav a[aria-current] { color: var(--ink); }
+.nav a[aria-current] { position: relative; }
+.nav a[aria-current]::after { content: ""; position: absolute; left: 50%; bottom: -8px; width: 5px; height: 5px; margin-left: -2.5px; border-radius: 50%; background: var(--accent-dot); }
+.nav .nav-cta { color: var(--ink); background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 7px 14px; }
+@media (max-width: 760px) { .nav a:not(.nav-cta):not([aria-current]) { display: none; } }
+.progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; pointer-events: none; }
+.progress .bar { position: absolute; inset: 0; background: var(--accent-dot); transform: scaleX(0); transform-origin: left; }
+
+/* buttons */
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 24px; border-radius: 10px;
+  font: 500 17px/1 var(--f-sans); text-decoration: none; cursor: pointer; border: 1px solid transparent;
+  transition: background-color 160ms var(--ease), border-color 160ms var(--ease); }
+.btn:active { transform: scale(0.99); }
+.btn-primary { background: var(--ink); color: #fff; position: relative; overflow: hidden; }
+.btn-primary:hover { background: #2E2E2C; }
+.btn-primary::after { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 40%; pointer-events: none;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.22), transparent); transform: translateX(-160%) skewX(-12deg); }
+.btn-primary:hover::after { transform: translateX(320%) skewX(-12deg); transition: transform 800ms var(--ease); }
+.btn-secondary { background: var(--card); color: var(--ink); border-color: var(--border); }
+.btn-secondary:hover { border-color: var(--ink-3); }
+
+/* hero: words on the left, the building on the right */
+.hero { padding-block: clamp(56px, 8vw, 104px) clamp(56px, 7vw, 88px); }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
+.eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--ink-2); font-size: 16px; margin-bottom: 20px; }
+.eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent-dot); box-shadow: 0 0 0 4px rgba(50, 179, 111, 0.16); }
+.hero h1 { font-size: clamp(40px, 4.2vw + 14px, 76px); line-height: 1.03; letter-spacing: -0.045em; }
+.hero h1 .n { font-family: var(--f-mono); font-weight: 500; letter-spacing: -0.06em; color: var(--accent); font-variant-numeric: tabular-nums; }
+.hero .lede { color: var(--ink-2); font-size: clamp(18px, 0.5vw + 15px, 21px); line-height: 1.45; margin-top: 24px; max-width: 30ch; }
+.hero .actions { margin-top: 32px; }
+
+.building { padding: 20px 22px 22px; }
+.building-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 14px; }
+.display { display: inline-flex; align-items: center; gap: 8px; font: 500 13px/1 var(--f-mono); color: #fff; background: var(--ink); border-radius: 6px; padding: 7px 10px; min-width: 92px; justify-content: center; font-variant-numeric: tabular-nums; }
+.display .arrow { color: var(--accent-dot); display: inline-block; transition: transform 300ms var(--ease); }
+.display .arrow.down { transform: rotate(180deg); }
+.floors-wrap { position: relative; }
+.floors { list-style: none; margin: 0; padding: 0; display: grid; }
+.shaft { position: absolute; left: 6px; top: 0; bottom: 0; width: 1px; background: var(--rail); }
+.car { position: absolute; left: 0; top: 0; width: 13px; height: 13px; border-radius: 50%; background: var(--accent-dot); z-index: 3; pointer-events: none;
+  box-shadow: 0 0 0 5px rgba(50, 179, 111, 0.18), 0 2px 8px rgba(31, 138, 85, 0.35); transform: translateY(var(--y, 0px)); transition: transform 900ms var(--ease); display: none; }
+.motion .car { display: block; }
+.floor { position: relative; display: grid; grid-template-columns: 13px 44px minmax(0, 1fr) auto; align-items: center; column-gap: 14px; min-height: 46px; border-bottom: 1px dashed var(--border); }
+.floor:last-child { border-bottom: 0; }
+.floor.ghost { min-height: 18px; }
+.floor .dot { width: 13px; height: 13px; border-radius: 50%; background: var(--card); border: 1.5px solid var(--ink); position: relative; z-index: 2; transition: border-color 240ms var(--ease), transform 240ms var(--ease); }
+.floor.ghost .dot { width: 5px; height: 5px; margin-left: 4px; border: 0; background: var(--rail); }
+.floor.lobby .dot { background: var(--ink); }
+.floor .lvl { font: 500 13px/1 var(--f-mono); color: var(--ink-3); }
+.floor .nm { font-weight: 500; font-size: 15px; letter-spacing: -0.01em; line-height: 1.25; }
+.floor .cap { font: 400 12px/1 var(--f-mono); color: var(--ink-2); white-space: nowrap; }
+a.floor { text-decoration: none; border-radius: 8px; transition: background-color 200ms var(--ease); }
+a.floor:hover { background: var(--ground); }
+a.floor:hover .dot, .floor.at .dot { border-color: var(--accent); transform: scale(1.15); }
+.floor.at .lvl { color: var(--accent); }
+
+/* sections */
+.section { padding-block: clamp(72px, 9vw, 120px); }
+.section h2 { font-size: clamp(34px, 2.6vw + 20px, 56px); line-height: 1.05; max-width: 18ch; }
+.section .sub { color: var(--ink-2); font-size: 19px; margin-top: 16px; max-width: 36rem; }
+
+/* how many people? */
+.fit { border-top: 1px solid var(--border); }
+.fit-card { margin-top: clamp(32px, 4vw, 48px); padding: clamp(20px, 3vw, 32px); }
+.fit-top { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(20px, 4vw, 48px); align-items: center; }
+.count { font: 500 clamp(56px, 6vw + 16px, 104px)/0.9 var(--f-mono); letter-spacing: -0.06em; font-variant-numeric: tabular-nums; min-width: 4.2ch; }
+.count small { display: block; font: 400 13px/1.3 var(--f-sans); letter-spacing: 0; color: var(--ink-2); margin-top: 10px; }
+.slider { display: grid; gap: 10px; }
+.slider label { font-size: 14px; font-weight: 500; }
+input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 28px; background: transparent; cursor: pointer; margin: 0; }
+input[type="range"]::-webkit-slider-runnable-track { height: 2px; border-radius: 2px; background: linear-gradient(90deg, var(--accent-dot) var(--p, 50%), var(--rail) var(--p, 50%)); }
+input[type="range"]::-moz-range-track { height: 2px; border-radius: 2px; background: var(--rail); }
+input[type="range"]::-moz-range-progress { height: 2px; background: var(--accent-dot); }
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; margin-top: -10px; border-radius: 50%; background: var(--card); border: 1.5px solid var(--ink); box-shadow: 0 2px 8px -2px rgba(20,20,20,.3); }
+input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: var(--card); border: 1.5px solid var(--ink); }
+.ticks { display: flex; justify-content: space-between; }
+.ticks .mono { font-size: 11px; color: var(--ink-3); }
+.fits { list-style: none; margin: 24px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.fits a { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 12px; text-decoration: none;
+  transition: opacity 300ms var(--ease), border-color 300ms var(--ease), background-color 300ms var(--ease); }
+.fits .f-lvl { font: 400 12px/1.4 var(--f-mono); color: var(--ink-3); }
+.fits .f-nm { grid-column: 1; font-weight: 500; font-size: 15px; letter-spacing: -0.01em; line-height: 1.3; }
+.fits .f-tag { grid-column: 2; grid-row: 1 / span 2; align-self: center; font: 400 11px/1 var(--f-mono); padding: 5px 7px; border-radius: 5px; border: 1px solid var(--border); color: var(--ink-2); white-space: nowrap; }
+.fits a.no { opacity: 0.42; }
+.fits a.best { border-color: var(--ink); background: #FBFBF9; }
+.fits a.best .f-tag { background: var(--accent-dot); border-color: var(--accent-dot); color: #fff; }
+.no-js .fits .f-tag { display: none; }
+@media (max-width: 860px) { .fits { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .fit-top { grid-template-columns: 1fr; } .fits { grid-template-columns: 1fr; } }
+
+/* one floor per section */
+.space { border-top: 1px solid var(--border); scroll-margin-top: 64px; }
+.space .wrap { display: grid; grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr); gap: clamp(28px, 4vw, 56px); align-items: start; }
+.space-info { position: sticky; top: 96px; }
+.lvl-big { display: flex; align-items: baseline; gap: 12px; }
+.lvl-big .num { font: 500 clamp(64px, 6vw + 20px, 120px)/0.85 var(--f-mono); letter-spacing: -0.07em; }
+.lvl-big .of { font: 400 13px/1.3 var(--f-mono); color: var(--ink-3); }
+.space h2 { font-size: clamp(30px, 1.8vw + 20px, 44px); margin-top: 22px; max-width: 14ch; }
+.space .say { color: var(--ink-2); margin-top: 12px; max-width: 32ch; }
+.stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 28px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.stat { padding: 14px 0; display: grid; gap: 4px; }
+.stat + .stat { padding-left: 18px; border-left: 1px solid var(--border); }
+.stat b { font: 500 26px/1 var(--f-mono); letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+.stat span { font-size: 13px; color: var(--ink-2); }
+.uses { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 0; border: 1px solid var(--border); border-radius: 12px; background: var(--card); overflow: hidden; }
+.uses li { display: flex; align-items: center; gap: 14px; padding: 11px 16px; border-bottom: 1px solid var(--border); }
+.uses li:last-child { border-bottom: 0; }
+.uses .no { font: 400 11px/1 var(--f-mono); color: var(--ink-3); min-width: 2ch; }
+.uses .ev { font: 500 14px/1.2 var(--f-mono); letter-spacing: 0.04em; text-transform: uppercase; display: inline-flex; flex-wrap: wrap; }
+.flap { display: inline-block; min-width: 0.62em; text-align: center; }
+.flap.set { animation: flip 260ms var(--ease); }
+.flap.spin { color: var(--ink-3); }
+@keyframes flip { from { transform: perspective(200px) rotateX(-80deg); opacity: 0.3; } to { transform: none; opacity: 1; } }
+.inside { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.inside .mono { font-size: 12px; color: var(--ink-3); margin-right: 4px; }
+.chip { font-size: 13px; border: 1px solid var(--border); background: var(--card); border-radius: 6px; padding: 4px 8px; }
+.space .actions { margin-top: 26px; }
+.space .actions .btn { min-height: 46px; font-size: 16px; padding: 0 18px; }
+
+/* photos: a small mosaic, each opens like elevator doors */
+.photos { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+.ph { position: relative; margin: 0; border-radius: 12px; overflow: hidden; background: #E9E9E4; grid-column: span 6; aspect-ratio: 16 / 10; }
+.ph.half { grid-column: span 3; aspect-ratio: 4 / 3.4; }
+.photos.duo { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); height: clamp(300px, 34vw, 440px); }
+.photos.duo .ph { grid-column: auto; aspect-ratio: auto; height: 100%; }
+@media (max-width: 560px) { .photos.duo { grid-template-columns: 1fr; height: auto; } .photos.duo .ph { aspect-ratio: 4 / 3; } .photos.duo .ph:last-child { aspect-ratio: 3 / 4; } }
+.ph img { width: 100%; height: 100%; object-fit: cover; transition: transform 1200ms var(--ease); }
+@media (hover: hover) { .ph:hover img { transform: scale(1.04); } }
+.ph::before, .ph::after { content: ""; position: absolute; top: 0; bottom: 0; width: 50.5%; background: #E4E4DE; z-index: 2; pointer-events: none; display: none;
+  transition: transform 1000ms var(--ease) calc(var(--i, 0) * 120ms + 150ms); }
+.ph::before { left: 0; border-right: 1px solid #D2D2CB; }
+.ph::after { right: 0; border-left: 1px solid #D2D2CB; }
+.motion .ph::before, .motion .ph::after { display: block; }
+.motion .ph.open::before { transform: translateX(-101%); }
+.motion .ph.open::after { transform: translateX(101%); }
+.motion .ph img { transform: scale(1.08); }
+.motion .ph.open img { transform: none; }
+@media (hover: hover) { .motion .ph.open:hover img { transform: scale(1.04); } }
+.ph figcaption { position: absolute; left: 10px; bottom: 10px; z-index: 1; font: 400 11px/1 var(--f-mono); color: var(--ink); background: rgba(255, 255, 255, 0.88); border-radius: 5px; padding: 6px 8px; }
+@media (max-width: 880px) {
+  .hero .wrap, .space .wrap { grid-template-columns: 1fr; }
+  .space-info { position: static; }
+}
+
+/* rooms to work in */
+.work { border-top: 1px solid var(--border); }
+.rooms { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 12px; margin-top: clamp(32px, 4vw, 48px); }
+.room { grid-column: span 4; margin: 0; }
+.room.wide { grid-column: span 8; }
+.room .ph { aspect-ratio: 4 / 3; }
+.room.wide .ph { aspect-ratio: 16 / 10; flex: none; }
+.room.tallr { grid-row: span 2; }
+.room.tallr .ph { aspect-ratio: auto; height: 100%; }
+.room { display: flex; flex-direction: column; }
+.room .ph { flex: 1; }
+.room .cap { display: flex; justify-content: space-between; gap: 10px; padding: 10px 2px 0; }
+.room strong { font-weight: 500; font-size: 16px; letter-spacing: -0.01em; }
+.room .mono { font-size: 12px; color: var(--ink-3); }
+@media (max-width: 860px) { .room, .room.wide { grid-column: span 6; } .room.tallr { grid-row: auto; } .room.wide .ph, .room.tallr .ph { aspect-ratio: 4 / 3; height: auto; } }
+@media (max-width: 560px) { .room, .room.wide { grid-column: span 12; } }
+
+/* closing */
+.cta { padding: clamp(32px, 5vw, 56px); text-align: center; }
+.cta h2 { margin-inline: auto; }
+.cta .sub { margin-inline: auto; }
+.cta .actions { justify-content: center; margin-top: 32px; }
+.addr { display: inline-flex; align-items: center; gap: 10px; margin-top: 28px; font: 400 13px/1 var(--f-mono); color: var(--ink-2); }
+.addr::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ink); }
+
+footer { border-top: 1px solid var(--border); padding-block: 24px 36px; font-size: 14px; color: var(--ink-2); }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+
+/* the floor you're on, bottom left while you ride down the page */
+.where { position: fixed; left: max(16px, env(safe-area-inset-left, 0px)); bottom: max(16px, env(safe-area-inset-bottom, 0px)); z-index: 9; display: none; align-items: center; gap: 10px;
+  background: var(--ink); color: #fff; border-radius: 10px; padding: 9px 12px; font: 500 13px/1 var(--f-mono); font-variant-numeric: tabular-nums;
+  opacity: 0; transform: translateY(8px); transition: opacity 300ms var(--ease), transform 300ms var(--ease); pointer-events: none; }
+.motion .where { display: inline-flex; }
+.where.on { opacity: 1; transform: none; }
+.where .arrow { color: var(--accent-dot); display: inline-block; transition: transform 300ms var(--ease); }
+.where .arrow.down { transform: rotate(180deg); }
+.where .lv { min-width: 3ch; display: inline-block; }
+.where .lv.tick { animation: flip 260ms var(--ease); }
+
+/* reveal on scroll */
+.motion [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity 700ms var(--ease), transform 700ms var(--ease); transition-delay: var(--d, 0ms); }
+.motion [data-reveal].shown { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Founder Base home">
+      <svg width="26" height="14" viewBox="0 0 26 14" aria-hidden="true"><path d="M3 7h20" stroke="#141414" stroke-width="1.5"/><circle cx="4" cy="7" r="3" fill="#141414"/><circle cx="22" cy="7" r="3.5" fill="#32B36F"/></svg>
+      Founder Base
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="index.html#desks">Desks</a>
+      <a href="index.html#events">Events</a>
+      <a href="spaces.html" aria-current="page">Spaces</a>
+      <a class="nav-cta" href="index.html#contact">Book</a>
+    </nav>
+  </div>
+  <div class="progress" aria-hidden="true"><span class="bar"></span></div>
+</header>
+
+<main id="main">
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow">San Francisco</div>
+        <h1 id="hero-title">One building.<br>Room for <span class="n">6</span>&nbsp;to<br><span class="n" data-to="1000">1,000</span>.</h1>
+        <p class="lede">A podcast room, a studio, a gallery floor and a hall. Pick the one that fits your night.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#fit">Find your room</a>
+          <a class="btn btn-secondary" href="index.html#contact">Book a date</a>
+        </div>
+      </div>
+
+      <div class="card building" aria-label="The building, floor by floor">
+        <div class="building-head">
+          <span class="mono">the building</span>
+          <span class="display" aria-hidden="true"><span class="arrow">&#9650;</span><span class="d-lv">L</span></span>
+        </div>
+        <div class="floors-wrap">
+        <span class="shaft" aria-hidden="true"></span>
+        <span class="car" aria-hidden="true"></span>
+        <ol class="floors">
+          <li><a class="floor" href="#studio" data-lv="8"><span class="dot"></span><span class="lvl">08</span><span class="nm">The Studio</span><span class="cap">50 people</span></a></li>
+          <li class="floor ghost" aria-hidden="true"><span class="dot"></span></li>
+          <li class="floor ghost" aria-hidden="true"><span class="dot"></span></li>
+          <li class="floor ghost" aria-hidden="true"><span class="dot"></span></li>
+          <li><a class="floor" href="#gallery" data-lv="4"><span class="dot"></span><span class="lvl">04</span><span class="nm">The Gallery</span><span class="cap">350 people</span></a></li>
+          <li><a class="floor" href="#small" data-lv="3"><span class="dot"></span><span class="lvl">03</span><span class="nm">The Small Room</span><span class="cap">6 people</span></a></li>
+          <li><a class="floor" href="#hall" data-lv="2"><span class="dot"></span><span class="lvl">02</span><span class="nm">The Hall</span><span class="cap">1,000 people</span></a></li>
+          <li class="floor lobby" data-lv="L"><span class="dot"></span><span class="lvl">L</span><span class="nm">Lobby</span><span class="cap"></span></li>
+        </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section fit" id="fit" aria-labelledby="fit-title">
+    <div class="wrap">
+      <h2 id="fit-title">Who's coming?</h2>
+      <p class="sub">Slide to your headcount. We'll light up the rooms that fit.</p>
+      <div class="card fit-card">
+        <div class="fit-top">
+          <div class="count" aria-live="polite"><span data-count>50</span><small>people</small></div>
+          <div class="slider">
+            <label for="guests">Guests</label>
+            <input id="guests" type="range" min="0" max="100" step="1" value="57" aria-valuetext="50 people">
+            <div class="ticks" aria-hidden="true"><span class="mono">1</span><span class="mono">10</span><span class="mono">100</span><span class="mono">1,000</span></div>
+          </div>
+        </div>
+        <ul class="fits">
+          <li><a href="#small" data-cap="6"><span class="f-lvl">3rd floor</span><span class="f-nm">The Small Room</span><span class="f-tag">Up to 6</span></a></li>
+          <li><a href="#studio" data-cap="50"><span class="f-lvl">8th floor</span><span class="f-nm">The Studio</span><span class="f-tag">Up to 50</span></a></li>
+          <li><a href="#gallery" data-cap="350"><span class="f-lvl">4th floor</span><span class="f-nm">The Gallery</span><span class="f-tag">Up to 350</span></a></li>
+          <li><a href="#hall" data-cap="1000"><span class="f-lvl">2nd floor</span><span class="f-nm">The Hall</span><span class="f-tag">Up to 1,000</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section space" id="studio" data-lv="8" aria-labelledby="studio-title">
+    <div class="wrap">
+      <div class="space-info">
+        <div class="lvl-big"><span class="num">08</span><span class="of">8th floor</span></div>
+        <h2 id="studio-title">The Studio</h2>
+        <p class="say">Tall windows and an open wood floor. Big enough for the whole team, small enough to still feel like yours.</p>
+        <div class="stats">
+          <div class="stat"><b data-num="2300">2,300</b><span>sq ft, about</span></div>
+          <div class="stat"><b data-num="50">50</b><span>people</span></div>
+        </div>
+        <ul class="uses">
+          <li><span class="no">01</span><span class="ev">Offsites</span></li>
+          <li><span class="no">02</span><span class="ev">Workshops</span></li>
+          <li><span class="no">03</span><span class="ev">Team meetings</span></li>
+          <li><span class="no">04</span><span class="ev">Wellness mornings</span></li>
+        </ul>
+        <div class="actions"><a class="btn btn-primary" href="index.html#contact">Book this floor</a></div>
+      </div>
+      <div class="photos duo">
+        <figure class="ph"><img src="assets/spaces/studio-desks.jpg" width="676" height="318" alt="Long work tables and a small team at work in a bright studio" loading="lazy"><figcaption>set for work</figcaption></figure>
+        <figure class="ph"><img src="assets/spaces/studio-mats.jpg" width="392" height="637" alt="The studio's wood floor laid out with rows of mats" loading="lazy"><figcaption>set for a morning class</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section space" id="gallery" data-lv="4" aria-labelledby="gallery-title">
+    <div class="wrap">
+      <div class="space-info">
+        <div class="lvl-big"><span class="num">04</span><span class="of">4th floor</span></div>
+        <h2 id="gallery-title">The Gallery</h2>
+        <p class="say">White walls, columns and track lights. Talks in the main space, drinks in the lounges.</p>
+        <div class="stats">
+          <div class="stat"><b data-num="5200">5,200</b><span>sq ft, about</span></div>
+          <div class="stat"><b data-num="350">350</b><span>people</span></div>
+        </div>
+        <ul class="uses">
+          <li><span class="no">01</span><span class="ev">Demo days</span></li>
+          <li><span class="no">02</span><span class="ev">Tech talks</span></li>
+          <li><span class="no">03</span><span class="ev">Launch parties</span></li>
+          <li><span class="no">04</span><span class="ev">Receptions</span></li>
+        </ul>
+        <div class="inside"><span class="mono">inside</span><span class="chip">Main space</span><span class="chip">Reception hall</span><span class="chip">Three lounges</span><span class="chip">Cafeteria</span><span class="chip">Common area</span></div>
+        <div class="actions"><a class="btn btn-primary" href="index.html#contact">Book this floor</a></div>
+      </div>
+      <div class="photos">
+        <figure class="ph"><img src="assets/spaces/gallery-main.jpg" width="446" height="375" alt="An empty white gallery room with track lights and a glossy floor" loading="lazy"><figcaption>main space</figcaption></figure>
+        <figure class="ph half"><img src="assets/spaces/gallery-open.jpg" width="446" height="373" alt="White columns and a row of windows across the gallery floor" loading="lazy"></figure>
+        <figure class="ph half"><img src="assets/spaces/gallery-plants.jpg" width="536" height="434" alt="Clear chairs and tall grasses set up in a white room" loading="lazy"></figure>
+        <figure class="ph"><img src="assets/spaces/gallery-dinner.jpg" width="536" height="376" alt="A full room of guests at round tables, cheering" loading="lazy"><figcaption>a full house</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section space" id="small" data-lv="3" aria-labelledby="small-title">
+    <div class="wrap">
+      <div class="space-info">
+        <div class="lvl-big"><span class="num">03</span><span class="of">3rd floor</span></div>
+        <h2 id="small-title">The Small Room</h2>
+        <p class="say">A small room with a door that shuts. Record, interview, or close a deal at the table.</p>
+        <div class="stats">
+          <div class="stat"><b data-num="300">300</b><span>sq ft, about</span></div>
+          <div class="stat"><b data-num="6">6</b><span>people</span></div>
+        </div>
+        <ul class="uses">
+          <li><span class="no">01</span><span class="ev">Podcasts</span></li>
+          <li><span class="no">02</span><span class="ev">Interviews</span></li>
+          <li><span class="no">03</span><span class="ev">Meetings</span></li>
+          <li><span class="no">04</span><span class="ev">Game nights</span></li>
+        </ul>
+        <div class="actions"><a class="btn btn-primary" href="index.html#contact">Book this room</a></div>
+      </div>
+      <div class="photos">
+        <figure class="ph"><img src="assets/spaces/small-lounge.jpg" width="620" height="404" alt="A small studio with a grey sofa, orange cushions and a table with orange chairs" loading="lazy"></figure>
+        <figure class="ph"><img src="assets/spaces/small-table.jpg" width="475" height="392" alt="A white table with orange chairs by the studio door" loading="lazy"></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section space" id="hall" data-lv="2" aria-labelledby="hall-title">
+    <div class="wrap">
+      <div class="space-info">
+        <div class="lvl-big"><span class="num">02</span><span class="of">2nd floor</span></div>
+        <h2 id="hall-title">The Hall</h2>
+        <p class="say">Concrete columns, steel windows and a floor that keeps going. Room for everyone you know.</p>
+        <div class="stats">
+          <div class="stat"><b data-num="18000">18,000</b><span>sq ft, about</span></div>
+          <div class="stat"><b data-num="1000">1,000</b><span>people</span></div>
+        </div>
+        <ul class="uses">
+          <li><span class="no">01</span><span class="ev">Hackathons</span></li>
+          <li><span class="no">02</span><span class="ev">Conferences</span></li>
+          <li><span class="no">03</span><span class="ev">Parties</span></li>
+          <li><span class="no">04</span><span class="ev">Productions</span></li>
+        </ul>
+        <div class="actions"><a class="btn btn-primary" href="index.html#contact">Book this floor</a></div>
+      </div>
+      <div class="photos">
+        <figure class="ph"><img src="assets/spaces/hall-empty.jpg" width="523" height="376" alt="A long empty hall with concrete columns and steel-framed windows" loading="lazy"><figcaption>by day</figcaption></figure>
+        <figure class="ph"><img src="assets/spaces/hall-party.jpg" width="566" height="439" alt="The same hall lit blue and purple for a party, with glowing cubes and balls" loading="lazy"><figcaption>by night</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section work" id="work" aria-labelledby="work-title">
+    <div class="wrap">
+      <h2 id="work-title">And rooms to work in, every day.</h2>
+      <p class="sub">Open floors for a team, furnished offices, private rooms behind glass.</p>
+      <div class="rooms">
+        <figure class="room wide"><div class="ph"><img src="assets/spaces/office-floor.jpg" width="1600" height="1200" alt="A large open office floor with big windows and a kitchenette" loading="lazy"></div><figcaption class="cap"><strong>Open team floor</strong><span class="mono">with a kitchenette</span></figcaption></figure>
+        <figure class="room tallr"><div class="ph"><img src="assets/spaces/office-glass.jpg" width="1200" height="1600" alt="A private office seen through sliding glass doors" loading="lazy"></div><figcaption class="cap"><strong>Private office</strong><span class="mono">glass doors</span></figcaption></figure>
+        <figure class="room"><div class="ph"><img src="assets/spaces/office-furnished.jpg" width="1600" height="1200" alt="A furnished office with white desks, blue chairs and a whiteboard" loading="lazy"></div><figcaption class="cap"><strong>Furnished office</strong><span class="mono">ready day one</span></figcaption></figure>
+        <figure class="room"><div class="ph"><img src="assets/spaces/room-chandelier.jpg" width="1600" height="1200" alt="A room with crystal chandeliers, velvet curtains and two gold armchairs" loading="lazy"></div><figcaption class="cap"><strong>The chandelier room</strong><span class="mono">calls, small dinners</span></figcaption></figure>
+      </div>
+      <div class="actions" style="margin-top:28px"><a class="btn btn-primary" href="index.html#contact">Book a desk</a></div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="go-title">
+    <div class="wrap">
+      <div class="card cta">
+        <h2 id="go-title">Pick a floor. Pick a date.</h2>
+        <p class="sub">Tell us the headcount and the night. We'll hold the room.</p>
+        <div class="actions"><a class="btn btn-primary" href="index.html#contact">Book a date</a><a class="btn btn-secondary" href="index.html">Back to home</a></div>
+        <div class="addr">San Francisco</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="where" aria-hidden="true"><span class="arrow down">&#9650;</span><span class="lv">08</span></div>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Founder Base.</span>
+    <span>San Francisco</span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var hasIO = 'IntersectionObserver' in window;
+    var motion = !reduce && hasIO;
+    root.classList.add(motion ? 'motion' : 'no-motion'); root.classList.remove('no-js');
+    var $ = function (s, el) { return (el || document).querySelector(s); };
+    var $$ = function (s, el) { return Array.prototype.slice.call((el || document).querySelectorAll(s)); };
+    var ease = function (t) { return 1 - Math.pow(1 - t, 3); };
+    function onView(el, cb, threshold) {
+      if (!hasIO) { cb(); return; }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { io.disconnect(); cb(); } });
+      }, { threshold: threshold || 0.2 });
+      io.observe(el);
+    }
+    function fmt(n) { return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+    function countUp(el, to, ms, from) {
+      var start = null; from = from || 0;
+      function step(t) {
+        if (!start) start = t;
+        var k = Math.min(1, (t - start) / ms);
+        el.textContent = fmt(from + (to - from) * ease(k));
+        if (k < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    /* the guests slider: log scale from 1 to 1,000 */
+    var range = $('#guests'), countEl = $('[data-count]'), cards = $$('.fits a');
+    function guests(v) {
+      var n = Math.pow(10, v * 3 / 100);
+      if (n < 10) return Math.max(1, Math.round(n));
+      if (n < 100) return Math.round(n / 5) * 5;
+      return Math.min(1000, Math.round(n / 25) * 25);
+    }
+    function fit() {
+      var n = guests(+range.value), best = null;
+      countEl.textContent = fmt(n);
+      range.setAttribute('aria-valuetext', fmt(n) + ' people');
+      range.style.setProperty('--p', range.value + '%');
+      cards.forEach(function (a) {
+        var cap = +a.getAttribute('data-cap'), ok = cap >= n;
+        a.classList.toggle('no', !ok); a.classList.remove('best');
+        a.querySelector('.f-tag').textContent = ok ? 'Fits' : 'Up to ' + fmt(cap);
+        if (ok && (!best || cap < +best.getAttribute('data-cap'))) best = a;
+      });
+      if (best) { best.classList.add('best'); best.querySelector('.f-tag').textContent = 'Best fit'; }
+    }
+    range.addEventListener('input', fit);
+    fit();
+
+    /* scroll line under the header */
+    var bar = $('.progress .bar'), ticking = false;
+    var where = $('.where'), whereLv = $('.where .lv'), whereArrow = $('.where .arrow');
+    var spaces = $$('.space'), lastLv = null, lastY = window.scrollY;
+    function pad(lv) { return lv.length === 1 ? '0' + lv : lv; }
+    function onScroll() {
+      ticking = false;
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+      bar.style.transform = 'scaleX(' + p + ')';
+      if (!motion) return;
+      var mid = window.innerHeight * 0.45, cur = null;
+      spaces.forEach(function (s) { var r = s.getBoundingClientRect(); if (r.top < mid && r.bottom > mid) cur = s; });
+      where.classList.toggle('on', !!cur);
+      whereArrow.classList.toggle('down', window.scrollY >= lastY);
+      lastY = window.scrollY;
+      if (cur) {
+        var lv = cur.getAttribute('data-lv');
+        if (lv !== lastLv) { lastLv = lv; whereLv.textContent = pad(lv); whereLv.classList.remove('tick'); void whereLv.offsetWidth; whereLv.classList.add('tick'); }
+      }
+    }
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll();
+
+    /* section reveals */
+    $$('.section h2, .section .sub, .fit-card, .room, .cta').forEach(function (el) {
+      if (el.closest('.space-info') || el.closest('.cta') && !el.classList.contains('cta')) return;
+      el.setAttribute('data-reveal', '');
+      onView(el, function () { el.classList.add('shown'); }, 0.15);
+    });
+
+    if (!motion) return;
+
+    /* hero: the count runs from 6 to 1,000 */
+    var heroN = $('.hero .n[data-to]');
+    heroN.textContent = '6'; setTimeout(function () { countUp(heroN, 1000, 1800, 6); }, 450);
+
+    /* the elevator car rides the building, stopping at each floor */
+    var list = $('.floors-wrap'), car = $('.car'), display = $('.d-lv'), arrow = $('.display .arrow');
+    var stopsEls = $$('.floors [data-lv]');
+    var order = ['L', '2', '3', '4', '8', '4', '3', '2'], at = 0, hold = false, curIdx = null;
+    function yFor(el) {
+      var dot = el.querySelector('.dot'), lr = list.getBoundingClientRect(), dr = dot.getBoundingClientRect();
+      return dr.top - lr.top;
+    }
+    function goTo(lv) {
+      var el = stopsEls.filter(function (s) { return s.getAttribute('data-lv') === lv; })[0];
+      if (!el) return;
+      var idx = stopsEls.indexOf(el);
+      if (curIdx !== null) arrow.classList.toggle('down', idx > curIdx);
+      curIdx = idx;
+      car.style.setProperty('--y', yFor(el) + 'px');
+      stopsEls.forEach(function (s) { s.classList.remove('at'); });
+      setTimeout(function () { if (curIdx === idx) { el.classList.add('at'); display.textContent = lv === 'L' ? 'L' : pad(lv); } }, 650);
+    }
+    goTo('L');
+    setInterval(function () { if (hold || document.hidden) return; at = (at + 1) % order.length; goTo(order[at]); }, 2200);
+    $$('a.floor').forEach(function (a) {
+      a.addEventListener('mouseenter', function () { hold = true; goTo(a.getAttribute('data-lv')); });
+      a.addEventListener('focus', function () { hold = true; goTo(a.getAttribute('data-lv')); });
+      a.addEventListener('mouseleave', function () { hold = false; });
+      a.addEventListener('blur', function () { hold = false; });
+    });
+    window.addEventListener('resize', function () { if (curIdx !== null) car.style.setProperty('--y', yFor(stopsEls[curIdx]) + 'px'); });
+
+    /* photos open like elevator doors */
+    $$('.photos, .rooms').forEach(function (group) {
+      $$('.ph', group).forEach(function (ph, i) {
+        ph.style.setProperty('--i', i);
+        onView(ph, function () { ph.classList.add('open'); }, 0.25);
+      });
+    });
+
+    /* stats count up, uses flip in like a departure board */
+    var CH = 'ABCDEFGHIJKLMNOPRSTUVWXYZ';
+    function flapRow(ev, delay) {
+      var word = ev.textContent; ev.setAttribute('aria-label', word); ev.textContent = '';
+      var spans = word.split('').map(function (ch) {
+        var s = document.createElement('span'); s.className = 'flap'; s.setAttribute('aria-hidden', 'true');
+        s.textContent = ch === ' ' ? ' ' : ' '; ev.appendChild(s); return s;
+      });
+      spans.forEach(function (s, i) {
+        var ch = word[i]; if (ch === ' ') return;
+        var spins = 3 + Math.floor(Math.random() * 4), n = 0;
+        setTimeout(function tick() {
+          if (n < spins) { s.className = 'flap spin'; s.textContent = CH[Math.floor(Math.random() * CH.length)]; n++; setTimeout(tick, 55); }
+          else { s.className = 'flap set'; s.textContent = ch; }
+        }, delay + i * 35);
+      });
+    }
+    spaces.forEach(function (sp) {
+      onView(sp.querySelector('.space-info'), function () {
+        $$('[data-num]', sp).forEach(function (b) { countUp(b, +b.getAttribute('data-num'), 1300); });
+        $$('.uses .ev', sp).forEach(function (ev, r) { flapRow(ev, 200 + r * 160); });
+      }, 0.3);
+    });
+  })();
+</script>
+</body>
+</html>
