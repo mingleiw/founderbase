@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Spaces · Founder Base</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Founder Base spaces in San Francisco: four rooms for 6 to 1,000 people, plus offices to work in.">
+<meta name="description" content="Founder Base spaces in San Francisco: private offices at $1,500 a month, and four rooms for 6 to 1,000 people from $40 an hour.">
 <meta property="og:title" content="Spaces · Founder Base">
 <meta property="og:description" content="Four spaces in one San Francisco building, for 6 to 1,000 people.">
 <meta name="theme-color" content="#F6F6F3">
@@ -17,7 +17,7 @@
 /* Founder Base, spaces.
    Same look as the home page. The one idea here: the building as a line that runs up and down,
    an elevator shaft with a stop at each floor. Photos open like elevator doors.
-   No prices anywhere on this page, on purpose. Sizes are rounded and the building is not named, on purpose. */
+   Prices shown are Founder Base prices. Sizes are rounded and the building is not named, on purpose. */
 :root {
   color-scheme: light;
   --ground: #F6F6F3;
@@ -139,12 +139,35 @@ input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; border-radius
 .fits .f-lvl { font: 400 12px/1.4 var(--f-mono); color: var(--ink-3); }
 .fits .f-nm { grid-column: 1; font-weight: 500; font-size: 15px; letter-spacing: -0.01em; line-height: 1.3; }
 .fits .f-tag { grid-column: 2; grid-row: 1 / span 2; align-self: center; font: 400 11px/1 var(--f-mono); padding: 5px 7px; border-radius: 5px; border: 1px solid var(--border); color: var(--ink-2); white-space: nowrap; }
+.fits .f-pr { grid-column: 1; font: 500 13px/1.4 var(--f-mono); color: var(--ink); margin-top: 4px; }
 .fits a.no { opacity: 0.42; }
 .fits a.best { border-color: var(--ink); background: #FBFBF9; }
 .fits a.best .f-tag { background: var(--accent-dot); border-color: var(--accent-dot); color: #fff; }
 .no-js .fits .f-tag { display: none; }
 @media (max-width: 860px) { .fits { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 520px) { .fit-top { grid-template-columns: 1fr; } .fits { grid-template-columns: 1fr; } }
+
+/* the office offer, first thing on the page */
+.offer-band { padding-top: clamp(24px, 3vw, 36px); }
+.offer { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); overflow: hidden; text-decoration: none; transition: border-color 200ms var(--ease), box-shadow 260ms var(--ease); }
+@media (hover: hover) { .offer:hover { border-color: #D2D2CC; box-shadow: 0 14px 40px -28px rgba(20, 20, 20, 0.45); } .offer:hover .o-photo img { transform: scale(1.03); } }
+.o-photo { position: relative; min-height: 280px; background: #E9E9E4; }
+.o-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1200ms var(--ease); }
+.o-body { padding: clamp(22px, 3vw, 36px); display: flex; flex-direction: column; gap: 14px; }
+.o-top { display: flex; justify-content: space-between; gap: 12px; }
+.o-top .mono { font-size: 12px; color: var(--ink-3); }
+.o-top .pick { color: #fff; background: var(--accent-dot); border-radius: 5px; padding: 4px 7px; font-size: 11px; }
+.o-body h2 { font-size: clamp(28px, 1.6vw + 20px, 40px); line-height: 1.05; }
+.o-price { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.o-price b { font: 500 clamp(56px, 5vw + 20px, 96px)/0.9 var(--f-mono); letter-spacing: -0.07em; color: var(--accent); font-variant-numeric: tabular-nums; }
+.o-price span { font-size: 16px; color: var(--ink-2); }
+.o-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.o-list li { display: flex; align-items: center; gap: 9px; font-size: 15px; color: var(--ink-2); }
+.o-list li::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--accent-dot); flex: none; }
+.o-foot { margin-top: auto; padding-top: 6px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.o-foot .mono { font-size: 12px; color: var(--ink-3); }
+.o-foot .mono s { text-decoration-color: var(--ink-3); }
+@media (max-width: 760px) { .offer { grid-template-columns: 1fr; } .o-photo { min-height: 220px; } }
 
 /* one floor per section */
 .space { border-top: 1px solid var(--border); scroll-margin-top: 64px; }
@@ -155,10 +178,11 @@ input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; border-radius
 .lvl-big .of { font: 400 13px/1.3 var(--f-mono); color: var(--ink-3); }
 .space h2 { font-size: clamp(30px, 1.8vw + 20px, 44px); margin-top: 22px; max-width: 14ch; }
 .space .say { color: var(--ink-2); margin-top: 12px; max-width: 32ch; }
-.stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 28px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 28px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .stat { padding: 14px 0; display: grid; gap: 4px; }
 .stat + .stat { padding-left: 18px; border-left: 1px solid var(--border); }
 .stat b { font: 500 26px/1 var(--f-mono); letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+.stat.cost b { color: var(--accent); }
 .stat span { font-size: 13px; color: var(--ink-2); }
 .uses { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 0; border: 1px solid var(--border); border-radius: 12px; background: var(--card); overflow: hidden; }
 .uses li { display: flex; align-items: center; gap: 14px; padding: 11px 16px; border-bottom: 1px solid var(--border); }
@@ -261,6 +285,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     <nav class="nav" aria-label="Main">
       <a href="index.html#desks">Desks</a>
       <a href="index.html#events">Events</a>
+      <a href="index.html#prices">Prices</a>
       <a href="spaces.html" aria-current="page">Spaces</a>
       <a class="nav-cta" href="index.html#contact">Book</a>
     </nav>
@@ -269,6 +294,25 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 </header>
 
 <main id="main">
+
+  <section class="offer-band" aria-labelledby="offer-title">
+    <div class="wrap">
+      <a class="card offer" href="index.html#book-office">
+        <div class="o-photo"><img src="assets/spaces/office-glass.jpg" width="1200" height="1600" alt="A private office seen through sliding glass doors"></div>
+        <div class="o-body">
+          <div class="o-top"><span class="mono">private office</span><span class="mono pick">our pick</span></div>
+          <h2 id="offer-title">Your own office, with a door.</h2>
+          <div class="o-price"><b>$1,500</b><span>a month, all in</span></div>
+          <ul class="o-list">
+            <li>4 to 6 people, about 350 sq ft</li>
+            <li>Utilities and wifi included</li>
+            <li>Member rates on every room below</li>
+          </ul>
+          <div class="o-foot"><span class="mono">SF coworking, same size: <s>$2,000 to $3,300</s></span><span class="btn btn-primary">Book this office</span></div>
+        </div>
+      </a>
+    </div>
+  </section>
 
   <section class="hero" aria-labelledby="hero-title">
     <div class="wrap">
@@ -319,10 +363,10 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
           </div>
         </div>
         <ul class="fits">
-          <li><a href="#small" data-cap="6"><span class="f-lvl">3rd floor</span><span class="f-nm">The Small Room</span><span class="f-tag">Up to 6</span></a></li>
-          <li><a href="#studio" data-cap="50"><span class="f-lvl">8th floor</span><span class="f-nm">The Studio</span><span class="f-tag">Up to 50</span></a></li>
-          <li><a href="#gallery" data-cap="350"><span class="f-lvl">4th floor</span><span class="f-nm">The Gallery</span><span class="f-tag">Up to 350</span></a></li>
-          <li><a href="#hall" data-cap="1000"><span class="f-lvl">2nd floor</span><span class="f-nm">The Hall</span><span class="f-tag">Up to 1,000</span></a></li>
+          <li><a href="#small" data-cap="6"><span class="f-lvl">3rd floor</span><span class="f-nm">The Small Room</span><span class="f-tag">Up to 6</span><span class="f-pr">$40 / hour</span></a></li>
+          <li><a href="#studio" data-cap="50"><span class="f-lvl">8th floor</span><span class="f-nm">The Studio</span><span class="f-tag">Up to 50</span><span class="f-pr">$150 / hour</span></a></li>
+          <li><a href="#gallery" data-cap="350"><span class="f-lvl">4th floor</span><span class="f-nm">The Gallery</span><span class="f-tag">Up to 350</span><span class="f-pr">$300 / hour</span></a></li>
+          <li><a href="#hall" data-cap="1000"><span class="f-lvl">2nd floor</span><span class="f-nm">The Hall</span><span class="f-tag">Up to 1,000</span><span class="f-pr">$600 / hour</span></a></li>
         </ul>
       </div>
     </div>
@@ -337,6 +381,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
         <div class="stats">
           <div class="stat"><b data-num="2300">2,300</b><span>sq ft, about</span></div>
           <div class="stat"><b data-num="50">50</b><span>people</span></div>
+          <div class="stat cost"><b>$<span data-num="150">150</span></b><span>per hour</span></div>
         </div>
         <ul class="uses">
           <li><span class="no">01</span><span class="ev">Offsites</span></li>
@@ -362,6 +407,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
         <div class="stats">
           <div class="stat"><b data-num="5200">5,200</b><span>sq ft, about</span></div>
           <div class="stat"><b data-num="350">350</b><span>people</span></div>
+          <div class="stat cost"><b>$<span data-num="300">300</span></b><span>per hour</span></div>
         </div>
         <ul class="uses">
           <li><span class="no">01</span><span class="ev">Demo days</span></li>
@@ -390,6 +436,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
         <div class="stats">
           <div class="stat"><b data-num="300">300</b><span>sq ft, about</span></div>
           <div class="stat"><b data-num="6">6</b><span>people</span></div>
+          <div class="stat cost"><b>$<span data-num="40">40</span></b><span>per hour</span></div>
         </div>
         <ul class="uses">
           <li><span class="no">01</span><span class="ev">Podcasts</span></li>
@@ -415,6 +462,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
         <div class="stats">
           <div class="stat"><b data-num="18000">18,000</b><span>sq ft, about</span></div>
           <div class="stat"><b data-num="1000">1,000</b><span>people</span></div>
+          <div class="stat cost"><b>$<span data-num="600">600</span></b><span>per hour</span></div>
         </div>
         <ul class="uses">
           <li><span class="no">01</span><span class="ev">Hackathons</span></li>
@@ -434,14 +482,14 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   <section class="section work" id="work" aria-labelledby="work-title">
     <div class="wrap">
       <h2 id="work-title">And rooms to work in, every day.</h2>
-      <p class="sub">Open floors for a team, furnished offices, private rooms behind glass.</p>
+      <p class="sub">Private offices at $1,500 a month. Desks from $250. Open floors for bigger teams.</p>
       <div class="rooms">
-        <figure class="room wide"><div class="ph"><img src="assets/spaces/office-floor.jpg" width="1600" height="1200" alt="A large open office floor with big windows and a kitchenette" loading="lazy"></div><figcaption class="cap"><strong>Open team floor</strong><span class="mono">with a kitchenette</span></figcaption></figure>
-        <figure class="room tallr"><div class="ph"><img src="assets/spaces/office-glass.jpg" width="1200" height="1600" alt="A private office seen through sliding glass doors" loading="lazy"></div><figcaption class="cap"><strong>Private office</strong><span class="mono">glass doors</span></figcaption></figure>
+        <figure class="room wide"><div class="ph"><img src="assets/spaces/office-floor.jpg" width="1600" height="1200" alt="A large open office floor with big windows and a kitchenette" loading="lazy"></div><figcaption class="cap"><strong>Open team floor</strong><span class="mono">ask for a quote</span></figcaption></figure>
+        <figure class="room tallr"><div class="ph"><img src="assets/spaces/office-glass.jpg" width="1200" height="1600" alt="A private office seen through sliding glass doors" loading="lazy"></div><figcaption class="cap"><strong>Private office</strong><span class="mono">$1,500 / month</span></figcaption></figure>
         <figure class="room"><div class="ph"><img src="assets/spaces/office-furnished.jpg" width="1600" height="1200" alt="A furnished office with white desks, blue chairs and a whiteboard" loading="lazy"></div><figcaption class="cap"><strong>Furnished office</strong><span class="mono">ready day one</span></figcaption></figure>
         <figure class="room"><div class="ph"><img src="assets/spaces/room-chandelier.jpg" width="1600" height="1200" alt="A room with crystal chandeliers, velvet curtains and two gold armchairs" loading="lazy"></div><figcaption class="cap"><strong>The chandelier room</strong><span class="mono">calls, small dinners</span></figcaption></figure>
       </div>
-      <div class="actions" style="margin-top:28px"><a class="btn btn-primary" href="index.html#contact">Book a desk</a></div>
+      <div class="actions" style="margin-top:28px"><a class="btn btn-primary" href="index.html#book-office">Book an office</a><a class="btn btn-secondary" href="index.html#prices">All prices</a></div>
     </div>
   </section>
 
@@ -449,7 +497,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     <div class="wrap">
       <div class="card cta">
         <h2 id="go-title">Pick a floor. Pick a date.</h2>
-        <p class="sub">Tell us the headcount and the night. We'll hold the room.</p>
+        <p class="sub">Tell us the headcount and the night. Rooms book for 3 hours or more.</p>
         <div class="actions"><a class="btn btn-primary" href="index.html#contact">Book a date</a><a class="btn btn-secondary" href="index.html">Back to home</a></div>
         <div class="addr">San Francisco</div>
       </div>
