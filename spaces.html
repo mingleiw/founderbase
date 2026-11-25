@@ -59,6 +59,10 @@ header .wrap { display: flex; align-items: center; justify-content: space-betwee
 .nav a[aria-current] { position: relative; }
 .nav a[aria-current]::after { content: ""; position: absolute; left: 50%; bottom: -8px; width: 5px; height: 5px; margin-left: -2.5px; border-radius: 50%; background: var(--accent-dot); }
 .nav .nav-cta { color: var(--ink); background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 7px 14px; }
+.nav a.nav-spaces, .nav a.nav-spaces:hover { display: inline-flex; align-items: center; gap: 8px; color: #fff; background: var(--ink); border: 1px solid var(--ink); border-radius: 10px; padding: 7px 14px; font-weight: 500; }
+.nav a.nav-spaces:hover { background: #2E2E2C; }
+.nav a.nav-spaces::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent-dot); box-shadow: 0 0 0 3px rgba(50, 179, 111, 0.28); }
+.nav a.nav-spaces[aria-current]::after { display: none; }
 @media (max-width: 760px) { .nav { gap: 18px; } .nav a:not(.nav-cta):not(.nav-keep) { display: none; } }
 .progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; pointer-events: none; }
 .progress .bar { position: absolute; inset: 0; background: var(--accent-dot); transform: scaleX(0); transform-origin: left; }
@@ -308,7 +312,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       <a href="index.html#desks">Desks</a>
       <a href="index.html#events">Events</a>
       <a href="index.html#day">A day</a>
-      <a class="nav-keep" href="spaces.html" aria-current="page">Spaces</a>
+      <a class="nav-keep nav-spaces" href="spaces.html" aria-current="page">Spaces</a>
       <a class="nav-cta" href="index.html#contact">Book</a>
     </nav>
   </div>
