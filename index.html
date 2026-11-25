@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Founder Base</title>
+<title>Founder Space</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Founder Base: desks and an event venue for founders in San Francisco, below market rates, with food, storage and a network on site.">
-<meta property="og:title" content="Founder Base">
+<meta name="description" content="Founder Space: desks and an event venue for founders in San Francisco, below market rates, with food, storage and a network on site.">
+<meta property="og:title" content="Founder Space">
 <meta property="og:description" content="Desks and an event venue for founders in San Francisco, below market rates.">
 <meta name="theme-color" content="#F6F6F3">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23141414'/%3E%3Cpath d='M7 16h18' stroke='%23F6F6F3' stroke-width='2'/%3E%3Ccircle cx='8' cy='16' r='3' fill='%23141414' stroke='%23F6F6F3' stroke-width='2'/%3E%3Ccircle cx='24' cy='16' r='3.5' fill='%2332B36F'/%3E%3C/svg%3E">
@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
 <style>
-/* Founder Base, "one stop".
+/* Founder Space, "one stop".
    Restrained and quiet: a light warm-grey page, white cards with hairline borders, one neutral
    grotesk at medium weight with tight tracking for headlines, a mono for small notes, and one
    small green accent. English only. The one idea: a thin line
@@ -284,7 +284,7 @@ header .wrap { display: flex; align-items: center; justify-content: space-betwee
 .code.g { background: var(--accent-dot); }
 .motion .anim:not(.live) .code { transform: scaleX(0); }
 
-/* a day at founder base */
+/* a day at founder space */
 .day { border-top: 1px solid var(--border); }
 .day-inner { padding-block: clamp(80px, 10vw, 128px); }
 .day-track { position: relative; margin-top: clamp(40px, 5vw, 64px); }
@@ -396,9 +396,9 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 
 <header>
   <div class="wrap">
-    <a class="brand" href="#main" aria-label="Founder Base home">
+    <a class="brand" href="#main" aria-label="Founder Space home">
       <svg width="26" height="14" viewBox="0 0 26 14" aria-hidden="true"><path d="M3 7h20" stroke="#141414" stroke-width="1.5"/><circle cx="4" cy="7" r="3" fill="#141414"/><circle cx="22" cy="7" r="3.5" fill="#32B36F"/></svg>
-      Founder Base
+      Founder Space
     </a>
     <nav class="nav" aria-label="Main">
       <a href="#desks">Desks</a>
@@ -426,8 +426,8 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       <a class="from-link" href="spaces.html#office">Private offices from <b>$1,500</b> a month <span class="go" aria-hidden="true">&rarr;</span></a>
       <p class="mono fine">We provide the places. Your company stays yours to run.</p>
 
-      <div class="card line-card" aria-label="What's at Founder Base">
-        <div class="line-head"><span class="mono">the founder base line</span><button class="replay" type="button">Ride again</button></div>
+      <div class="card line-card" aria-label="What's at Founder Space">
+        <div class="line-head"><span class="mono">the founder space line</span><button class="replay" type="button">Ride again</button></div>
         <div class="track">
         <span class="track-fill" aria-hidden="true"></span>
         <span class="train" aria-hidden="true"></span>
@@ -490,7 +490,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   <section class="day" id="day" aria-labelledby="day-title">
     <div class="day-sticky">
       <div class="wrap day-inner">
-        <h2 id="day-title" style="font-size: clamp(36px, 2.8vw + 20px, 60px); line-height: 1.05;">A day at Founder Base.</h2>
+        <h2 id="day-title" style="font-size: clamp(36px, 2.8vw + 20px, 60px); line-height: 1.05;">A day at Founder Space.</h2>
         <p class="sub" style="color: var(--ink-2); font-size: 19px; margin-top: 16px;">Work, eat, learn and host, without leaving.</p>
         <div class="day-track">
           <span class="day-fill" aria-hidden="true"></span>
@@ -586,7 +586,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 
 <footer>
   <div class="wrap">
-    <span>© 2026 Founder Base.</span>
+    <span>© 2026 Founder Space.</span>
     <span>San Francisco</span>
   </div>
 </footer>
@@ -745,7 +745,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       });
     }
 
-    /* a day at founder base: the train follows the scroll */
+    /* a day at founder space: the train follows the scroll */
     var day = document.getElementById('day');
     var dTrack = day.querySelector('.day-track'), dFill = day.querySelector('.day-fill'), dTrain = day.querySelector('.day-train');
     var dStops = Array.prototype.slice.call(day.querySelectorAll('.day-stop'));
