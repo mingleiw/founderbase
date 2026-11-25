@@ -378,6 +378,12 @@ legend .opt { font: 400 12px var(--f-mono); color: var(--ink-3); margin-left: 6p
 .sent dt { font: 400 12px/1.9 var(--f-mono); color: var(--ink-3); }
 .sent dd { margin: 0; }
 .sent .btn { justify-self: start; }
+#f-kind { position: relative; }
+.see-top { position: absolute; right: 0; top: 2px; }
+.see { font: 400 13px/1.4 var(--f-mono); color: var(--ink-2); text-decoration: none; border-bottom: 1px solid var(--border); justify-self: start; white-space: nowrap; }
+.see:hover { color: var(--ink); border-color: var(--ink); }
+.see span { display: inline-block; transition: transform 160ms var(--ease); }
+.see:hover span { transform: translateX(3px); }
 form[hidden] { display: none; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 form .btn[disabled] { opacity: 0.6; cursor: default; }
@@ -552,6 +558,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
           <div class="hp" aria-hidden="true"><label for="f-hp">Leave this empty<input id="f-hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
           <fieldset id="f-kind">
             <legend>What are you booking?</legend>
+            <a class="see see-top" href="spaces.html">See the spaces <span aria-hidden="true">&rarr;</span></a>
             <div class="choice">
               <label for="k-desk"><input id="k-desk" type="radio" name="kind" value="desk"><span class="c-title">A desk or office</span><span class="c-sub">Space for your team to work</span></label>
               <label for="k-event"><input id="k-event" type="radio" name="kind" value="event"><span class="c-title">An event date</span><span class="c-sub">A hackathon, talk, dinner or social</span></label>
@@ -561,7 +568,8 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
             <label class="field" for="f-space">Space
               <select id="f-space" name="space">
                 <option value="office">Private office</option><option value="dedicated">Dedicated desk</option><option value="flex">Flex desk</option><option value="day">Day pass</option><option value="floor">Open team floor</option>
-              </select></label>
+              </select>
+              <a class="see" href="spaces.html#work">See the offices <span aria-hidden="true">&rarr;</span></a></label>
             <div class="row">
               <label class="field" for="f-team">How many people
                 <input id="f-team" name="team" type="number" min="1" inputmode="numeric" placeholder="e.g. 4"></label>
@@ -583,7 +591,8 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
             <label class="field" for="f-room">Room
               <select id="f-room" name="room">
                 <option value="">Not sure, suggest one</option><option value="small">The Small Room, up to 6</option><option value="studio">The Studio, up to 50</option><option value="gallery">The Gallery, up to 350</option><option value="hall">The Hall, up to 1,000</option>
-              </select></label>
+              </select>
+              <a class="see" href="spaces.html#fit">Compare the rooms <span aria-hidden="true">&rarr;</span></a></label>
             <div class="row">
               <label class="field" for="f-date"><span>Date <span class="opt">optional</span></span>
                 <input id="f-date" name="date" type="date"></label>
