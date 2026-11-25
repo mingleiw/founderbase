@@ -378,8 +378,7 @@ legend .opt { font: 400 12px var(--f-mono); color: var(--ink-3); margin-left: 6p
 .sent dt { font: 400 12px/1.9 var(--f-mono); color: var(--ink-3); }
 .sent dd { margin: 0; }
 .sent .btn { justify-self: start; }
-#f-kind { position: relative; }
-.see-top { position: absolute; right: 0; top: 2px; }
+.kind-legend { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; width: 100%; }
 .see { font: 400 13px/1.4 var(--f-mono); color: var(--ink-2); text-decoration: none; border-bottom: 1px solid var(--border); justify-self: start; white-space: nowrap; }
 .see:hover { color: var(--ink); border-color: var(--ink); }
 .see span { display: inline-block; transition: transform 160ms var(--ease); }
@@ -557,8 +556,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
         <form id="interest-form" novalidate>
           <div class="hp" aria-hidden="true"><label for="f-hp">Leave this empty<input id="f-hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
           <fieldset id="f-kind">
-            <legend>What are you booking?</legend>
-            <a class="see see-top" href="spaces.html">See the spaces <span aria-hidden="true">&rarr;</span></a>
+            <legend class="kind-legend"><span>What are you booking?</span><a class="see" href="spaces.html">See the spaces <span aria-hidden="true">&rarr;</span></a></legend>
             <div class="choice">
               <label for="k-desk"><input id="k-desk" type="radio" name="kind" value="desk"><span class="c-title">A desk or office</span><span class="c-sub">Space for your team to work</span></label>
               <label for="k-event"><input id="k-event" type="radio" name="kind" value="event"><span class="c-title">An event date</span><span class="c-sub">A hackathon, talk, dinner or social</span></label>
