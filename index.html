@@ -323,12 +323,13 @@ header .wrap { display: flex; align-items: center; justify-content: space-betwee
 .cta .sub { margin-inline: auto; }
 form { display: grid; gap: 20px; max-width: 560px; margin: 36px auto 0; text-align: left; }
 label.field { display: grid; gap: 6px; font-size: 14px; font-weight: 500; }
-input[type="text"], input[type="email"], input[type="number"], input[type="date"], select { font: 400 16px/1.4 var(--f-sans); padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px;
+input[type="text"], input[type="email"], input[type="number"], input[type="date"], select, textarea { font: 400 16px/1.4 var(--f-sans); padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px;
   background: var(--ground); color: var(--ink); width: 100%; transition: border-color 160ms var(--ease), background-color 160ms var(--ease); }
 select { appearance: none; padding-right: 36px; cursor: pointer;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%2355554F' stroke-width='1.4'/%3E%3C/svg%3E");
   background-repeat: no-repeat; background-position: right 14px center; }
-input:focus, select:focus { outline: none; border-color: var(--ink); background-color: var(--card); }
+textarea { resize: vertical; min-height: 84px; }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--ink); background-color: var(--card); }
 fieldset { border: 0; padding: 0; margin: 0; }
 legend { font-size: 14px; font-weight: 500; padding: 0; margin-bottom: 8px; }
 .checks { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -362,6 +363,22 @@ legend .opt { font: 400 12px var(--f-mono); color: var(--ink-3); margin-left: 6p
 .form-note { text-align: center; }
 .form-note.ok { color: var(--accent); }
 .form-note.err { color: #B3261E; }
+.field .opt { font: 400 12px var(--f-mono); color: var(--ink-3); margin-left: 6px; }
+.field.bad input, .field.bad select, fieldset.bad .choice label { border-color: #B3261E; }
+.picked { display: none; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px; background: var(--ground); font-size: 14px; }
+.picked.on { display: flex; }
+.picked::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent-dot); flex: none; }
+.picked b { font-weight: 500; }
+.sent { display: none; max-width: 560px; margin: 36px auto 0; text-align: left; }
+.sent.on { display: grid; gap: 18px; animation: rise 420ms var(--ease); }
+.sent .tick { width: 40px; height: 40px; border-radius: 50%; background: var(--accent-dot); display: grid; place-items: center; }
+.sent h3 { margin: 0; font-size: 24px; font-weight: 500; letter-spacing: -0.02em; }
+.sent p { margin: 0; color: var(--ink-2); }
+.sent dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 8px 18px; padding: 16px 18px; border: 1px solid var(--border); border-radius: 12px; font-size: 15px; }
+.sent dt { font: 400 12px/1.9 var(--f-mono); color: var(--ink-3); }
+.sent dd { margin: 0; }
+.sent .btn { justify-self: start; }
+form[hidden] { display: none; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 form .btn[disabled] { opacity: 0.6; cursor: default; }
 
@@ -529,25 +546,24 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     <div class="wrap">
       <div class="card cta">
         <h2 id="contact-title">Book a desk or a date.</h2>
-        <p class="sub">We're opening to startups and event hosts. Tell us what you need.</p>
+        <p class="sub">Tell us what you need, and we'll email you a quote.</p>
         <!-- Sends through FormSubmit to hello@shebang.si (FORM_ENDPOINT in the script below). -->
         <form id="interest-form" novalidate>
-          <input type="hidden" name="_subject" value="New Founder Space booking request">
           <div class="hp" aria-hidden="true"><label for="f-hp">Leave this empty<input id="f-hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
-          <fieldset>
+          <fieldset id="f-kind">
             <legend>What are you booking?</legend>
             <div class="choice">
-              <label for="k-desk"><input id="k-desk" type="radio" name="kind" value="desk"><span class="c-title">A desk</span><span class="c-sub">Desks or an office for your team</span></label>
+              <label for="k-desk"><input id="k-desk" type="radio" name="kind" value="desk"><span class="c-title">A desk or office</span><span class="c-sub">Space for your team to work</span></label>
               <label for="k-event"><input id="k-event" type="radio" name="kind" value="event"><span class="c-title">An event date</span><span class="c-sub">A hackathon, talk, dinner or social</span></label>
             </div>
           </fieldset>
           <div class="group" data-for="desk">
             <label class="field" for="f-space">Space
               <select id="f-space" name="space">
-                <option value="office">Private office</option><option value="dedicated">Dedicated desk</option><option value="flex">Flex desk</option><option value="day">Day pass</option>
+                <option value="office">Private office</option><option value="dedicated">Dedicated desk</option><option value="flex">Flex desk</option><option value="day">Day pass</option><option value="floor">Open team floor</option>
               </select></label>
             <div class="row">
-              <label class="field" for="f-team">Team size
+              <label class="field" for="f-team">How many people
                 <input id="f-team" name="team" type="number" min="1" inputmode="numeric" placeholder="e.g. 4"></label>
               <label class="field" for="f-start">When to start
                 <select id="f-start" name="start">
@@ -556,15 +572,25 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
             </div>
           </div>
           <div class="group" data-for="event">
-            <label class="field" for="f-type">Event type
-              <select id="f-type" name="event">
-                <option>Hackathon</option><option>Tech talk</option><option>Private dinner</option><option>Workshop</option><option>Social</option><option>Private event</option><option>Something else</option>
+            <div class="row">
+              <label class="field" for="f-type">Event type
+                <select id="f-type" name="event">
+                  <option>Hackathon</option><option>Tech talk</option><option>Private dinner</option><option>Workshop</option><option>Social</option><option>Private event</option><option>Something else</option>
+                </select></label>
+              <label class="field" for="f-guests">How many guests
+                <input id="f-guests" name="guests" type="number" min="1" inputmode="numeric" placeholder="e.g. 60"></label>
+            </div>
+            <label class="field" for="f-room">Room
+              <select id="f-room" name="room">
+                <option value="">Not sure, suggest one</option><option value="small">The Small Room, up to 6</option><option value="studio">The Studio, up to 50</option><option value="gallery">The Gallery, up to 350</option><option value="hall">The Hall, up to 1,000</option>
               </select></label>
             <div class="row">
-              <label class="field" for="f-guests">Guests
-                <input id="f-guests" name="guests" type="number" min="1" inputmode="numeric" placeholder="e.g. 60"></label>
-              <label class="field" for="f-date">Preferred date
+              <label class="field" for="f-date"><span>Date <span class="opt">optional</span></span>
                 <input id="f-date" name="date" type="date"></label>
+              <label class="field" for="f-long">How long
+                <select id="f-long" name="length">
+                  <option>3 hours</option><option>Half a day</option><option>A full day</option><option>More than a day</option><option>Not sure yet</option>
+                </select></label>
             </div>
           </div>
           <div class="row">
@@ -576,15 +602,24 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
           <fieldset>
             <legend>Also interested in <span class="opt">optional</span></legend>
             <div class="checks">
-              <label for="c-warehouse"><input id="c-warehouse" type="checkbox" name="extra" value="warehouse">Warehouse</label>
-              <label for="c-food"><input id="c-food" type="checkbox" name="extra" value="food">Food</label>
-              <label for="c-network"><input id="c-network" type="checkbox" name="extra" value="network">Network</label>
-              <label for="c-tech"><input id="c-tech" type="checkbox" name="extra" value="tech">Tech help</label>
+              <label for="c-warehouse"><input id="c-warehouse" type="checkbox" name="extra" value="Warehouse">Warehouse</label>
+              <label for="c-food"><input id="c-food" type="checkbox" name="extra" value="Food">Food</label>
+              <label for="c-network"><input id="c-network" type="checkbox" name="extra" value="Network">Network</label>
+              <label for="c-tech"><input id="c-tech" type="checkbox" name="extra" value="Tech help">Tech help</label>
             </div>
           </fieldset>
-          <button class="btn btn-primary" type="submit">Send my details</button>
+          <label class="field" for="f-note"><span>Anything else <span class="opt">optional</span></span>
+            <textarea id="f-note" name="note" rows="3" placeholder="Your company, a flexible date, a question"></textarea></label>
+          <button class="btn btn-primary" type="submit">Get my quote</button>
           <p class="mono form-note" role="status">We'll reply by email.</p>
         </form>
+        <div class="sent" id="sent" tabindex="-1" aria-live="polite">
+          <span class="tick" aria-hidden="true"><svg width="16" height="12" viewBox="0 0 16 12"><path d="M1.5 6l4.5 4.5L14.5 1.5" fill="none" stroke="#fff" stroke-width="2"/></svg></span>
+          <h3>Request sent.</h3>
+          <p>We'll email your quote to <b data-sent-email></b>.</p>
+          <dl data-sent-list></dl>
+          <button class="btn btn-secondary" type="button" data-again>Send another request</button>
+        </div>
       </div>
     </div>
   </section>
@@ -601,11 +636,16 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 <script>
   // The booking form. It posts JSON to FormSubmit, which emails hello@shebang.si.
   // Leave FORM_ENDPOINT empty and nothing is sent or stored.
+  // Off shebang.si (a preview), nothing is sent: the form only shows what would go out.
   var FORM_ENDPOINT = 'https://formsubmit.co/ajax/hello@shebang.si';
   (function () {
-    var form = document.getElementById('interest-form');
+    var LIVE = /(^|\.)shebang\.si$/.test(location.hostname);
+    var form = document.getElementById('interest-form'), sent = document.getElementById('sent');
     var note = form.querySelector('.form-note'), btn = form.querySelector('button[type="submit"]');
     var groups = Array.prototype.slice.call(form.querySelectorAll('.group'));
+    var $f = function (id) { return document.getElementById(id); };
+    var ROOMS = { small: 'The Small Room', studio: 'The Studio', gallery: 'The Gallery', hall: 'The Hall' };
+    var SPACES = { office: 'Private office', dedicated: 'Dedicated desk', flex: 'Flex desk', day: 'Day pass', floor: 'Open team floor' };
     function say(text, cls) { note.textContent = text; note.className = 'mono form-note' + (cls ? ' ' + cls : ''); }
     function show(kind) {
       groups.forEach(function (g) {
@@ -614,43 +654,110 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
         g.querySelectorAll('input, select').forEach(function (f) { f.disabled = off; });
       });
     }
+    function pick(kind) { var r = $f(kind === 'desk' ? 'k-desk' : 'k-event'); r.checked = true; show(kind); $f('f-kind').classList.remove('bad'); }
+    function bad(el, text) {
+      var box = el.closest('.field') || el.closest('fieldset');
+      if (box) box.classList.add('bad');
+      say(text, 'err'); el.focus({ preventScroll: true });
+      (box || el).scrollIntoView({ block: 'center', behavior: 'smooth' });
+      return false;
+    }
+    form.addEventListener('input', function (e) { var box = e.target.closest('.bad'); if (box) box.classList.remove('bad'); });
+    form.addEventListener('change', function (e) { var box = e.target.closest('.bad'); if (box) box.classList.remove('bad'); });
+
+    /* the guest count picks a room when none is chosen yet */
+    var roomTouched = false;
+    $f('f-room').addEventListener('change', function () { roomTouched = true; });
+    $f('f-guests').addEventListener('input', function () {
+      if (roomTouched) return;
+      var n = +this.value, r = '';
+      if (n > 0) r = n <= 6 ? 'small' : n <= 50 ? 'studio' : n <= 350 ? 'gallery' : n <= 1000 ? 'hall' : '';
+      $f('f-room').value = r;
+    });
+
+    function collect(kind) {
+      var v = function (id) { return $f(id).value.trim(); };
+      var rows = [];
+      if (kind === 'desk') {
+        rows.push(['Booking', 'Desk or office'], ['Space', SPACES[v('f-space')]], ['People', v('f-team')], ['Start', v('f-start')]);
+      } else {
+        var d = v('f-date');
+        rows.push(['Booking', 'Event'], ['Event', v('f-type')], ['Guests', v('f-guests')],
+          ['Room', ROOMS[v('f-room')] || 'Not sure, suggest one'],
+          ['Date', d ? new Date(d + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' }) : 'Flexible'],
+          ['How long', v('f-long')]);
+      }
+      var extras = Array.prototype.map.call(form.querySelectorAll('input[name="extra"]:checked'), function (c) { return c.value; });
+      if (extras.length) rows.push(['Also', extras.join(', ')]);
+      if (v('f-note')) rows.push(['Note', v('f-note')]);
+      return rows;
+    }
+    function done(rows, email) {
+      sent.querySelector('[data-sent-email]').textContent = email;
+      var dl = sent.querySelector('[data-sent-list]'); dl.innerHTML = '';
+      rows.forEach(function (r) {
+        if (r[0] === 'Note') return;
+        var dt = document.createElement('dt'), dd = document.createElement('dd');
+        dt.textContent = r[0]; dd.textContent = r[1]; dl.appendChild(dt); dl.appendChild(dd);
+      });
+      form.hidden = true; sent.classList.add('on'); sent.focus({ preventScroll: true });
+      sent.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }
+    sent.querySelector('[data-again]').addEventListener('click', function () {
+      form.reset(); roomTouched = false; show(''); say("We'll reply by email.");
+      sent.classList.remove('on'); form.hidden = false; $f('k-desk').focus();
+    });
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      if (!FORM_ENDPOINT) { say("This form isn't connected yet, so nothing is sent."); return; }
       var kind = form.querySelector('input[name="kind"]:checked');
-      var name = form.querySelector('#f-name'), email = form.querySelector('#f-email');
-      if (!kind) { say('Pick a desk or an event date first.', 'err'); return; }
-      if (!name.value.trim()) { say('Add your name.', 'err'); name.focus(); return; }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) { say('Add an email we can reply to.', 'err'); email.focus(); return; }
-      var data = {};
-      new FormData(form).forEach(function (v, k) {
-        if (k === 'extra') { data.extra = data.extra ? data.extra + ', ' + v : v; } else { data[k] = v; }
-      });
-      if (data._gotcha) return;
-      delete data._gotcha;
+      var name = $f('f-name'), email = $f('f-email');
+      if (!kind) return bad($f('k-desk'), 'Pick a desk or an event date first.');
+      kind = kind.value;
+      var count = $f(kind === 'desk' ? 'f-team' : 'f-guests');
+      if (!(+count.value > 0)) return bad(count, kind === 'desk' ? 'How many people need space?' : 'About how many guests?');
+      if (kind === 'event' && $f('f-date').value && $f('f-date').value < $f('f-date').min) return bad($f('f-date'), 'Pick a date from today on.');
+      if (!name.value.trim()) return bad(name, 'Add your name.');
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) return bad(email, 'Add an email we can reply to.');
+      if ($f('f-hp').value) return;
+      var rows = collect(kind), addr = email.value.trim();
+      var data = { _subject: 'Quote request: ' + rows.slice(1, 3).map(function (r) { return r[1]; }).join(', ') + ' from ' + name.value.trim(),
+        _replyto: addr, _template: 'table', Name: name.value.trim(), Email: addr };
+      rows.forEach(function (r) { data[r[0]] = r[1]; });
+      if (!LIVE || !FORM_ENDPOINT) { done(rows, addr); return; }
       btn.disabled = true; say('Sending...');
       fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data) })
         .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json().catch(function () { return {}; }); })
         .then(function (j) { if (j && (j.success === false || j.success === 'false')) throw new Error('not sent'); })
-        .then(function () { form.reset(); show(''); say("Thanks, we got your details.", 'ok'); })
-        .catch(function () { say('That didn\'t go through. Please try again in a moment.', 'err'); })
+        .then(function () { say("We'll reply by email."); done(rows, addr); })
+        .catch(function () { say('That didn\'t go through. Please try again, or email hello@shebang.si.', 'err'); })
         .then(function () { btn.disabled = false; });
     });
+
+    var today = new Date(); today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+    $f('f-date').min = today.toISOString().slice(0, 10);
     form.classList.add('js-ready');
-    form.querySelectorAll('input[name="kind"]').forEach(function (r) { r.addEventListener('change', function () { show(r.value); }); });
+    form.querySelectorAll('input[name="kind"]').forEach(function (r) { r.addEventListener('change', function () { show(r.value); $f('f-kind').classList.remove('bad'); }); });
     var checked = form.querySelector('input[name="kind"]:checked');
     show(checked ? checked.value : '');
-    document.querySelectorAll('[data-pick]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var r = document.getElementById(btn.getAttribute('data-pick') === 'desk' ? 'k-desk' : 'k-event');
-        r.checked = true; show(r.value);
-      });
+    document.querySelectorAll('[data-pick]').forEach(function (b) {
+      b.addEventListener('click', function () { pick(b.getAttribute('data-pick')); });
     });
-    /* from the Spaces page: index.html#book-office opens the form on a private office */
-    if (location.hash === '#book-office') {
-      document.getElementById('k-desk').checked = true; show('desk');
-      document.getElementById('f-space').value = 'office';
-      var c = document.getElementById('contact');
+
+    /* links from the Spaces page carry what was picked: ?book=event&room=studio&guests=40, ?book=office, ?book=desk */
+    var q = new URLSearchParams(location.search), book = q.get('book');
+    if (location.hash === '#book-office') book = 'office';
+    if (book) {
+      if (book === 'event') {
+        pick('event');
+        var room = q.get('room'), g = parseInt(q.get('guests'), 10);
+        if (ROOMS[room]) { $f('f-room').value = room; roomTouched = true; }
+        if (g > 0) $f('f-guests').value = g;
+      } else {
+        pick('desk');
+        if (SPACES[book]) $f('f-space').value = book;
+      }
+      var c = $f('contact');
       if (c) setTimeout(function () { c.scrollIntoView(); }, 0);
     }
   })();

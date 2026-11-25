@@ -144,6 +144,8 @@ input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; border-radius
 .fits a.best { border-color: var(--ink); background: #FBFBF9; }
 .fits a.best .f-tag { background: var(--accent-dot); border-color: var(--accent-dot); color: #fff; }
 .no-js .fits .f-tag { display: none; }
+.fit-go { margin-top: 20px; display: flex; justify-content: flex-end; }
+@media (max-width: 520px) { .fit-go .btn { width: 100%; } }
 @media (max-width: 860px) { .fits { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 520px) { .fit-top { grid-template-columns: 1fr; } .fits { grid-template-columns: 1fr; } }
 
@@ -317,7 +319,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 
   <section class="offer-band" id="office" aria-labelledby="offer-title">
     <div class="wrap">
-      <a class="card offer" href="index.html#book-office">
+      <a class="card offer" href="index.html?book=office#contact">
         <div class="o-photo"><img src="assets/spaces/office-glass.jpg" width="1200" height="1600" alt="A private office seen through sliding glass doors"></div>
         <div class="o-body">
           <div class="o-top"><span class="mono">private office</span><span class="mono pick">our pick</span></div>
@@ -342,7 +344,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
         <p class="lede">A podcast room, a studio, a gallery floor and a hall. Pick the one that fits your night.</p>
         <div class="actions">
           <a class="btn btn-primary" href="#fit">Find your room</a>
-          <a class="btn btn-secondary" href="index.html#contact">Book a date</a>
+          <a class="btn btn-secondary" href="index.html?book=event#contact">Book a date</a>
         </div>
       </div>
 
@@ -388,6 +390,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
           <li><a href="#gallery" data-cap="350"><span class="f-lvl">4th floor</span><span class="f-nm">The Gallery</span><span class="f-tag">Up to 350</span></a></li>
           <li><a href="#hall" data-cap="1000"><span class="f-lvl">2nd floor</span><span class="f-nm">The Hall</span><span class="f-tag">Up to 1,000</span></a></li>
         </ul>
+        <div class="fit-go"><a class="btn btn-primary" href="index.html?book=event#contact" data-fit-book>Get a quote</a></div>
       </div>
     </div>
   </section>
@@ -409,7 +412,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
           <li><span class="no">03</span><span class="ev">Team meetings</span></li>
           <li><span class="no">04</span><span class="ev">Wellness mornings</span></li>
         </ul>
-        <div class="actions"><a class="btn btn-primary" href="index.html#contact">Book this floor</a></div>
+        <div class="actions"><a class="btn btn-primary" href="index.html?book=event&amp;room=studio#contact">Book this floor</a></div>
       </div>
       <div class="photos duo">
         <figure class="ph"><img src="assets/spaces/studio-desks.jpg" width="676" height="318" alt="Long work tables and a small team at work in a bright studio" loading="lazy"><figcaption>set for work</figcaption></figure>
@@ -436,7 +439,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
           <li><span class="no">04</span><span class="ev">Receptions</span></li>
         </ul>
         <div class="inside"><span class="mono">inside</span><span class="chip">Main space</span><span class="chip">Reception hall</span><span class="chip">Three lounges</span><span class="chip">Cafeteria</span><span class="chip">Common area</span></div>
-        <div class="actions"><a class="btn btn-primary" href="index.html#contact">Book this floor</a></div>
+        <div class="actions"><a class="btn btn-primary" href="index.html?book=event&amp;room=gallery#contact">Book this floor</a></div>
       </div>
       <div class="photos">
         <figure class="ph"><img src="assets/spaces/gallery-main.jpg" width="446" height="375" alt="An empty white gallery room with track lights and a glossy floor" loading="lazy"><figcaption>main space</figcaption></figure>
@@ -464,7 +467,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
           <li><span class="no">03</span><span class="ev">Meetings</span></li>
           <li><span class="no">04</span><span class="ev">Game nights</span></li>
         </ul>
-        <div class="actions"><a class="btn btn-primary" href="index.html#contact">Book this room</a></div>
+        <div class="actions"><a class="btn btn-primary" href="index.html?book=event&amp;room=small#contact">Book this room</a></div>
       </div>
       <div class="photos">
         <figure class="ph"><img src="assets/spaces/small-lounge.jpg" width="620" height="404" alt="A small studio with a grey sofa, orange cushions and a table with orange chairs" loading="lazy"></figure>
@@ -490,7 +493,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
           <li><span class="no">03</span><span class="ev">Parties</span></li>
           <li><span class="no">04</span><span class="ev">Productions</span></li>
         </ul>
-        <div class="actions"><a class="btn btn-primary" href="index.html#contact">Book this floor</a></div>
+        <div class="actions"><a class="btn btn-primary" href="index.html?book=event&amp;room=hall#contact">Book this floor</a></div>
       </div>
       <div class="photos">
         <figure class="ph"><img src="assets/spaces/hall-empty.jpg" width="523" height="376" alt="A long empty hall with concrete columns and steel-framed windows" loading="lazy"><figcaption>by day</figcaption></figure>
@@ -509,7 +512,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
         <figure class="room"><div class="ph"><img src="assets/spaces/office-furnished.jpg" width="1600" height="1200" alt="A furnished office with white desks, blue chairs and a whiteboard" loading="lazy"></div><figcaption class="cap"><strong>Furnished office</strong><span class="mono">ready day one</span></figcaption></figure>
         <figure class="room"><div class="ph"><img src="assets/spaces/room-chandelier.jpg" width="1600" height="1200" alt="A room with crystal chandeliers, velvet curtains and two gold armchairs" loading="lazy"></div><figcaption class="cap"><strong>The chandelier room</strong><span class="mono">calls, small dinners</span></figcaption></figure>
       </div>
-      <div class="actions" style="margin-top:28px"><a class="btn btn-primary" href="index.html#book-office">Book an office</a><a class="btn btn-secondary" href="#prices">Everything we offer</a></div>
+      <div class="actions" style="margin-top:28px"><a class="btn btn-primary" href="index.html?book=office#contact">Book an office</a><a class="btn btn-secondary" href="#prices">Everything we offer</a></div>
     </div>
   </section>
 
@@ -557,7 +560,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       <div class="card cta">
         <h2 id="go-title">Pick a floor. Pick a date.</h2>
         <p class="sub">Tell us the headcount and the night. Rooms book for 3 hours or more.</p>
-        <div class="actions"><a class="btn btn-primary" href="index.html#contact">Book a date</a><a class="btn btn-secondary" href="index.html">Back to home</a></div>
+        <div class="actions"><a class="btn btn-primary" href="index.html?book=event#contact">Book a date</a><a class="btn btn-secondary" href="index.html">Back to home</a></div>
         <div class="addr">San Francisco</div>
       </div>
     </div>
@@ -623,6 +626,12 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
         if (ok && (!best || cap < +best.getAttribute('data-cap'))) best = a;
       });
       if (best) { best.classList.add('best'); best.querySelector('.f-tag').textContent = 'Best fit'; }
+      var go = $('[data-fit-book]');
+      if (go) {
+        var room = best ? best.getAttribute('href').slice(1) : '';
+        go.href = 'index.html?book=event' + (room ? '&room=' + room : '') + '&guests=' + n + '#contact';
+        go.textContent = best ? 'Book ' + best.querySelector('.f-nm').textContent + ' for ' + fmt(n) : 'Get a quote';
+      }
     }
     range.addEventListener('input', fit);
     fit();
