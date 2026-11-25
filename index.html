@@ -530,7 +530,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       <div class="card cta">
         <h2 id="contact-title">Book a desk or a date.</h2>
         <p class="sub">We're opening to startups and event hosts. Tell us what you need.</p>
-        <!-- Sends nothing until FORM_ENDPOINT in the script below is set to a form service address. -->
+        <!-- Sends through FormSubmit to hello@shebang.si (FORM_ENDPOINT in the script below). -->
         <form id="interest-form" novalidate>
           <input type="hidden" name="_subject" value="New Founder Space booking request">
           <div class="hp" aria-hidden="true"><label for="f-hp">Leave this empty<input id="f-hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
@@ -599,11 +599,9 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 </footer>
 
 <script>
-  // The booking form. Leave FORM_ENDPOINT empty and nothing is sent or stored.
-  // To go live, set it to a form service address that accepts a JSON POST, for example
-  //   Formspree:  'https://formspree.io/f/<form id>'
-  //   FormSubmit: 'https://formsubmit.co/ajax/<the alias it gives after the first confirmation>'
-  var FORM_ENDPOINT = '';
+  // The booking form. It posts JSON to FormSubmit, which emails hello@shebang.si.
+  // Leave FORM_ENDPOINT empty and nothing is sent or stored.
+  var FORM_ENDPOINT = 'https://formsubmit.co/ajax/hello@shebang.si';
   (function () {
     var form = document.getElementById('interest-form');
     var note = form.querySelector('.form-note'), btn = form.querySelector('button[type="submit"]');
@@ -632,7 +630,8 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       delete data._gotcha;
       btn.disabled = true; say('Sending...');
       fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data) })
-        .then(function (r) { if (!r.ok) throw new Error(r.status); })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json().catch(function () { return {}; }); })
+        .then(function (j) { if (j && (j.success === false || j.success === 'false')) throw new Error('not sent'); })
         .then(function () { form.reset(); show(''); say("Thanks, we got your details.", 'ok'); })
         .catch(function () { say('That didn\'t go through. Please try again in a moment.', 'err'); })
         .then(function () { btn.disabled = false; });
