@@ -41,7 +41,7 @@
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--f-sans); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--f-sans); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: clip; }
 a { color: inherit; }
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 4px; }
 p { margin: 0; }
@@ -696,7 +696,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       sent.querySelector('[data-sent-email]').textContent = email;
       var dl = sent.querySelector('[data-sent-list]'); dl.innerHTML = '';
       rows.forEach(function (r) {
-        if (r[0] === 'Note') return;
+        if (r[0] === 'Note' || r[0] === 'Booking') return;
         var dt = document.createElement('dt'), dd = document.createElement('dd');
         dt.textContent = r[0]; dd.textContent = r[1]; dl.appendChild(dt); dl.appendChild(dd);
       });
