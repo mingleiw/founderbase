@@ -104,6 +104,7 @@ header .wrap { display: flex; align-items: center; justify-content: space-betwee
 }
 .btn-spaces .go { transition: transform 200ms var(--ease); }
 .btn-spaces:hover .go { transform: translateX(3px); }
+@media (max-width: 560px) { .hero .actions .btn { min-width: 0; flex: 1 1 40%; } .hero .actions .btn-spaces { flex-basis: 100%; } }
 .strip { margin: 40px auto 0; text-align: left; }
 .strip-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 12px; }
 .strip-head a { color: var(--accent); text-decoration: none; }
